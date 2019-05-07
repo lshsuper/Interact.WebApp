@@ -108,7 +108,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ActivityController.cs" />
     <Compile Include="Controllers\NoticeController.cs" />
-    <Compile Include="Controllers\WeixinController.cs" />
+    <Compile Include="Controllers\SigninController.cs" />
     <Compile Include="Filters\CustomExceptionFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -120,9 +120,9 @@
     <Content Include="Content\lib\mui-master\fonts\mui.ttf" />
     <None Include="packages.config" />
     <Content Include="Views\Notice\Error.cshtml" />
-    <Content Include="Views\Weixin\Test.cshtml" />
-    <Content Include="Views\Weixin\Sigin.cshtml" />
-    <Content Include="Views\Notice\SiginSucc.cshtml" />
+    <Content Include="Views\Signin\Test.cshtml" />
+    <Content Include="Views\Signin\Signin.cshtml" />
+    <Content Include="Views\Notice\SigninSucc.cshtml" />
     <Content Include="Views\Shared\_LayoutForMobile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

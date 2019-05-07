@@ -22,7 +22,7 @@ namespace Interact.WebApp.Controllers
         /// 签到成功
         /// </summary>
         /// <returns></returns>
-        public ActionResult SiginSucc()
+        public ActionResult SigninSucc()
         {
             return View();
         }

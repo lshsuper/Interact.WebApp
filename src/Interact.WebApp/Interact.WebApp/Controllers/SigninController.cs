@@ -14,11 +14,11 @@ namespace Interact.WebApp.Controllers
     /// <summary>
     /// 微信签到整体控制栏目
     /// </summary>
-    public class WeixinController : Controller
+    public class SigninController : Controller
     {
         #region Weixin-Service
         private IWeixinRespository _weixinRespository;
-        public WeixinController(IWeixinRespository weixinRespository)
+        public SigninController(IWeixinRespository weixinRespository)
         {
             _weixinRespository = weixinRespository;
         }
@@ -32,7 +32,7 @@ namespace Interact.WebApp.Controllers
         /// <param name="activityId"></param>
         /// <param name="code"></param>
         /// <returns></returns>
-        public ActionResult Sigin(int activityId, string code)
+        public ActionResult Signin(int activityId, string code)
         {
             ////1.从微信地址跳转过来
             //if (!string.IsNullOrEmpty(code))
