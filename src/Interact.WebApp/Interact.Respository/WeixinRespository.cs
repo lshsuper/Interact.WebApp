@@ -32,7 +32,7 @@ namespace Interact.Respository
 
         public string GetAuthCodeUrl(string redirectUrl)
         {
-            return WexinApiAddrBuilder.AuthCodeAddr(WeixinConfig.AppKey, redirectUrl, ScopeTypeEnum.snsapi_userinfo);
+            return WexinApiAddrBuilder.AuthCodeAddr(WeixinConfig.AppKey, redirectUrl, AuditScopeTypeEnum.snsapi_userinfo);
         }
 
         public WeixinAuthUserInfoResult GetUserInfoByOpennIdAndAccessToken(string access_token, string openId)

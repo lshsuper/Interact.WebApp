@@ -10,5 +10,6 @@ namespace Interact.Infrastructure.Config.Model
   public  class WebConfig
     {
         public  static string Web_Host=> ConfigurationManager.AppSettings["web_host"];
+        public static string JWT_Secret=> ConfigurationManager.AppSettings["jwt_secret"];
     }
 }

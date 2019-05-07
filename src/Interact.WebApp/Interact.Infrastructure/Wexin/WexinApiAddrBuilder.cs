@@ -42,7 +42,7 @@ namespace Interact.Infrastructure.Wexin
         /// 获取Code码接口地址
         /// </summary>
         /// <returns></returns>
-        public static string AuthCodeAddr(string appkey, string redirect_uri, ScopeTypeEnum scope)
+        public static string AuthCodeAddr(string appkey, string redirect_uri, AuditScopeTypeEnum scope)
         {
             //https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=SCOPE&state=STATE#wechat_redirect
             return $"https://open.weixin.qq.com/connect/oauth2/authorize?appid={appkey}&redirect_uri={redirect_uri}&response_type=code&scope={scope.ToString()}&state=STATE#wechat_redirect";
