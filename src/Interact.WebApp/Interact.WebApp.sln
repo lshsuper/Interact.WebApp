@@ -1,9 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.156
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interact.WebApp", "Interact.WebApp\Interact.WebApp.csproj", "{366FDA60-74FA-4175-BB30-005946E21D92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interact.Core", "Interact.Core\Interact.Core.csproj", "{7BCB947F-EB40-42C4-BB5A-9F007398711B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interact.Infrastructure", "Interact.Infrastructure\Interact.Infrastructure.csproj", "{9853419D-B966-45EE-8801-DC3E94860B45}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interact.Respository", "Interact.Respository\Interact.Respository.csproj", "{6EB3ED81-ABED-45DB-8B25-1F4AD6C7FB7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interact.Service", "Interact.Service\Interact.Service.csproj", "{99F8ACEF-ADA8-41A9-8159-15191C44F404}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interact.IRespository", "Interact.IRespository\Interact.IRespository.csproj", "{D96E46C9-4A5F-4ECD-BD73-7F4F8182DC4D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +25,26 @@ Global
 		{366FDA60-74FA-4175-BB30-005946E21D92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{366FDA60-74FA-4175-BB30-005946E21D92}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{366FDA60-74FA-4175-BB30-005946E21D92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BCB947F-EB40-42C4-BB5A-9F007398711B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BCB947F-EB40-42C4-BB5A-9F007398711B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BCB947F-EB40-42C4-BB5A-9F007398711B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BCB947F-EB40-42C4-BB5A-9F007398711B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9853419D-B966-45EE-8801-DC3E94860B45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9853419D-B966-45EE-8801-DC3E94860B45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9853419D-B966-45EE-8801-DC3E94860B45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9853419D-B966-45EE-8801-DC3E94860B45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EB3ED81-ABED-45DB-8B25-1F4AD6C7FB7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EB3ED81-ABED-45DB-8B25-1F4AD6C7FB7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EB3ED81-ABED-45DB-8B25-1F4AD6C7FB7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EB3ED81-ABED-45DB-8B25-1F4AD6C7FB7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99F8ACEF-ADA8-41A9-8159-15191C44F404}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99F8ACEF-ADA8-41A9-8159-15191C44F404}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99F8ACEF-ADA8-41A9-8159-15191C44F404}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99F8ACEF-ADA8-41A9-8159-15191C44F404}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D96E46C9-4A5F-4ECD-BD73-7F4F8182DC4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D96E46C9-4A5F-4ECD-BD73-7F4F8182DC4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D96E46C9-4A5F-4ECD-BD73-7F4F8182DC4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D96E46C9-4A5F-4ECD-BD73-7F4F8182DC4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

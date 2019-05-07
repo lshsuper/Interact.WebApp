@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Interact.WebApp</RootNamespace>
     <AssemblyName>Interact.WebApp</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort />
@@ -23,6 +23,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -56,10 +57,6 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
@@ -98,16 +95,24 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AutofacConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\WeChatController.cs" />
+    <Compile Include="Controllers\ActivityController.cs" />
+    <Compile Include="Controllers\NoticeController.cs" />
+    <Compile Include="Controllers\WeixinController.cs" />
+    <Compile Include="Filters\CustomExceptionFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\web.config" />
     <None Include="packages.config" />
+    <Content Include="Views\Notice\Error.cshtml" />
+    <Content Include="Views\Weixin\Test.cshtml" />
+    <Content Include="Views\Weixin\Sigin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -117,8 +122,28 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
-    <Folder Include="Views\WeChat\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Interact.Core\Interact.Core.csproj">
+      <Project>{7bcb947f-eb40-42c4-bb5a-9f007398711b}</Project>
+      <Name>Interact.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interact.Infrastructure\Interact.Infrastructure.csproj">
+      <Project>{9853419d-b966-45ee-8801-dc3e94860b45}</Project>
+      <Name>Interact.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interact.IRespository\Interact.IRespository.csproj">
+      <Project>{d96e46c9-4a5f-4ecd-bd73-7f4f8182dc4d}</Project>
+      <Name>Interact.IRespository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interact.Respository\Interact.Respository.csproj">
+      <Project>{6eb3ed81-abed-45db-8b25-1f4ad6c7fb7a}</Project>
+      <Name>Interact.Respository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interact.Service\Interact.Service.csproj">
+      <Project>{99f8acef-ada8-41a9-8159-15191c44f404}</Project>
+      <Name>Interact.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

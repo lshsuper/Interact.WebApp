@@ -6,18 +6,15 @@ using System.Web.Mvc;
 
 namespace Interact.WebApp.Controllers
 {
-    public class WeChatController : Controller
+    /// <summary>
+    /// 活动管理控制器
+    /// </summary>
+    public class ActivityController : Controller
     {
-        // GET: WeChat
+        // GET: ActivityManage
         public ActionResult Index()
         {
             return View();
-        }
-        public ActionResult Token()
-        {
-
-            string echoStr = Request.QueryString["echoStr"].ToString();
-            return Content(echoStr);
         }
     }
 }

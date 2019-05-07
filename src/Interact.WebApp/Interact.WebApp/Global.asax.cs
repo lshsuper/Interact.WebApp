@@ -1,3 +1,5 @@
+using Autofac;
+using Interact.WebApp.App_Start;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,9 @@ namespace Interact.WebApp
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+           
+            //×¢²áiocÈÝÆ÷
+            AutofacConfig.RegisterIoc();
         }
     }
 }

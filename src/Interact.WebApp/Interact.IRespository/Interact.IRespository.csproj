@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7BCB947F-EB40-42C4-BB5A-9F007398711B}</ProjectGuid>
+    <ProjectGuid>{D96E46C9-4A5F-4ECD-BD73-7F4F8182DC4D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Interact.Core</RootNamespace>
-    <AssemblyName>Interact.Core</AssemblyName>
+    <RootNamespace>Interact.IRespository</RootNamespace>
+    <AssemblyName>Interact.IRespository</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -42,8 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IWeixinRespository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Interact.Infrastructure\Interact.Infrastructure.csproj">
+      <Project>{9853419d-b966-45ee-8801-dc3e94860b45}</Project>
+      <Name>Interact.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
