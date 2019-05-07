@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Config\WebConfig.cs" />
     <Compile Include="Config\WeixinConfig.cs" />
+    <Compile Include="Helper\CookieHelper.cs" />
     <Compile Include="Helper\HttpHelper.cs" />
     <Compile Include="Helper\JWTHelper.cs" />
     <Compile Include="Helper\QrCodeHelper.cs" />
