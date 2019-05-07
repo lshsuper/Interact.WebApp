@@ -59,6 +59,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Wexin\Enum\ScopeTypeEnum.cs" />
     <Compile Include="Wexin\Model\WeixinAuthAccessTokenResult.cs" />
+    <Compile Include="Wexin\Model\WeixinAuthUserInfoResult.cs" />
     <Compile Include="Wexin\WexinApiAddrBuilder.cs" />
   </ItemGroup>
   <ItemGroup>

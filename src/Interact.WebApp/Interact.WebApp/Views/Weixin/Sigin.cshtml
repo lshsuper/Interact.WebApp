@@ -9,9 +9,86 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Sigin</title>
+    <script src="~/Content/lib/jquery/jquery-3.3.1.min.js"></script>
+    <link href="~/Content/lib/mui-master/css/mui.min.css" rel="stylesheet" />
+    <script src="~/Content/lib/mui-master/js/mui.min.js"></script>
+    <style>
+        .sigin-header {
+            height: 180px;
+            background-image: url('/Content/webappp/img/yuantiao.jpg');
+            background-size:cover;
+        }
+        .sigin-footer {
+            padding: 30px;
+        }
+        .sigin-body {
+            background-color: #ffffff;
+        }
+
+        .sigin-btn {
+            margin: 0 auto;
+            width: 80px;
+            height: 80px;
+            border-radius: 40px;
+            text-align: center;
+            line-height: 80px;  
+        }
+        .user-headimg {
+            background-image: url(/Content/webappp/img/yuantiao.jpg);
+            background-size: cover;
+            height: 80px;
+            width: 80px;
+            border-radius: 80px;
+            margin: 18px;
+        }
+
+        .user-info {
+            margin-top: 24px;
+        }
+            .user-info > div{
+                margin-bottom:5px;
+            }
+            .user-info > div > span {
+                display: inline-block;
+            }
+
+                .user-info > div > span:first-child {
+                    margin-right:5px;
+                }
+    </style>
 </head>
 <body>
-    <div> 
+    <div class="mui-card">
+        <!--页眉，放置标题-->
+        <div class="mui-card-header mui-card-media sigin-header">
+
+        </div>
+        <!--内容区-->
+        <div class="mui-content mui-card-content sigin-body">
+            <div class="mui-row">
+                <div class="mui-col-sm-4 mui-col-xs-4">
+                    <div class="user-headimg"></div>
+                </div>
+                <div class="mui-col-sm-8 mui-col-xs-8 user-info">
+                    <div class="user-nickname"><span>昵称:</span><span>lsh</span></div>
+                    <div class="user-age"><span>年龄:</span><span>25</span></div>
+                    <div class="user-area"><span>地址:</span><span>北京-通州</span></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+        <!--页脚，放置补充信息或支持的操作-->
+        <div class="mui-card-footer sigin-footer">
+            <div class="sigin-btn mui-btn-primary">
+                点我签到
+            </div>
+        </div>
     </div>
+    <script>
+        (function () {
+
+
+        })()
+    </script>
 </body>
 </html>

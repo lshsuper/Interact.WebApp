@@ -8,10 +8,24 @@ namespace Interact.WebApp.Controllers
 {
     public class NoticeController : Controller
     {
-        // GET: Notice
+       
+        #region Notice-View
+        /// <summary>
+        /// 错误捕捉页面
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Error()
         {
             return View();
         }
+        /// <summary>
+        /// 签到成功
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult SiginSucc()
+        {
+            return View();
+        }
+        #endregion
     }
 }

@@ -34,20 +34,21 @@ namespace Interact.WebApp.Controllers
         /// <returns></returns>
         public ActionResult Sigin(int activityId, string code)
         {
-            //1.从微信地址跳转过来
-            if (!string.IsNullOrEmpty(code))
-            {
-                string redirectUrl = $"{WebConfig.Web_Host}/Weixin/Sigin?activityId={activityId}";
-                var authCodeUrl = _weixinRespository.GetAuthCodeUrl(redirectUrl);
-                return Content("<script>location.href='" + authCodeUrl + "'</script>");
-            }
-            //2.首次访问
-            //2.1.根据code获取access_token+openid
-            var weixinAuthAccessTokenResult = _weixinRespository.GetAuthAccessTokenResult(code);
-            //2.1.1根据openid+activityId查询参与活动的情况
-            var weixinAuthUserInfoResult = _weixinRespository.GetUserInfoByOpennIdAndAccessToken(weixinAuthAccessTokenResult.access_token,weixinAuthAccessTokenResult.openid);
-            //2.1.2根据openid获取当前用户信息
-            //2.2.对签到页面做数据展示规划
+            ////1.从微信地址跳转过来
+            //if (!string.IsNullOrEmpty(code))
+            //{
+            //    string redirectUrl = $"{WebConfig.Web_Host}/Weixin/Sigin?activityId={activityId}";
+            //    var authCodeUrl = _weixinRespository.GetAuthCodeUrl(redirectUrl);
+            //    return Content("<script>location.href='" + authCodeUrl + "'</script>");
+            //}
+            ////2.首次访问
+            ////2.1.根据code获取access_token+openid
+            //var weixinAuthAccessTokenResult = _weixinRespository.GetAuthAccessTokenResult(code);
+            ////2.1.1根据openid+activityId查询参与活动的情况
+            //var weixinAuthUserInfoResult = _weixinRespository.GetUserInfoByOpennIdAndAccessToken(weixinAuthAccessTokenResult.access_token,weixinAuthAccessTokenResult.openid);
+            ////2.1.2根据openid获取当前用户信息
+            ////2.2.对签到页面做数据展示规划
+            
             return View();
         }
 

@@ -91,6 +91,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\lib\jquery\jquery-3.3.1.js" />
+    <Content Include="Content\lib\jquery\jquery-3.3.1.min.js" />
+    <Content Include="Content\lib\mui-master\css\mui.css" />
+    <Content Include="Content\lib\mui-master\css\mui.min.css" />
+    <Content Include="Content\lib\mui-master\js\mui.js" />
+    <Content Include="Content\lib\mui-master\js\mui.min.js" />
+    <Content Include="Content\webappp\img\icon-sigin-succ.png" />
+    <Content Include="Content\webappp\img\yuantiao.jpg" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -109,10 +117,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\lib\mui-master\fonts\mui.ttf" />
     <None Include="packages.config" />
     <Content Include="Views\Notice\Error.cshtml" />
     <Content Include="Views\Weixin\Test.cshtml" />
     <Content Include="Views\Weixin\Sigin.cshtml" />
+    <Content Include="Views\Notice\SiginSucc.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -122,6 +132,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\webappp\css\" />
+    <Folder Include="Content\webappp\js\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Interact.Core\Interact.Core.csproj">
