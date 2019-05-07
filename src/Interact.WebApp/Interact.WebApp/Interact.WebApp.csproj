@@ -123,6 +123,7 @@
     <Content Include="Views\Weixin\Test.cshtml" />
     <Content Include="Views\Weixin\Sigin.cshtml" />
     <Content Include="Views\Notice\SiginSucc.cshtml" />
+    <Content Include="Views\Shared\_LayoutForMobile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
