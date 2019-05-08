@@ -6,21 +6,29 @@
 
 <style>
     .sigin-screen-body {
+        position: relative;
+         overflow: hidden;
         background-color: rgba(0, 0, 0, 0.3);
         height: 80%;
-        width: 95%;
+        width: 90%;
         margin: 5% auto 0% auto;
-        overflow: auto;
-        position: relative;
+        
     }
-
+    .user-info-group{
+     height: 100%;
+     width:104%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    }
     .user-info-group > li {
+        
         float: left;
-        width: 154px;
+        width: 144px;
         height: 144px;
         text-align: center;
         position: relative;
         padding: 15px 0;
+       
     }
 
         .user-info-group > li > img {
@@ -107,18 +115,42 @@
             <p class="user-nick">lsh</p>
         </li>
         <li>
-            <img src="~/Content/webappp/img/yuantiao.jpg" />
+            <img src="/Content/webappp/img/yuantiao.jpg" />
             <p class="user-sort">111</p>
             <p class="user-nick">lsh</p>
         </li>
     </ul>
 </div>
+<script id="user-info-tmpl" type="text/html">
+    <li class="animated fadeInDown">
+        <img src="/Content/webappp/img/yuantiao.jpg" />
+        <p class="user-sort">{{sort}}</p>
+        <p class="user-nick">{{nickname}}</p>
+    </li>
+</script>
 @section scripts{
     <script>
         (function () {
             var signinscreen = {
-
+                userInfoGroup:$('.user-info-group'),
+                userInfoTmpl:'user-info-tmpl',
+                buildUserInfoBlock: function () {
+                    var _self = this;
+                    var html = template(_self.userInfoTmpl, {nickname:"lsh",sort:21}); 
+                        _self.userInfoGroup.append(html);
+                },
+                test: function () {
+                    var _self = this;
+                    setInterval(function () {
+                        _self.buildUserInfoBlock();
+                    }, 2000);
+                },
+                init: function () {
+                    var _self = this;
+                    _self.test()
+                }
             }
+            signinscreen.init();
         })()    
     </script>
     

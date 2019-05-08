@@ -5,140 +5,142 @@
     <title>@ViewBag.Title</title>
     <script src="~/Content/lib/jquery/jquery-3.3.1.min.js"></script>
     <script src="~/Content/lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="~/Content/lib/art-template-master/template-web.js"></script>
     <link href="~/Content/lib/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/lib/animate/animate.min.css" rel="stylesheet" />
     <style>
-         .container {
-        position: fixed;
-        background-image: url('../../Content/webappp/img/bg/bg-luckydraw.jpg');
-        background-size: 100% 100%;
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        width: 100%;
-        background-repeat: no-repeat;
-        background-size: cover;
-        overflow: hidden;
-        font-family: Microsoft YaHei, Helvitica, Verdana, Tohoma, Arial, san-serif;
-    }
-          .screen-footer {
-        position: absolute;
-        bottom: 0px;
-        width: 100%;
-        padding: 0px 230px 10px 230px;
-    }
-
-    .screen-func {
-        float: right;
-        position: relative;
-    }
-
-        .screen-func > div[class^=screen-func] {
-            float: left;
-            text-align: center;
-            width: 80px;
+        .container {
+            position: fixed;
+            background-image: url('../../Content/webappp/img/bg/bg-luckydraw.jpg');
+            background-size: 100% 100%;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            overflow: hidden;
+            font-family: Microsoft YaHei, Helvitica, Verdana, Tohoma, Arial, san-serif;
         }
 
-        .screen-func > [class^=screen-func]:hover {
-            background-color: rgba(0, 0, 0, 0.75);
+        .screen-footer {
+            position: absolute;
+            bottom: 0px;
+            width: 100%;
+            padding: 0px 230px 10px 230px;
+        }
+
+        .screen-func {
+            float: right;
+            position: relative;
+        }
+
+            .screen-func > div[class^=screen-func] {
+                float: left;
+                text-align: center;
+                width: 80px;
+            }
+
+            .screen-func > [class^=screen-func]:hover {
+                background-color: rgba(0, 0, 0, 0.75);
+                box-shadow: 0 3px 10px rgba(0,0,0,.3);
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            .screen-func > div > img {
+                display: block;
+                margin: 0 auto;
+            }
+
+            .screen-func > div > span {
+                display: block;
+                color: #ffffff;
+            }
+
+        .apply-list {
+            display: none;
+            position: absolute;
+            width: 300px;
+            bottom: 80px;
+            left: 55px;
+            background: #fff;
+            border-radius: 10px;
             box-shadow: 0 3px 10px rgba(0,0,0,.3);
-            border-radius: 5px;
-            cursor: pointer;
+            border: 2px solid rgb(255, 255, 255);
+            background-color: rgba(0, 0, 0, 0.75);
+            z-index: 1000;
         }
 
-        .screen-func > div > img {
-            display: block;
-            margin: 0 auto;
-        }
+            .apply-list:after {
+                content: "";
+                /* visibility: hidden; */
+                position: absolute;
+                bottom: -14px;
+                left: 160px;
+                margin-left: -6px;
+                display: inline-block;
+                width: 0;
+                height: 0;
+                font-size: 0;
+                border: 6px dashed transparent;
+                border-top: 6px solid #fff;
+            }
 
-        .screen-func > div > span {
-            display: block;
-            color: #ffffff;
-        }
+            .apply-list > i {
+                cursor: pointer;
+                position: absolute;
+                display: block;
+                border-radius: 50%;
+                width: 26px;
+                height: 26px;
+                top: -8px;
+                right: -8px;
+                background-color: #FFF;
+                /* text-indent: 3px; */
+                padding: 4px 5px;
+            }
 
-    .apply-list {
-        display: none;
-        position: absolute;
-        width: 300px;
-        bottom: 80px;
-        left: 55px;
-        background: #fff;
-        border-radius: 10px;
-        box-shadow: 0 3px 10px rgba(0,0,0,.3);
-        border: 2px solid rgb(255, 255, 255);
-        background-color: rgba(0, 0, 0, 0.75);
-        z-index: 1000;
-    }
+            .apply-list > ul > li {
+                float: left;
+                padding: 5px;
+                color: #ffffff;
+                text-align: center;
+            }
 
-        .apply-list:after {
-            content: "";
-            /* visibility: hidden; */
-            position: absolute;
-            bottom: -14px;
-            left: 160px;
-            margin-left: -6px;
-            display: inline-block;
-            width: 0;
-            height: 0;
-            font-size: 0;
-            border: 6px dashed transparent;
-            border-top: 6px solid #fff;
-        }
+                .apply-list > ul > li > a > img {
+                    display: block;
+                }
 
-        .apply-list > i {
-            cursor: pointer;
-            position: absolute;
-            display: block;
-            border-radius: 50%;
-            width: 26px;
-            height: 26px;
-            top: -8px;
-            right: -8px;
-            background-color: #FFF;
-            /* text-indent: 3px; */
-            padding: 4px 5px;
-        }
+                .apply-list > ul > li > span {
+                    display: block;
+                }
 
-        .apply-list > ul > li {
+        .skin-group > div {
+            position: relative;
+            width: 25%;
             float: left;
             padding: 5px;
-            color: #ffffff;
-            text-align: center;
         }
 
-            .apply-list > ul > li > a > img {
-                display: block;
+            .skin-group > div:hover {
+                cursor: pointer;
             }
 
-            .apply-list > ul > li > span {
+            .skin-group > div > img {
                 display: block;
+                width: 100%;
             }
 
-    .skin-group > div {
-        position: relative;
-        width: 25%;
-        float: left;
-        padding: 5px;
-    }
-
-        .skin-group > div:hover {
-            cursor: pointer;
+        .select-it {
+            display: none;
+            background-image: url(../../Content/webappp/img/icon/icon-select.png);
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            top: -7px;
+            right: -3px;
         }
-
-        .skin-group > div > img {
-            display: block;
-            width: 100%;
-        }
-
-    .select-it {
-        display: none;
-        background-image: url(../../Content/webappp/img/icon/icon-select.png);
-        position: absolute;
-        width: 32px;
-        height: 32px;
-        top: -7px;
-        right: -3px;
-    }
     </style>
 </head>
 <body>
