@@ -23,7 +23,7 @@ namespace Interact.WebApp.App_Start
             var respository = Assembly.Load("Interact.Respository");
             builder.RegisterTypes(respository.GetTypes().Where(o=>o.Name.EndsWith("Respository")).ToArray()).AsImplementedInterfaces().InstancePerDependency();
             //4.注入service
-            var service = Assembly.Load("Interact.Interact.Service");
+            var service = Assembly.Load("Interact.Application");
             builder.RegisterTypes(service.GetTypes().Where(o=>o.Name.EndsWith("Service")).ToArray()).AsSelf().InstancePerDependency();
             //5.注入其它
             //6.修改mvc默认解析器
