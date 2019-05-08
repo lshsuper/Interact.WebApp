@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Interact.Application.Utils
 {
     /// <summary>
-    /// 应用上下文
+    /// 应用上下文工具
     /// </summary>
     public class AppUtil
     {
