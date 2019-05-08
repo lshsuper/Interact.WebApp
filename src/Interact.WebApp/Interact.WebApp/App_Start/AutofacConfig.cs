@@ -12,7 +12,6 @@ namespace Interact.WebApp.App_Start
 {
     public class AutofacConfig
     {
-       
         public static void RegisterIoc()
         {
             //1.构造autofac容器

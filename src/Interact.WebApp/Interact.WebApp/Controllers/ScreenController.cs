@@ -17,6 +17,14 @@ namespace Interact.WebApp.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// 签到大屏幕
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult SignInScreen()
+        {
+            return View();
+        }
         #endregion
 
     }
