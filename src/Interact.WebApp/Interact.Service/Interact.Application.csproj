@@ -7,8 +7,8 @@
     <ProjectGuid>{99F8ACEF-ADA8-41A9-8159-15191C44F404}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Interact.Service</RootNamespace>
-    <AssemblyName>Interact.Service</AssemblyName>
+    <RootNamespace>Interact.Application</RootNamespace>
+    <AssemblyName>Interact.Application</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -42,7 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Utils\AppContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Interact.Infrastructure\Interact.Infrastructure.csproj">
+      <Project>{9853419D-B966-45EE-8801-DC3E94860B45}</Project>
+      <Name>Interact.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Service\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

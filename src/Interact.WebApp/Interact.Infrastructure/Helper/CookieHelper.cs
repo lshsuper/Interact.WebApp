@@ -26,5 +26,13 @@ namespace Interact.Infrastructure.Helper
             if (cookie == null) return string.Empty;
             return cookie.Value;
         }
+        /// <summary>
+        /// 移除cookie
+        /// </summary>
+        /// <param name="name"></param>
+        public static void Remove(string name)
+        {
+            HttpContext.Current.Response.Cookies.Remove(name);
+        }
     }
 }

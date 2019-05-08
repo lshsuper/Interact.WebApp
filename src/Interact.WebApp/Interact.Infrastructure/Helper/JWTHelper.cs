@@ -44,7 +44,7 @@ namespace Interact.Infrastructure.Helper
         /// </summary>
         /// <param name="token">jwtToken</param>
         /// <returns></returns>
-        public static T GetJwtDecode<T>(string token)
+        public static T Get<T>(string token)
         {
             IJsonSerializer serializer = new JsonNetSerializer();
             IDateTimeProvider provider = new UtcDateTimeProvider();
