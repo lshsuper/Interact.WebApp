@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Interact.Infrastructure.Util
 {
-   public class Tool
+    /// <summary>
+    /// 工具类
+    /// </summary>
+    public class Tool
     {
-
-
         /// <summary>
         /// 截取参数,取不到值时返回""
         /// </summary>
@@ -86,6 +88,44 @@ namespace Interact.Infrastructure.Util
                 }
             }
             return result;
+        }
+        /// <summary>
+        /// 是否通过微信浏览器打开链接
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsCheckByWeixin()
+        {
+            string userAgent = HttpContext.Current.Request.UserAgent;
+            return userAgent.ToLower().Contains("micromessenger");
+        }
+        /// <summary>
+        /// 是否通过手机端打开链接
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsCheckByMobile()
+        {
+            bool flag = false;
+
+            string agent = HttpContext.Current.Request.UserAgent;
+            string[] keywords = { "Android", "iPhone", "iPod", "iPad", "Windows Phone", "MQQBrowser" };
+            //排除 Windows 桌面系统
+            if (!agent.Contains("Windows NT") || (agent.Contains("Windows NT") && agent.Contains("compatible; MSIE 9.0;")))
+            {
+                //排除 苹果桌面系统
+                if (!agent.Contains("Windows NT") && !agent.Contains("Macintosh"))
+                {
+                    foreach (string item in keywords)
+                    {
+                        if (agent.Contains(item))
+                        {
+                            flag = true;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return flag;
         }
     }
 }

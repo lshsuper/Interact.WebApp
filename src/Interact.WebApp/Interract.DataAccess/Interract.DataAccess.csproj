@@ -4,15 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9853419D-B966-45EE-8801-DC3E94860B45}</ProjectGuid>
+    <ProjectGuid>{A79C96E5-1B09-4F6F-B09C-F05D458C2914}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Interact.Infrastructure</RootNamespace>
-    <AssemblyName>Interact.Infrastructure</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <RootNamespace>Interract.DataAccess</RootNamespace>
+    <AssemblyName>Interract.DataAccess</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,23 +34,8 @@
     <Reference Include="Dapper, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.1.60.6\lib\net451\Dapper.dll</HintPath>
     </Reference>
-    <Reference Include="JWT, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\JWT.5.1.1\lib\net46\JWT.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="QRCoder, Version=1.3.5.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\QRCoder.1.3.5\lib\net40\QRCoder.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Drawing.Common, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Drawing.Common.4.5.0\lib\net461\System.Drawing.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -60,21 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config\DbConfig.cs" />
-    <Compile Include="Config\WebConfig.cs" />
-    <Compile Include="Config\WeixinConfig.cs" />
-    <Compile Include="Dapper\DapperContext.cs" />
-    <Compile Include="Helper\CookieHelper.cs" />
-    <Compile Include="Helper\DapperHelper.cs" />
-    <Compile Include="Helper\HttpHelper.cs" />
-    <Compile Include="Helper\JWTHelper.cs" />
-    <Compile Include="Helper\QrCodeHelper.cs" />
-    <Compile Include="Helper\Tool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Wexin\Enum\AuditScopeTypeEnum.cs" />
-    <Compile Include="Wexin\Model\WeixinAuthAccessTokenResult.cs" />
-    <Compile Include="Wexin\Model\WeixinAuthUserInfoResult.cs" />
-    <Compile Include="Wexin\WexinApiAddrBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

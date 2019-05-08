@@ -91,13 +91,32 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\lib\animate\animate.css" />
+    <Content Include="Content\lib\animate\animate.min.css">
+      <DependentUpon>animate.css</DependentUpon>
+    </Content>
+    <Content Include="Content\lib\bootstrap-3.3.7-dist\css\bootstrap-theme.css" />
+    <Content Include="Content\lib\bootstrap-3.3.7-dist\css\bootstrap-theme.min.css" />
+    <Content Include="Content\lib\bootstrap-3.3.7-dist\css\bootstrap.css" />
+    <Content Include="Content\lib\bootstrap-3.3.7-dist\css\bootstrap.min.css" />
+    <Content Include="Content\lib\bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\lib\bootstrap-3.3.7-dist\js\bootstrap.js" />
+    <Content Include="Content\lib\bootstrap-3.3.7-dist\js\bootstrap.min.js" />
+    <Content Include="Content\lib\bootstrap-3.3.7-dist\js\npm.js" />
     <Content Include="Content\lib\jquery\jquery-3.3.1.js" />
     <Content Include="Content\lib\jquery\jquery-3.3.1.min.js" />
     <Content Include="Content\lib\mui-master\css\mui.css" />
     <Content Include="Content\lib\mui-master\css\mui.min.css" />
     <Content Include="Content\lib\mui-master\js\mui.js" />
     <Content Include="Content\lib\mui-master\js\mui.min.js" />
+    <Content Include="Content\webappp\img\bg\bg-luckydraw.jpg" />
+    <Content Include="Content\webappp\img\bg\bg-nouser.jpg" />
+    <Content Include="Content\webappp\img\bg\bg-lucky-draw.png" />
+    <Content Include="Content\webappp\img\icon\icon-apply.png" />
+    <Content Include="Content\webappp\img\icon\icon-select.png" />
+    <Content Include="Content\webappp\img\icon\icon-skin.png" />
     <Content Include="Content\webappp\img\icon-sigin-succ.png" />
+    <Content Include="Content\webappp\img\icon\icon-ewm.png" />
     <Content Include="Content\webappp\img\yuantiao.jpg" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
@@ -107,7 +126,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ActivityController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NoticeController.cs" />
+    <Compile Include="Controllers\ScreenController.cs" />
     <Compile Include="Controllers\SigninController.cs" />
     <Compile Include="Filters\CustomExceptionFilter.cs" />
     <Compile Include="Global.asax.cs">
@@ -118,12 +139,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\lib\mui-master\fonts\mui.ttf" />
+    <Content Include="Content\lib\bootstrap-3.3.7-dist\css\bootstrap-theme.css.map" />
+    <Content Include="Content\lib\bootstrap-3.3.7-dist\css\bootstrap-theme.min.css.map" />
+    <Content Include="Content\lib\bootstrap-3.3.7-dist\css\bootstrap.css.map" />
+    <Content Include="Content\lib\bootstrap-3.3.7-dist\css\bootstrap.min.css.map" />
+    <Content Include="Content\lib\bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\lib\bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\lib\bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\lib\bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="bundleconfig.json" />
     <None Include="packages.config" />
     <Content Include="Views\Notice\Error.cshtml" />
     <Content Include="Views\Signin\Test.cshtml" />
     <Content Include="Views\Signin\Signin.cshtml" />
     <Content Include="Views\Notice\SigninSucc.cshtml" />
     <Content Include="Views\Shared\_LayoutForMobile.cshtml" />
+    <Content Include="Views\Manage\Login.cshtml" />
+    <Content Include="Views\Screen\LuckyDrawScreen.cshtml" />
+    <Content Include="Views\Shared\_LayoutForPC.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

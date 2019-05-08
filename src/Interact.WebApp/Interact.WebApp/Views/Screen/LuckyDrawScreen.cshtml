@@ -1,0 +1,583 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutForPC.cshtml";
+    ViewBag.Title = "抽奖";
+}
+ <style>
+    .container {
+        position: fixed;
+        background-image: url('../../Content/webappp/img/bg/bg-luckydraw.jpg');
+        background-size: 100% 100%;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        overflow: hidden;
+        font-family: Microsoft YaHei, Helvitica, Verdana, Tohoma, Arial, san-serif;
+    }
+
+    .screen-body {
+        position: absolute;
+        top: 17%;
+        height: 72%;
+        width: 96%;
+        left: 50%;
+        margin-left: -45%;
+    }
+
+    .screen-body-left {
+        background-color: rgba(53, 44, 87, 0.7);
+        height: 100%;
+        margin-right: 1%;
+    }
+
+    .screen-body-right {
+        background-color: rgba(53, 44, 87, 0.7);
+        height: 100%;
+        padding: 0px;
+    }
+
+    .luckydraw-title {
+        width: 100%;
+        height: 60px;
+        position: relative;
+        color: #fff;
+        font-size: 35px;
+        line-height: 60px;
+        font-family: Arial, Helvetica, sans-serif;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+        .luckydraw-title > pan:first-child {
+            margin-left: 50px;
+        }
+
+        .luckydraw-title > pan:last-child {
+            right: 10px;
+            text-align: right;
+        }
+
+    .luckydraw-body {
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        top: 50%;
+        left: 50%;
+        margin: -150px auto auto -150px;
+    }
+
+        .luckydraw-body > .user {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            background-size: contain;
+            background-image: url('../../Content/webappp/img/bg/bg-nouser.jpg');
+            margin: 15px auto;
+            overflow: visible;
+            border: 1px solid #fff;
+            border-radius: 8px;
+            box-shadow: 3px 5px 3px rgba(0, 0, 0, 0.11);
+        }
+
+            .luckydraw-body > .user > .nick-name {
+                position: absolute;
+                width: 200%;
+                height: 30px;
+                line-height: 20px;
+                left: -50%;
+                bottom: -34px;
+                font-size: 18px;
+                color: #fff;
+                text-align: center;
+                display: block;
+                text-shadow: 0 1px 3px rgba(0,0,0,0.45);
+            }
+
+        .luckydraw-body > .start-btn {
+            position: absolute;
+            left: 52%;
+            margin-left: -60px;
+            bottom: 10px;
+            width: 100px;
+            text-align: center;
+            padding: 8px 10px 12px 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            font-weight: bolder;
+            cursor: pointer;
+            color: #E74145;
+            box-shadow: 0 2px 0px 3px rgba(0,0,0,0.15), 0 -3px 0px 0px #D0D0D0 inset;
+        }
+
+    .luckydraw-footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 60px;
+        right: 0%;
+        border-top: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+        .luckydraw-footer > div {
+            height: 100%;
+        }
+
+    .choice-group {
+        height: 100%;
+        line-height: 59px;
+    }
+
+    .luckydraw-footer > div:last-child {
+        line-height: 60px;
+        margin-right: 5px;
+    }
+
+    .luckydraw-footer > div:last-child {
+        position: absolute;
+        right: 10px;
+        height: 40px;
+        top: 50%;
+        margin-top: -20px;
+        line-height: 40px;
+        width: 105px;
+        text-align: center;
+        font-size: 20px;
+        padding: 0 10px;
+        color: #fff;
+        border: 1px solid #fff;
+        cursor: pointer;
+        border-radius: 8px;
+        -moz-border-radius: 8px;
+        -webkit-border-radius: 8px;
+    }
+
+        .luckydraw-footer > div:last-child:hover {
+        }
+
+    .menu-list {
+        width: 100%;
+        height: 93%;
+        position: relative;
+        float: left;
+        background-color: rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        padding: 3px;
+    }
+
+        .menu-list > .menu-opt {
+            position: relative;
+            width: 100%;
+            height: 70px;
+            line-height: 70px;
+            margin: 3px auto;
+            background: rgba(255, 255, 255,0.15);
+            overflow: hidden;
+        }
+
+            .menu-list > .menu-opt > .user-no {
+                width: 30px;
+                height: 30px;
+                color: #E62841;
+                position: relative;
+                top: 20px;
+                text-align: center;
+                margin-left: 10px;
+                font-size: 16px;
+                line-height: 30px;
+                background-color: #FFF;
+                border-radius: 100%;
+            }
+
+            .menu-list > .menu-opt > .user-pic {
+                position: absolute;
+                display: inline-block;
+                width: 60px;
+                height: 60px;
+                background: url('../../Content/webappp/img/yuantiao.jpg') center no-repeat;
+                background-size: contain;
+                top: 6px;
+                left: 50px;
+                border-radius: 100%;
+            }
+
+            .menu-list > .menu-opt > .user-nick {
+                position: absolute;
+                height: 60px;
+                width: 500%;
+                top: 6px;
+                left: 131px;
+                overflow: visible;
+                font-size: 20px;
+                line-height: 60px;
+                text-align: left;
+                display: block;
+                color: #fff;
+                text-shadow: 0 1px 3px rgba(0,0,0,0.45);
+            }
+
+    .afresh-choice {
+        width: 100%;
+        height: 50px;
+        position: absolute;
+        right: 0px;
+        background-color: rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        border-top: 0px;
+        padding: 3px;
+        bottom: 0px;
+        overflow: auto;
+    }
+
+    .afresh-choice-btn {
+        position: absolute;
+        left: 50%;
+        margin-left: -60px;
+        bottom: 4px;
+        width: 100px;
+        text-align: center;
+        padding: 8px 10px 12px 10px;
+        background-color: #fff;
+        border-radius: 8px;
+        font-weight: bolder;
+        cursor: pointer;
+        color: #E74145;
+        box-shadow: 0 2px 0px 3px rgba(0,0,0,0.15), 0 -3px 0px 0px #D0D0D0 inset;
+    }
+
+    .screen-footer {
+        position: absolute;
+        bottom: 0px;
+        width: 100%;
+        padding: 0px 230px 10px 230px;
+    }
+
+    .screen-func {
+        float: right;
+        position: relative;
+    }
+
+        .screen-func > div[class^=screen-func] {
+            float: left;
+            text-align: center;
+            width: 80px;
+        }
+
+        .screen-func > [class^=screen-func]:hover {
+            background-color: rgba(0, 0, 0, 0.75);
+            box-shadow: 0 3px 10px rgba(0,0,0,.3);
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .screen-func > div > img {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .screen-func > div > span {
+            display: block;
+            color: #ffffff;
+        }
+
+    .apply-list {
+        display: none;
+        position: absolute;
+        width: 300px;
+        bottom: 80px;
+        left: 55px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 3px 10px rgba(0,0,0,.3);
+        border: 2px solid rgb(255, 255, 255);
+        background-color: rgba(0, 0, 0, 0.75);
+        z-index: 1000;
+    }
+
+        .apply-list:after {
+            content: "";
+            /* visibility: hidden; */
+            position: absolute;
+            bottom: -14px;
+            left: 160px;
+            margin-left: -6px;
+            display: inline-block;
+            width: 0;
+            height: 0;
+            font-size: 0;
+            border: 6px dashed transparent;
+            border-top: 6px solid #fff;
+        }
+
+        .apply-list > i {
+            cursor: pointer;
+            position: absolute;
+            display: block;
+            border-radius: 50%;
+            width: 26px;
+            height: 26px;
+            top: -8px;
+            right: -8px;
+            background-color: #FFF;
+            /* text-indent: 3px; */
+            padding: 4px 5px;
+        }
+
+        .apply-list > ul > li {
+            float: left;
+            padding: 5px;
+            color: #ffffff;
+            text-align: center;
+        }
+
+            .apply-list > ul > li > a > img {
+                display: block;
+            }
+
+            .apply-list > ul > li > span {
+                display: block;
+            }
+
+    .skin-group > div {
+        position: relative;
+        width: 25%;
+        float: left;
+        padding: 5px;
+    }
+
+        .skin-group > div:hover {
+            cursor: pointer;
+        }
+
+        .skin-group > div > img {
+            display: block;
+            width: 100%;
+        }
+
+    .select-it {
+        display: none;
+        background-image: url(../../Content/webappp/img/icon/icon-select.png);
+        position: absolute;
+        width: 32px;
+        height: 32px;
+        top: -7px;
+        right: -3px;
+    }
+</style>
+<div class="container">
+    <div class="row screen-body">
+        <div class="col-md-7 screen-body-left">
+            <div class="luckydraw-title clearfix">
+                <span class="pull-left">抽奖</span>
+                <span class="pull-right">1000000人</span>
+            </div>
+            <div class="luckydraw-body">
+                <div class="user">
+                    <span class="nick-name"></span>
+                </div>
+                <div class="start-btn">
+                    开始抽奖
+                </div>
+            </div>
+            <div class="luckydraw-footer clearfix">
+                <div class="pull-left">
+                    <div class="form-inline choice-group">
+                        <div class="form-group">
+                            <label class="label">请选择奖项:</label>
+                            <select class="form-control">
+                                <option value="-1">--请选择奖项--</option>
+                                <option value="0">一等奖</option>
+                                <option value="1">二等奖</option>
+                                <option value="2">三等奖</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="label">选择人数:</label>
+                            <select class="form-control">
+                                <option value="-1">--请选择中奖人数--</option>
+                                <option value="0">1</option>
+                                <option value="1">2</option>
+                                <option value="2">3</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="pull-right">
+                    重新加载
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4  screen-body-right">
+            <div class="menu-list">
+                <div class="menu-opt">
+                    <div class="user-no">5</div>
+                    <div class="user-pic"></div>
+                    <div class="user-nick">lsh</div>
+                </div>
+                <div class="menu-opt">
+                    <div class="user-no">5</div>
+                    <div class="user-pic"></div>
+                    <div class="user-nick">lsh</div>
+                </div>
+                <div class="menu-opt">
+                    <div class="user-no">5</div>
+                    <div class="user-pic"></div>
+                    <div class="user-nick">lsh</div>
+                </div>
+                <div class="menu-opt">
+                    <div class="user-no">5</div>
+                    <div class="user-pic"></div>
+                    <div class="user-nick">lsh</div>
+                </div>
+                <div class="menu-opt">
+                    <div class="user-no">5</div>
+                    <div class="user-pic"></div>
+                    <div class="user-nick">lsh</div>
+                </div>
+            </div>
+            <div class="afresh-choice">
+                <div class="afresh-choice-btn">
+                    重新抽奖
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="screen-footer clearfix">
+        <div class="screen-func clearfix">
+            <div class="screen-func-ewm">
+                <img src="~/Content/webappp/img/icon/icon-ewm.png" />
+                <span>二维码</span>
+            </div>
+            <div class="screen-func-skin" data-toggle="modal" data-target="#skin-modal" id="skin-btn">
+                <img src="~/Content/webappp/img/icon/icon-skin.png" />
+                <span>皮肤</span>
+            </div>
+            <div class="screen-func-apply" id="apply-btn">
+                <img src="~/Content/webappp/img/icon/icon-apply.png" />
+                <span>应用</span>
+            </div>
+            <div class="apply-list" id="apply-modal">
+                <i id="close-apply-btn"><span class="glyphicon glyphicon-remove"></span></i>
+                <ul class="list-unstyled clearfix">
+                    <li>
+                        <a href="#">
+                            <img src="~/Content/webappp/img/bg/bg-lucky-draw.png" />
+                        </a>
+                        <span>抽奖</span>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="~/Content/webappp/img/bg/bg-lucky-draw.png" />
+                        </a>
+                        <span>抽奖</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="skin-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">皮肤选择</h4>
+            </div>
+            <div class="modal-body">
+                <div class=" skin-group clearfix">
+                    <div class="skin-opt">
+                        <i class="select-it"></i>
+                        <img src="~/Content/webappp/img/yuantiao.jpg" />
+
+                    </div>
+                    <div class="skin-opt">
+                        <i class="select-it"></i>
+                        <img src="~/Content/webappp/img/yuantiao.jpg" />
+
+                    </div>
+                    <div class="skin-opt">
+                        <i class="select-it"></i>
+                        <img src="~/Content/webappp/img/yuantiao.jpg" />
+
+                    </div>
+                    <div class="skin-opt">
+                        <i class="select-it"></i>
+                        <img src="~/Content/webappp/img/yuantiao.jpg" />
+
+                    </div>
+                    <div class="skin-opt">
+                        <i class="select-it"></i>
+                        <img src="~/Content/webappp/img/yuantiao.jpg" />
+
+                    </div>
+                    <div class="skin-opt">
+                        <i class="select-it"></i>
+                        <img src="~/Content/webappp/img/yuantiao.jpg" />
+
+                    </div>
+                    <div class="skin-opt">
+                        <i class="select-it"></i>
+                        <img src="~/Content/webappp/img/yuantiao.jpg" />
+
+                    </div>
+                    <div class="skin-opt">
+                        <i class="select-it"></i>
+                        <img src="~/Content/webappp/img/yuantiao.jpg" />
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="definite-select-skin">确定</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+@section scripts{
+    <script>
+        (function () {
+
+            var luckydraw = {
+                skinModal: $('#skin-modal'),
+                skinBtn: $('#skin-btn'),
+                applyBtn: $('#apply-btn'),
+                closeApplyBtn: $('#close-apply-btn'),
+                applyModal: $('#apply-modal'),
+                definiteSelectSkin: $('#definite-select-skin'),
+                skinGroup: $('.skin-group'),
+                event: function () {
+                    var _self = this;
+                    //打开应用列表
+                    _self.applyBtn.click(function () {
+                        if (_self.applyModal.is(":hidden")) {
+                            _self.applyModal.show('bounceInDown');
+                        } else {
+                            _self.applyModal.hide();
+                        }
+                    });
+                    //关闭应用列表
+                    _self.closeApplyBtn.click(function () {
+                        _self.applyModal.hide();
+                    });
+                    //展示皮肤列表
+                    _self.definiteSelectSkin.click(function () {
+                        _self.skinModal.modal('hide');
+                    });
+                    //点选皮肤
+                    _self.skinGroup.children('.skin-opt').click(function () {
+                        $(this).siblings('.skin-opt').find('.select-it').hide();
+                        $(this).find('.select-it').show();
+                    });
+                },
+                init: function () {
+                    var _self = this;
+                    _self.event();
+                }
+            };
+            luckydraw.init();  //初始化
+
+        })()
+    </script>
+}
