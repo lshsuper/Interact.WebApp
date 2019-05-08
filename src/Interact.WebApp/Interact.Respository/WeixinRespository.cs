@@ -5,7 +5,7 @@ using Interact.Infrastructure.Weixin.Model;
 using Interact.Infrastructure.Wexin;
 using Interact.Infrastructure.Wexin.Enum;
 using Interact.Infrastructure.Wexin.Model;
-using Interact.IRespository;
+using Interact.Core.IRespository;
 using System;
 using System.Collections.Generic;
 using System.Linq;

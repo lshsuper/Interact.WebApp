@@ -42,11 +42,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IRespository\IAdminRespository.cs" />
+    <Compile Include="IRespository\IWeixinRespository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entity\" />
     <Folder Include="Enum\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Interact.Infrastructure\Interact.Infrastructure.csproj">
+      <Project>{9853419d-b966-45ee-8801-dc3e94860b45}</Project>
+      <Name>Interact.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,6 +1,6 @@
 ﻿using Interact.Infrastructure.Config.Model;
 using Interact.Infrastructure.Wexin;
-using Interact.IRespository;
+using Interact.Core.IRespository;
 using System;
 using System.Collections.Generic;
 using System.Linq;

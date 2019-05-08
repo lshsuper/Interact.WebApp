@@ -178,10 +178,6 @@
       <Project>{9853419d-b966-45ee-8801-dc3e94860b45}</Project>
       <Name>Interact.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Interact.IRespository\Interact.IRespository.csproj">
-      <Project>{d96e46c9-4a5f-4ecd-bd73-7f4f8182dc4d}</Project>
-      <Name>Interact.IRespository</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Interact.Respository\Interact.Respository.csproj">
       <Project>{6eb3ed81-abed-45db-8b25-1f4ad6c7fb7a}</Project>
       <Name>Interact.Respository</Name>

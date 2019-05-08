@@ -46,13 +46,13 @@
     <Compile Include="WeixinRespository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Interact.Core\Interact.Core.csproj">
+      <Project>{7BCB947F-EB40-42C4-BB5A-9F007398711B}</Project>
+      <Name>Interact.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Interact.Infrastructure\Interact.Infrastructure.csproj">
       <Project>{9853419d-b966-45ee-8801-dc3e94860b45}</Project>
       <Name>Interact.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Interact.IRespository\Interact.IRespository.csproj">
-      <Project>{d96e46c9-4a5f-4ecd-bd73-7f4f8182dc4d}</Project>
-      <Name>Interact.IRespository</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
