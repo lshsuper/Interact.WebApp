@@ -112,6 +112,7 @@
     <Content Include="Content\lib\mui-master\css\mui.min.css" />
     <Content Include="Content\lib\mui-master\js\mui.js" />
     <Content Include="Content\lib\mui-master\js\mui.min.js" />
+    <Content Include="Content\webappp\img\bg\bg-flash-light.png" />
     <Content Include="Content\webappp\img\bg\bg-luckydraw.jpg" />
     <Content Include="Content\webappp\img\bg\bg-nouser.jpg" />
     <Content Include="Content\webappp\img\bg\bg-lucky-draw.png" />
