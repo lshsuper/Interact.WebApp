@@ -156,7 +156,7 @@
     <Content Include="Views\Shared\_LayoutForMobile.cshtml" />
     <Content Include="Views\Manage\Login.cshtml" />
     <Content Include="Views\Screen\LuckyDrawScreen.cshtml" />
-    <Content Include="Views\Shared\_LayoutForPC.cshtml" />
+    <Content Include="Views\Shared\_LayoutScreenForPC.cshtml" />
     <Content Include="Views\Screen\SignInScreen.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
