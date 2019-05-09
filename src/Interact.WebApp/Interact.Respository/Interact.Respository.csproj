@@ -50,6 +50,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SigInRecordRespository.cs" />
     <Compile Include="WeixinRespository.cs" />
+    <Compile Include="WinnerMenuRespository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Interact.Core\Interact.Core.csproj">

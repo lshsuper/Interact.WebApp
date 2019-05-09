@@ -52,6 +52,7 @@
     <Compile Include="IRespository\IAdminRespository.cs" />
     <Compile Include="IRespository\ISigInRecordRespository.cs" />
     <Compile Include="IRespository\IWeixinRespository.cs" />
+    <Compile Include="IRespository\IWinnerMenuRespository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

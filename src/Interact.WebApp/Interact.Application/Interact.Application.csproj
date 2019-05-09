@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Service\LotteryDrawService.cs" />
     <Compile Include="Service\SignInService.cs" />
     <Compile Include="Utils\AppUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

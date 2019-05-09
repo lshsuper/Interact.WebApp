@@ -58,5 +58,6 @@ namespace Interact.Application.Service
             notify = "签到成功";
             return true;
         }
+        
     }
 }
