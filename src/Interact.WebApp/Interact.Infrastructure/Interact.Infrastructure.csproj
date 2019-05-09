@@ -35,6 +35,9 @@
     <Reference Include="Dapper, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.1.60.6\lib\net451\Dapper.dll</HintPath>
     </Reference>
+    <Reference Include="DapperExtensions, Version=1.6.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DapperExtensions.1.6.3\lib\net45\DapperExtensions.dll</HintPath>
+    </Reference>
     <Reference Include="JWT, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\JWT.5.1.1\lib\net46\JWT.dll</HintPath>
     </Reference>
@@ -64,6 +67,8 @@
     <Compile Include="Config\WebConfig.cs" />
     <Compile Include="Config\WeixinConfig.cs" />
     <Compile Include="Dapper\DapperContext.cs" />
+    <Compile Include="Dapper\Respository\IRespository.cs" />
+    <Compile Include="Dapper\Respository\Respository.cs" />
     <Compile Include="Helper\CookieHelper.cs" />
     <Compile Include="Helper\DapperHelper.cs" />
     <Compile Include="Helper\HttpHelper.cs" />
