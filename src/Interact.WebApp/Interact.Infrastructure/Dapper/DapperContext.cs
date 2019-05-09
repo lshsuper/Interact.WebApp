@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+using DapperExtensions;
 namespace Interact.Infrastructure.Dapper
 {
     /// <summary>
@@ -38,7 +39,7 @@ namespace Interact.Infrastructure.Dapper
         /// <param name="connStr"></param>
         /// <param name="sql"></param>
         /// <returns></returns>
-        public T QueryFirst<T>(string connStr,string sql)
+        public T QueryFirst<T>(string connStr,string sql,object param = null)
         {
             using (var conn = GetConnection(connStr))
             {
@@ -52,11 +53,11 @@ namespace Interact.Infrastructure.Dapper
         /// <param name="connStr"></param>
         /// <param name="sql"></param>
         /// <returns></returns>
-        public List<T>Query<T>(string connStr,string sql)
+        public List<T>Query<T>(string connStr,string sql,object param=null)
         {
             using (var conn = GetConnection(connStr))
             {
-                return conn.Query<T>(sql).ToList();
+                return conn.Query<T>(sql,param).ToList();
             }
         }
         /// <summary>
@@ -71,6 +72,26 @@ namespace Interact.Infrastructure.Dapper
             using (var conn = GetConnection(connStr))
             {
                 return conn.ExecuteScalar<T>(connStr,sql);
+            }
+        }
+        /// <summary>
+        /// 分页获取数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="connStr"></param>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+        public PageModel<T> Page<T>(string connStr, string sql) {
+
+            var result = new PageModel<T>();
+            using (var conn = GetConnection(connStr))
+            {
+                using (var muilt=conn.QueryMultiple(sql))
+                {
+                    result.Total = muilt.Read<int>().FirstOrDefault();
+                    result.Data = muilt.Read<T>();
+                    return result;
+                }
             }
         }
     }

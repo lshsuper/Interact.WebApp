@@ -127,5 +127,36 @@ namespace Interact.Infrastructure.Util
 
             return flag;
         }
+        /// <summary>
+        /// 获取自定义长度随机码
+        /// </summary>
+        /// <param name="length"></param>
+        /// <param name="useNum"></param>
+        /// <param name="useLow"></param>
+        /// <param name="useUpp"></param>
+        /// <param name="useSpe"></param>
+        /// <param name="custom"></param>
+        /// <returns></returns>
+        public static string UUID(int length, 
+                                  bool useNum=true, 
+                                  bool useLow=false,
+                                  bool useUpp=true,
+                                  bool useSpe=false,
+                                  string custom="")
+        {
+            byte[] b = new byte[4];
+            new System.Security.Cryptography.RNGCryptoServiceProvider().GetBytes(b);
+            Random r = new Random(BitConverter.ToInt32(b, 0));
+            string s = null, str = custom;
+            if (useNum == true) { str += "0123456789"; }
+            if (useLow == true) { str += "abcdefghijklmnopqrstuvwxyz"; }
+            if (useUpp == true) { str += "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; }
+            if (useSpe == true) { str += "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"; }
+            for (int i = 0; i < length; i++)
+            {
+                s += str.Substring(r.Next(0, str.Length - 1), 1);
+            }
+            return s;
+        }
     }
 }

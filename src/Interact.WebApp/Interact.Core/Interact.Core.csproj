@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,19 +43,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\Activity.cs" />
+    <Compile Include="Enum\ActivityStatusEnum.cs" />
+    <Compile Include="Entity\Admin.cs" />
+    <Compile Include="Entity\ActivityAward.cs" />
+    <Compile Include="Entity\SignInRecord.cs" />
+    <Compile Include="Entity\WinnerMenu.cs" />
+    <Compile Include="Enum\WinnerLevelEnum.cs" />
+    <Compile Include="IRespository\IActivityRespository.cs" />
     <Compile Include="IRespository\IAdminRespository.cs" />
+    <Compile Include="IRespository\ISigInRecordRespository.cs" />
     <Compile Include="IRespository\IWeixinRespository.cs" />
+    <Compile Include="IRespository\IWinnerMenuRespository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Entity\" />
-    <Folder Include="Enum\" />
+    <Content Include="Sql\Interact.sql" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Interact.Infrastructure\Interact.Infrastructure.csproj">
       <Project>{9853419d-b966-45ee-8801-dc3e94860b45}</Project>
       <Name>Interact.Infrastructure</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Entity\README.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
