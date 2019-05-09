@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interact.Infrastructure", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interact.Respository", "Interact.Respository\Interact.Respository.csproj", "{6EB3ED81-ABED-45DB-8B25-1F4AD6C7FB7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interact.Application", "Interact.Service\Interact.Application.csproj", "{99F8ACEF-ADA8-41A9-8159-15191C44F404}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interact.Application", "Interact.Application\Interact.Application.csproj", "{99F8ACEF-ADA8-41A9-8159-15191C44F404}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

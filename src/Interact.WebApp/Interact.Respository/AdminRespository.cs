@@ -9,8 +9,12 @@ using Interact.Infrastructure.Dapper.Respository;
 
 namespace Interact.Respository
 {
+    /// <summary>
+    /// 管理账户
+    /// </summary>
    public class AdminRespository:Respository<Admin>,IAdminRespository
     {
+
 
     }
 }
