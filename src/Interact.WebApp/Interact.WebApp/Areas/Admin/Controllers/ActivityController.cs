@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
 namespace Interact.WebApp.Areas.Admin.Controllers
 {
+    /// <summary>
+    /// 活动管理
+    /// </summary>
     public class ActivityController : Controller
     {
         private readonly IActivityRespository _activityRespository;
@@ -14,11 +16,15 @@ namespace Interact.WebApp.Areas.Admin.Controllers
         {
             _activityRespository = activityRespository;
         }
-        // GET: Admin/Activity
-        public ActionResult Index()
+        #region View
+        /// <summary>
+        /// 活动列表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Activities()
         {
-
             return View();
-        }
+        } 
+        #endregion
     }
 }

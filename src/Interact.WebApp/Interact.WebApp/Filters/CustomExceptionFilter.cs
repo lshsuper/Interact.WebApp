@@ -17,7 +17,6 @@ namespace Interact.WebApp.Filters
             base.OnException(filterContext);
 
             filterContext.ExceptionHandled = true;
-
             //接口异常处理
             if (filterContext.HttpContext.Request.IsAjaxRequest())
                 filterContext.Result = new JsonResult() {

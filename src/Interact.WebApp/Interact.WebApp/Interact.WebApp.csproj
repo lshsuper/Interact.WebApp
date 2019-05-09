@@ -156,6 +156,8 @@
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Home\Views\web.config" />
     <Content Include="Areas\Admin\Views\Activity\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Activity\Activities.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayputForPCManage.cshtml" />
     <None Include="bundleconfig.json" />
     <None Include="packages.config" />
     <Content Include="Areas\Home\Views\Notice\Error.cshtml" />
@@ -175,7 +177,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Home\Content\css\" />
     <Folder Include="Areas\Home\Content\js\" />
     <Folder Include="Areas\Home\Models\" />

@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Interact.Core.Entity
 {
+    /// <summary>
+    /// 活动模型
+    /// </summary>
   public  class Activity
     {
         /// <summary>
@@ -37,5 +40,9 @@ namespace Interact.Core.Entity
         /// 活动状态
         /// </summary>
         public ActivityStatusEnum Status { get; set; }
+        /// <summary>
+        /// 活动授权码
+        /// </summary>
+        public string AuthCode { get; set; }
     }
 }

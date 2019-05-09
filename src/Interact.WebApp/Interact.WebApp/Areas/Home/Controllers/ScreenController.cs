@@ -27,5 +27,8 @@ namespace Interact.WebApp.Areas.Home.Controllers
         }
         #endregion
 
+        #region Operator
+        
+        #endregion
     }
 }
