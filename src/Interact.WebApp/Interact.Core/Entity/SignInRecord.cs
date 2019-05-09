@@ -24,6 +24,10 @@ namespace Interact.Core.Entity
         /// </summary>
         public string NickName { get; set; }
         /// <summary>
+        /// 头像
+        /// </summary>
+        public string HeadImage { get; set; }
+        /// <summary>
         /// 所属活动id
         /// </summary>
         public int ActivityId { get; set; }

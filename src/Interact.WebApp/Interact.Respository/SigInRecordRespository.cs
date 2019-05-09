@@ -19,6 +19,13 @@ namespace Interact.Respository
             string sql = "select count(1) from SignInRecord where OpendId=@opendId and ActivityId=@activityId";
             return DapperHelper.Instance.ExcuteScaler<int>(DbConfig.DbConnStr,sql)>0;
         }
+
+        public List<string> GetSignInHeadImages(int activityId)
+        {
+            string sql = "select HeadImage from SignInRecord where ActivityId=@activityId";
+            return DapperHelper.Instance.Query<string>(DbConfig.DbConnStr,sql,new { activityId });
+        }
+
         public bool SignIn(SignInRecord record)
         {
             using (var conn=DapperHelper.Instance.GetConnection(DbConfig.DbConnStr))
@@ -62,6 +69,16 @@ namespace Interact.Respository
                   
                 }
             }
+        }
+
+        public List<SignInRecord> GetSignInRecordsWithoutAwards(int top,int activityId)
+        {
+            string sql = $@"select top({top}) 
+                                   sr.*
+                            from SignInRecord sr
+                            left join WinnerMenu wm on wm.SiginInRecoredId=sr.Id
+                            where sr.Id=@activityId and wm.Id=null";
+            return DapperHelper.Instance.Query<SignInRecord>(DbConfig.DbConnStr, sql);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Interact.Core.Entity;
+using Interact.Core.Enum;
 using Interact.Core.IRespository;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace Interact.Application.Service
             _activityRespository = activityRespository;
         }
         /// <summary>
-        /// 抽奖
+        /// 抽奖(策略1)
         /// </summary>
         /// <param name="winner"></param>
         /// <param name="notify"></param>
@@ -44,6 +45,42 @@ namespace Interact.Application.Service
             });
             bool result = _winnerMenuRespository.Add(winner);
             notify = result ? "操作成功" : "操作失败";
+            return result;
+        }
+        /// <summary>
+        /// 抽奖（策略2）
+        /// </summary>
+        /// <param name="winner"></param>
+        /// <param name="notify"></param>
+        /// <returns></returns>
+        public bool LotteryDraw(int activityId,
+                                int number,
+                                WinnerLevelEnum winnerLevel,
+                                out string notify, out List<SignInRecord> signInRecords)
+        {
+            //1.随机获取
+            var lst=_sigInRecordRespository.GetSignInRecordsWithoutAwards(number,activityId);
+            List<WinnerMenu> winnerMenus = new List<WinnerMenu>();
+            lst.ForEach(ele=> {
+                winnerMenus.Add(new WinnerMenu()
+                {
+                    ActivityId = ele.ActivityId,
+                    SiginInRecoredId = ele.Id,
+                    CreateTime = DateTime.Now,
+                    WinnerLevel = winnerLevel,
+                    Id = Guid.NewGuid().ToString("N")
+                });
+            });
+            //2.抽奖
+            bool result = _winnerMenuRespository.Add(winnerMenus);
+            if (!result)
+            {
+                notify = "抽取失败";
+                signInRecords = null;
+                return false;
+            }
+            notify = "抽取成功";
+            signInRecords = lst;
             return result;
         }
     }

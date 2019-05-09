@@ -10,6 +10,7 @@ namespace Interact.Core.IRespository
 {
     public interface IAdminRespository:IRespository<Admin>
     {
+      
         
     }
 }
