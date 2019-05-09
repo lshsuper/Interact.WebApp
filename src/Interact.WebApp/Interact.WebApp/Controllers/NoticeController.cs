@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Interact.WebApp.Areas.Home.Controllers
+namespace Interact.WebApp.Controllers
 {
     public class NoticeController : Controller
     {
