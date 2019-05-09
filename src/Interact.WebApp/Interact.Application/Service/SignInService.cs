@@ -9,7 +9,10 @@ using System.Threading.Tasks;
 
 namespace Interact.Application.Service
 {
-  public  class SignInService
+    /// <summary>
+    /// 签到相关业务
+    /// </summary>
+    public class SignInService
     {
         private readonly ISigInRecordRespository _sigInRecordRespository;
         private readonly IActivityRespository _activityRespository;
@@ -26,10 +29,10 @@ namespace Interact.Application.Service
         /// <param name="record"></param>
         /// <param name="notify"></param>
         /// <returns></returns>
-        public bool SignIn(SignInRecord record,out string notify)
+        public bool SignIn(SignInRecord record, out string notify)
         {
             //1.判断是否超出报名限制
-            var currentActivity = _activityRespository.Get(DbConfig.DbConnStr,record.Id);
+            var currentActivity = _activityRespository.Get(DbConfig.DbConnStr, record.Id);
             if (currentActivity == null || currentActivity.Id <= 0)
             {
                 notify = "不存在当前活动";
@@ -58,6 +61,6 @@ namespace Interact.Application.Service
             notify = "签到成功";
             return true;
         }
-        
+
     }
 }
