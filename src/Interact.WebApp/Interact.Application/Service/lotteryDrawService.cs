@@ -34,9 +34,14 @@ namespace Interact.Application.Service
         /// <returns></returns>
       public bool LotteryDraw(List<WinnerMenu> winner,out string notify)
         {
+
             //1.校验活动(暂时不做检验)
             //2.校验签到记录(暂时不做检验)
             //3.抽奖
+            winner.ForEach(o=> {
+                o.Id = Guid.NewGuid().ToString("N");
+                o.CreateTime = DateTime.Now;
+            });
             bool result = _winnerMenuRespository.Add(winner);
             notify = result ? "操作成功" : "操作失败";
             return result;

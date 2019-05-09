@@ -16,7 +16,7 @@ namespace Interact.Core.Entity
         /// <summary>
         /// 活动名称
         /// </summary>
-        public string Nanme { get; set; }
+        public string Name { get; set; }
         /// <summary>
         /// 报名限制
         /// </summary>

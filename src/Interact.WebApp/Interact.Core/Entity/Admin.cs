@@ -8,5 +8,6 @@ namespace Interact.Core.Entity
 {
    public class Admin
     {
+
     }
 }

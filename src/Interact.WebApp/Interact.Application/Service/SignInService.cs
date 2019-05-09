@@ -32,10 +32,15 @@ namespace Interact.Application.Service
         public bool SignIn(SignInRecord record, out string notify)
         {
             //1.判断是否超出报名限制
-            var currentActivity = _activityRespository.Get(DbConfig.DbConnStr, record.Id);
+            var currentActivity = _activityRespository.Get(DbConfig.DbConnStr, record.ActivityId);
             if (currentActivity == null || currentActivity.Id <= 0)
             {
                 notify = "不存在当前活动";
+                return false;
+            }
+            if (currentActivity.Status == Core.Enum.ActivityStatusEnum.End)
+            {
+                notify = "活动已停止报名";
                 return false;
             }
             if (currentActivity.SignInNumber >= currentActivity.LimitNumber)
