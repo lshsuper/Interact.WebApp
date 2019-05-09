@@ -112,16 +112,16 @@
     <Content Include="Content\lib\mui-master\css\mui.min.css" />
     <Content Include="Content\lib\mui-master\js\mui.js" />
     <Content Include="Content\lib\mui-master\js\mui.min.js" />
-    <Content Include="Content\webappp\img\bg\bg-flash-light.png" />
-    <Content Include="Content\webappp\img\bg\bg-luckydraw.jpg" />
-    <Content Include="Content\webappp\img\bg\bg-nouser.jpg" />
-    <Content Include="Content\webappp\img\bg\bg-lucky-draw.png" />
-    <Content Include="Content\webappp\img\icon\icon-apply.png" />
-    <Content Include="Content\webappp\img\icon\icon-select.png" />
-    <Content Include="Content\webappp\img\icon\icon-skin.png" />
-    <Content Include="Content\webappp\img\icon-sigin-succ.png" />
-    <Content Include="Content\webappp\img\icon\icon-ewm.png" />
-    <Content Include="Content\webappp\img\yuantiao.jpg" />
+    <Content Include="Areas\Home\Content\img\bg\bg-flash-light.png" />
+    <Content Include="Areas\Home\Content\img\bg\bg-luckydraw.jpg" />
+    <Content Include="Areas\Home\Content\img\bg\bg-nouser.jpg" />
+    <Content Include="Areas\Home\Content\img\bg\bg-lucky-draw.png" />
+    <Content Include="Areas\Home\Content\img\icon\icon-apply.png" />
+    <Content Include="Areas\Home\Content\img\icon\icon-select.png" />
+    <Content Include="Areas\Home\Content\img\icon\icon-skin.png" />
+    <Content Include="Areas\Home\Content\img\icon-sigin-succ.png" />
+    <Content Include="Areas\Home\Content\img\icon\icon-ewm.png" />
+    <Content Include="Areas\Home\Content\img\yuantiao.jpg" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -129,10 +129,13 @@
     <Compile Include="App_Start\AutofacConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\ActivityController.cs" />
-    <Compile Include="Controllers\NoticeController.cs" />
-    <Compile Include="Controllers\ScreenController.cs" />
-    <Compile Include="Controllers\SigninController.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\ActivityController.cs" />
+    <Compile Include="Areas\Home\HomeAreaRegistration.cs" />
+    <Compile Include="Areas\Home\Controllers\ActivityController.cs" />
+    <Compile Include="Areas\Home\Controllers\NoticeController.cs" />
+    <Compile Include="Areas\Home\Controllers\ScreenController.cs" />
+    <Compile Include="Areas\Home\Controllers\SigninController.cs" />
     <Compile Include="Filters\CustomExceptionFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -150,16 +153,18 @@
     <Content Include="Content\lib\bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\lib\bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\lib\bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Home\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Activity\Index.cshtml" />
     <None Include="bundleconfig.json" />
     <None Include="packages.config" />
-    <Content Include="Views\Notice\Error.cshtml" />
-    <Content Include="Views\Signin\Test.cshtml" />
-    <Content Include="Views\Signin\Signin.cshtml" />
-    <Content Include="Views\Notice\SigninSucc.cshtml" />
-    <Content Include="Views\Shared\_LayoutForMobile.cshtml" />
-    <Content Include="Views\Screen\LuckyDrawScreen.cshtml" />
-    <Content Include="Views\Shared\_LayoutScreenForPC.cshtml" />
-    <Content Include="Views\Screen\SignInScreen.cshtml" />
+    <Content Include="Areas\Home\Views\Notice\Error.cshtml" />
+    <Content Include="Areas\Home\Views\Signin\Signin.cshtml" />
+    <Content Include="Areas\Home\Views\Notice\SigninSucc.cshtml" />
+    <Content Include="Areas\Home\Views\Shared\_LayoutForMobile.cshtml" />
+    <Content Include="Areas\Home\Views\Screen\LuckyDrawScreen.cshtml" />
+    <Content Include="Areas\Home\Views\Shared\_LayoutScreenForPC.cshtml" />
+    <Content Include="Areas\Home\Views\Screen\SignInScreen.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -169,8 +174,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\webappp\css\" />
-    <Folder Include="Content\webappp\js\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\Home\Content\css\" />
+    <Folder Include="Areas\Home\Content\js\" />
+    <Folder Include="Areas\Home\Models\" />
+    <Folder Include="Controllers\" />
+    <Folder Include="Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Interact.Core\Interact.Core.csproj">

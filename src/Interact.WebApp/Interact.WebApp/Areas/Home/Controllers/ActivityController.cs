@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Interact.WebApp.Controllers
+namespace Interact.WebApp.Areas.Home.Controllers
 {
     /// <summary>
     /// 活动管理控制器

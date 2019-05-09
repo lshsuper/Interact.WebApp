@@ -53,9 +53,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
-    <Compile Include="LotteryDrawTest.cs" />
+    <Compile Include="ServiceTest\LotteryDrawTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SignInTest.cs" />
+    <Compile Include="ServiceTest\SignInTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

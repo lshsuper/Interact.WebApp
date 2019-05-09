@@ -4,28 +4,28 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Interact.WebApp.Controllers
+namespace Interact.WebApp.Areas.Home.Controllers
 {
-    public class ScreenController : Controller
+    public class NoticeController : Controller
     {
-        #region View
+       
+        #region Notice-View
         /// <summary>
-        /// 抽奖大屏幕
+        /// 错误捕捉页面
         /// </summary>
         /// <returns></returns>
-        public ActionResult LuckyDrawScreen()
+        public ActionResult Error()
         {
             return View();
         }
         /// <summary>
-        /// 签到大屏幕
+        /// 签到成功
         /// </summary>
         /// <returns></returns>
-        public ActionResult SignInScreen()
+        public ActionResult SigninSucc()
         {
             return View();
         }
         #endregion
-
     }
 }

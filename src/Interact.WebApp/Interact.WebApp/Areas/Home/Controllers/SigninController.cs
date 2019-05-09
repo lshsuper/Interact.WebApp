@@ -9,7 +9,7 @@ using System.Web.Mvc;
 using Interact.WebApp.Filters;
 using Interact.Infrastructure.Util;
 
-namespace Interact.WebApp.Controllers
+namespace Interact.WebApp.Areas.Home.Controllers
 {
     /// <summary>
     /// 微信签到整体控制栏目
