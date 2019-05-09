@@ -21,6 +21,10 @@ namespace Interact.Core.Entity
         /// </summary>
         public int LimitNumber { get; set; }
         /// <summary>
+        /// 签到数
+        /// </summary>
+        public int SignInNumber { get; set; }
+        /// <summary>
         /// 海报地址
         /// </summary>
         public string PlayBillUrl { get; set; }
