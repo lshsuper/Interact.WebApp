@@ -67,13 +67,15 @@
     <Compile Include="Config\WebConfig.cs" />
     <Compile Include="Config\WeixinConfig.cs" />
     <Compile Include="Dapper\DapperContext.cs" />
-    <Compile Include="Dapper\PageModel.cs" />
+    <Compile Include="Dapper\Model\PageModel.cs" />
     <Compile Include="Dapper\Respository\IRespository.cs" />
     <Compile Include="Dapper\Respository\Respository.cs" />
     <Compile Include="Helper\CookieHelper.cs" />
     <Compile Include="Helper\DapperHelper.cs" />
     <Compile Include="Helper\HttpHelper.cs" />
     <Compile Include="Helper\JWTHelper.cs" />
+    <Compile Include="Helper\Model\PageInfo.cs" />
+    <Compile Include="Helper\Model\PageOption.cs" />
     <Compile Include="Helper\QrCodeHelper.cs" />
     <Compile Include="Helper\Tool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
