@@ -43,14 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\Activity.cs" />
     <Compile Include="Entity\Admin.cs" />
+    <Compile Include="Entity\SignInRecord.cs" />
+    <Compile Include="Entity\WinnerMenu.cs" />
+    <Compile Include="Enum\WinnerLevelEnum.cs" />
+    <Compile Include="IRespository\IActivityRespository.cs" />
     <Compile Include="IRespository\IAdminRespository.cs" />
+    <Compile Include="IRespository\ISigInRecordRespository.cs" />
     <Compile Include="IRespository\IWeixinRespository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Enum\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Interact.Infrastructure\Interact.Infrastructure.csproj">
       <Project>{9853419d-b966-45ee-8801-dc3e94860b45}</Project>
