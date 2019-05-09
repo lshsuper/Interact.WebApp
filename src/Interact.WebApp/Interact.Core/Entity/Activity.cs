@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Interact.Core.Enum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,5 +33,9 @@ namespace Interact.Core.Entity
         /// 创建时间
         /// </summary>
         public DateTime CreateTime { get; set; }
+        /// <summary>
+        /// 活动状态
+        /// </summary>
+        public ActivityStatusEnum Status { get; set; }
     }
 }
