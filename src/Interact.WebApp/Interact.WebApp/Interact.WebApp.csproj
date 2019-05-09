@@ -380,7 +380,7 @@
       <Project>{6eb3ed81-abed-45db-8b25-1f4ad6c7fb7a}</Project>
       <Name>Interact.Respository</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Interact.Service\Interact.Application.csproj">
+    <ProjectReference Include="..\Interact.Application\Interact.Application.csproj">
       <Project>{99f8acef-ada8-41a9-8159-15191c44f404}</Project>
       <Name>Interact.Application</Name>
     </ProjectReference>
