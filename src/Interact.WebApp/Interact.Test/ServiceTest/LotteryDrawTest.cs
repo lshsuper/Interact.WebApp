@@ -6,6 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Autofac;
+using Interact.Core.Enum;
+using Interact.Core.Entity;
+
 namespace Interact.Test
 {
     /// <summary>
@@ -20,10 +23,10 @@ namespace Interact.Test
             _lotteryDrawService = _container.Resolve<LotteryDrawService>();
         }
         /// <summary>
-        /// 抽奖测试
+        /// 抽奖测试01
         /// </summary>
         [TestMethod]
-        public void LotteryDraw()
+        public void LotteryDraw01()
         {
             string notify;
             bool result = _lotteryDrawService.LotteryDraw(new List<Core.Entity.WinnerMenu>() {
@@ -34,6 +37,20 @@ namespace Interact.Test
                        WinnerLevel=Core.Enum.WinnerLevelEnum.Level_One
                    }
             }, out notify);
+
+        }
+        /// <summary>
+        /// 抽奖测试02
+        /// </summary>
+        [TestMethod]
+        public void LotteryDraw02()
+        {
+            string notify;
+            List<SignInRecord> signInRecords;
+            bool result = _lotteryDrawService.LotteryDraw(1,
+                                                          5,WinnerLevelEnum.Level_One,
+                                                          out notify,
+                                                          out signInRecords);
 
         }
 

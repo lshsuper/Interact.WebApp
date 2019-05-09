@@ -11,7 +11,7 @@ namespace Interact.Application.Service
     /// <summary>
     /// 抽奖相关业务
     /// </summary>
-   public class LotteryDrawService
+    public class LotteryDrawService
     {
         private readonly IWinnerMenuRespository _winnerMenuRespository;
         private readonly ISigInRecordRespository _sigInRecordRespository;
@@ -33,13 +33,14 @@ namespace Interact.Application.Service
         /// <param name="winner"></param>
         /// <param name="notify"></param>
         /// <returns></returns>
-      public bool LotteryDraw(List<WinnerMenu> winner,out string notify)
+        public bool LotteryDraw(List<WinnerMenu> winner, out string notify)
         {
 
             //1.校验活动(暂时不做检验)
             //2.校验签到记录(暂时不做检验)
             //3.抽奖
-            winner.ForEach(o=> {
+            winner.ForEach(o =>
+            {
                 o.Id = Guid.NewGuid().ToString("N");
                 o.CreateTime = DateTime.Now;
             });
@@ -59,9 +60,10 @@ namespace Interact.Application.Service
                                 out string notify, out List<SignInRecord> signInRecords)
         {
             //1.随机获取
-            var lst=_sigInRecordRespository.GetSignInRecordsWithoutAwards(number,activityId);
+            var lst = _sigInRecordRespository.GetSignInRecordsWithoutAwards(number, activityId);
             List<WinnerMenu> winnerMenus = new List<WinnerMenu>();
-            lst.ForEach(ele=> {
+            lst.ForEach(ele =>
+            {
                 winnerMenus.Add(new WinnerMenu()
                 {
                     ActivityId = ele.ActivityId,

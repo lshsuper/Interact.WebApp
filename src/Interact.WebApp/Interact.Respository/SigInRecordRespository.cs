@@ -78,7 +78,7 @@ namespace Interact.Respository
                             from SignInRecord sr
                             left join WinnerMenu wm on wm.SiginInRecoredId=sr.Id
                             where sr.Id=@activityId and wm.Id=null";
-            return DapperHelper.Instance.Query<SignInRecord>(DbConfig.DbConnStr, sql);
+            return DapperHelper.Instance.Query<SignInRecord>(DbConfig.DbConnStr, sql,new { activityId});
         }
     }
 }
