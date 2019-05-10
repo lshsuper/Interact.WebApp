@@ -20,9 +20,9 @@ namespace Interact.Respository
             return DapperHelper.Instance.ExcuteScaler<int>(DbConfig.DbConnStr,sql)>0;
         }
 
-        public List<string> GetSignInHeadImages(int activityId)
+        public List<string> GetSignInHeadImages(int activityId,int top)
         {
-            string sql = "select HeadImage from SignInRecord where ActivityId=@activityId";
+            string sql = $"select top({top}) HeadImage from SignInRecord where ActivityId=@activityId";
             return DapperHelper.Instance.Query<string>(DbConfig.DbConnStr,sql,new { activityId });
         }
 

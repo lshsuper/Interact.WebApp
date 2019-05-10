@@ -249,6 +249,7 @@
     <Folder Include="Areas\Home\Content\css\" />
     <Folder Include="Areas\Home\Content\js\" />
     <Folder Include="Areas\Home\Models\" />
+    <Folder Include="Content\app\" />
     <Folder Include="Controllers\" />
     <Folder Include="Views\Shared\" />
   </ItemGroup>

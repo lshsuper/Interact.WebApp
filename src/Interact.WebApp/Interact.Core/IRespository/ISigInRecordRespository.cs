@@ -27,9 +27,9 @@ namespace Interact.Core.IRespository
         /// 获取当前活动下签到人的头像
         /// </summary>
         /// <param name="activityId"></param>
-        /// <param name=""></param>
+        /// <param name="top"></param>
         /// <returns></returns>
-        List<string> GetSignInHeadImages(int activityId);
+        List<string> GetSignInHeadImages(int activityId,int top=100);
         /// <summary>
         /// 获取未领过奖的签到数据列表
         /// </summary>
