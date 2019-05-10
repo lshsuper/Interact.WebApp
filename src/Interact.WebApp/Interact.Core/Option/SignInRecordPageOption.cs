@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 
 namespace Interact.Core.Option
 {
-    public class ActivityPageOption : PageOption
+    /// <summary>
+    /// 签到数据分页参数类
+    /// </summary>
+    public class SignInRecordPageOption : PageOption
     {
         protected override void BuildFilterStr()
         {

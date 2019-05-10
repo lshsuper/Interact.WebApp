@@ -117,7 +117,7 @@ namespace Interact.Respository
         }
         public PageInfo<List<Activity>> QueryActivityByPage(ActivityPageOption option)
         {
-            string sqlFilter = option.BuildFilterStr();
+            string sqlFilter = option.GetFilterStr;
             sqlFilter = string.IsNullOrEmpty(sqlFilter) ? "" : " where " + sqlFilter;
             string dataSql = $@"select *
                                 from(
