@@ -25,10 +25,14 @@ namespace Interact.WebApp.Areas.Home.Controllers
         {
             return View();
         }
+        public ActionResult CoolLuckyDrawScreen()
+        {
+            return View();
+        }
         #endregion
 
         #region Operator
-        
+
         #endregion
     }
 }

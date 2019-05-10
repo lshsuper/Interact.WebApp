@@ -165,6 +165,7 @@
     <Content Include="Areas\Admin\Content\ui-layout-0.0.0\ui-layout.js" />
     <Content Include="Areas\Admin\Content\ui-layout-0.0.0\ui-layout.min.js" />
     <Content Include="Areas\Home\Content\css\signin-screen.css" />
+    <Content Include="Areas\Home\Content\img\icon\icon-close.png" />
     <Content Include="Areas\Home\Content\js\signin-screen.js" />
     <Content Include="Content\lib\animate\animate.css" />
     <Content Include="Content\lib\animate\animate.min.css">
