@@ -10,6 +10,8 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+using Interact.Core.Enum;
+
 namespace Interact.Respository
 {
     public class SigInRecordRespository : Respository<SignInRecord>, ISigInRecordRespository
@@ -79,6 +81,13 @@ namespace Interact.Respository
                             left join WinnerMenu wm on wm.SiginInRecoredId=sr.Id
                             where sr.Id=@activityId and wm.Id=null";
             return DapperHelper.Instance.Query<SignInRecord>(DbConfig.DbConnStr, sql,new { activityId});
+        }
+        public List<SignInRecord> ByActivityIdAndWinnerLevel(int activityId, WinnerLevelEnum winnerLevel)
+        {
+            string sql =$@"select * from SignInRecord sr
+                           inner join WinnerMenu wm on sr.Id=wm.SiginInRecoredId
+                           where sr.ActivityId=@activityId and wm.WinnerLevel=@winnerLevel";
+            return DapperHelper.Instance.Query<SignInRecord>(DbConfig.DbConnStr, sql, new { activityId, winnerLevel });
         }
     }
 }

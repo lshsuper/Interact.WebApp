@@ -74,6 +74,7 @@
     <Compile Include="Helper\CookieHelper.cs" />
     <Compile Include="Helper\DapperHelper.cs" />
     <Compile Include="Helper\HttpHelper.cs" />
+    <Compile Include="Helper\JsonHelper.cs" />
     <Compile Include="Helper\JWTHelper.cs" />
     <Compile Include="Helper\Model\PageInfo.cs" />
     <Compile Include="Helper\Model\PageOption.cs" />

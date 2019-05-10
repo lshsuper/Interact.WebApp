@@ -28,11 +28,11 @@
             };
             //3.开启监听
             $.connection.hub.start().done(function (){
-               
+
             });
             //3.调用后台发广播的接口
             $('#send').click(function () {
-                $.post("/Admin/Activity/Msg", {}, function (data) {
+                $.post("/TestSignalr/Msg", {msg:"lsh"}, function (data) {
 
                 });
             });

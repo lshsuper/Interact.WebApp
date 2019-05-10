@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
-    <title>用户中心</title>
+    <title>@ViewBag.Title</title>
     <link href="~/Content/lib/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Areas/Admin/Content/css/style.css" rel="stylesheet" />
     <link href="~/Areas/Admin/Content/css/dermadefault.css" rel="stylesheet" />
@@ -15,12 +15,7 @@
     <script src="~/Content/lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     @RenderSection("styles", false)
 </head>
-
 <body>
-
-
-
-
     <nav class="nav navbar-default navbar-mystyle navbar-fixed-top">
         <div class="navbar-header">
             <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -32,7 +27,7 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="li-border"><a class="mystyle-color">管理控制台</a></li>
+                <li class="li-border"><a class="mystyle-color">互动管理控制台</a></li>
             </ul>
 
             <ul class="nav navbar-nav pull-right">
@@ -74,10 +69,21 @@
                             <div class="showtitle" style="width:100px;"><span class="title-icon glyphicon glyphicon-chevron-down"></span>活动管理</div>
                             <a href="/admin/activity/Activities"><span class="sublist-icon glyphicon glyphicon-user"></span><span class="sub-title">活动管理</span></a>
                         </li>
-             
+
                     </ul>
                 </div>
-             
+                <div class="sBox">
+                    <div class="subNav sublist-down">
+                        <span class="title-icon glyphicon glyphicon-chevron-down"></span><span class="sublist-title">数据统计</span>
+                    </div>
+                    <ul class="navContent" style="display:block">
+                        <li class="active">
+                            <div class="showtitle" style="width:100px;"><span class="title-icon glyphicon glyphicon-chevron-down"></span>签到统计</div>
+                            <a href="/admin/activity/Activities"><span class="sublist-icon glyphicon glyphicon-user"></span><span class="sub-title">签到统计</span></a>
+                        </li>
+
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="right-product my-index right-full">

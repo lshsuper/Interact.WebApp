@@ -220,6 +220,7 @@
     <Compile Include="Areas\Home\Controllers\ScreenController.cs" />
     <Compile Include="Areas\Home\Controllers\SigninController.cs" />
     <Compile Include="Areas\Home\Controllers\NoticeController.cs" />
+    <Compile Include="Controllers\TestSignalRController.cs" />
     <Compile Include="Filters\CustomExceptionFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -265,6 +266,7 @@
     <Content Include="Areas\Home\Views\Screen\LuckyDrawScreen.cshtml" />
     <Content Include="Areas\Home\Views\Shared\_LayoutScreenForPC.cshtml" />
     <Content Include="Areas\Home\Views\Screen\SignInScreen.cshtml" />
+    <Content Include="Views\TestSignalR\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -277,7 +279,6 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Home\Models\" />
     <Folder Include="Content\app\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Views\Shared\" />
   </ItemGroup>
   <ItemGroup>

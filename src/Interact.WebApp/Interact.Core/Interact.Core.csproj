@@ -50,6 +50,7 @@
     <Compile Include="Entity\SignInRecord.cs" />
     <Compile Include="Entity\WinnerMenu.cs" />
     <Compile Include="Enum\WinnerLevelEnum.cs" />
+    <Compile Include="IRespository\IActivityAwardRespository.cs" />
     <Compile Include="IRespository\IActivityRespository.cs" />
     <Compile Include="IRespository\IAdminRespository.cs" />
     <Compile Include="IRespository\ISigInRecordRespository.cs" />

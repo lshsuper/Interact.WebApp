@@ -1,4 +1,5 @@
 ﻿using Interact.Core.Entity;
+using Interact.Core.Enum;
 using Interact.Core.IRespository;
 using Interact.Infrastructure.Config;
 using Interact.Infrastructure.Dapper.Respository;
@@ -28,5 +29,7 @@ namespace Interact.Respository
                                         @WinnerLevel)";
             return DapperHelper.Instance.Excute(DbConfig.DbConnStr,sql,lst);
         }
+
+        
     }
 }

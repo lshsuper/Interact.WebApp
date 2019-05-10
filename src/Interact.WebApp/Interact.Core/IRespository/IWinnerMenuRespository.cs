@@ -1,4 +1,5 @@
 ﻿using Interact.Core.Entity;
+using Interact.Core.Enum;
 using Interact.Infrastructure.Dapper.Respository;
 using System;
 using System.Collections.Generic;
@@ -19,5 +20,6 @@ namespace Interact.Core.IRespository
         /// <param name="lst"></param>
         /// <returns></returns>
         bool Add(List<WinnerMenu>lst);
+      
     }
 }

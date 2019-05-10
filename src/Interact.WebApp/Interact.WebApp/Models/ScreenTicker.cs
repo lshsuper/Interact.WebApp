@@ -1,4 +1,6 @@
-﻿using Interact.WebApp.Hubs;
+﻿using Interact.Core.Entity;
+using Interact.Infrastructure.Helper;
+using Interact.WebApp.Hubs;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using System;
@@ -37,11 +39,21 @@ namespace Interact.WebApp.Models
             get;
             set;
         }
-
-        public void Test()
+        /// <summary>
+        /// 测试
+        /// </summary>
+        public void Test(string msg)
         {
-            Clients.All.hello();
+            Clients.All.hello(msg);
         }
-       
+        /// <summary>
+        /// 向客户端发签到消息
+        /// </summary>
+        /// <param name="record"></param>
+        public void SendSignInRecordToClient(SignInRecord record)
+        {
+            string str = JsonHelper.Set(record);
+            Clients.All.sendSignInRecordToClient(str);
+        }
     }
 }

@@ -22,6 +22,9 @@ namespace Interact.WebApp.Areas.Admin.Controllers
         {
             _activityRespository = activityRespository;
         }
+
+     
+       
         #region View
         /// <summary>
         /// 活动列表
