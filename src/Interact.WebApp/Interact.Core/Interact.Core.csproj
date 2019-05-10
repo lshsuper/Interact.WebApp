@@ -55,6 +55,7 @@
     <Compile Include="IRespository\ISigInRecordRespository.cs" />
     <Compile Include="IRespository\IWeixinRespository.cs" />
     <Compile Include="IRespository\IWinnerMenuRespository.cs" />
+    <Compile Include="Option\ActivityPageOption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

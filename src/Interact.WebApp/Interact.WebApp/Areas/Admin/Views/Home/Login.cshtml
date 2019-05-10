@@ -1,58 +1,72 @@
-﻿
-@{
+﻿@{
+
     Layout = null;
+
 }
+
 <!doctype html>
 <html>
-
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <title>登录</title>
-    <meta name="description" content="这是一个 login 页面">
-    <meta name="keywords" content="index">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <link rel="apple-touch-icon-precomposed" href="~/Content/lib/amazeui/assets/i/app-icon72x72@2x.png">
- 
-
-    <link href="~/Content/lib/amazeui/assets/css/amazeui.min.css" rel="stylesheet" />
-    <link href="~/Content/lib/amazeui/assets/css/admin.css" rel="stylesheet" />
-    <link href="~/Content/lib/amazeui/assets/css/app.css" rel="stylesheet" />
-    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
-
+    <meta name="keywords" content="登录页" />
+    <meta name="description" content="登录页" />
+    <link href="~/Areas/Admin/Content/css/layout.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/login.css" rel="stylesheet" />
+    <script src="~/Content/lib/jquery/jquery-3.3.1.min.js"></script>
 </head>
 
-<body data-type="login">
-
-    <div class="am-g myapp-login">
-        <div class="myapp-login-logo-block  tpl-login-max">
-            <div class="myapp-login-logo-text">
-                <div class="myapp-login-logo-text">
-                    互动后台管理<span>&nbsp;Login</span> <i class="am-icon-skyatlas"></i>
-                </div>
+<body class="login-bg">
+    <div class="main ">
+        <!--登录-->
+        <div class="login-dom login-max">
+            <div class="logo text-center">
+                <a href="#">
+                    <img src="~/Areas/Admin/Content/img/logo.png" width="180px" height="180px">
+                </a>
             </div>
-            <div class="am-u-sm-10 login-am-center">
-                <form class="am-form">
-                    <fieldset>
-                        <div class="am-form-group">
-                            <input type="email" class="" id="doc-ipt-email-1" placeholder="用户名">
+            <div class="login container " id="login">
+                <p class="text-big text-center logo-color">
+                    互 动 后 台
+                </p>
+               
+                <form class="login-form" action="index.html" method="post" autocomplete="off">
+                    <div class="login-box border text-small" id="box">
+                        <div class="name border-bottom">
+                            <input type="text" placeholder="请输入账号" id="username" name="username" />
                         </div>
-                        <div class="am-form-group">
-                            <input type="password" class="" id="doc-ipt-pwd-1" placeholder="密码">
+                        <div class="pwd">
+                            <input type="password" placeholder="请输入密码" datatype="*" id="password" name="password" />
                         </div>
-                        <p><button type="submit" class="am-btn am-btn-default">登录</button></p>
-                    </fieldset>
+                    </div>
+                    <input type="hidden" name="formhash" value="5abb5d21" />
+                    <input type="button"  id="login-btn" class="btn text-center login-btn" value="立即登录">
                 </form>
+               
             </div>
         </div>
+      
     </div>
+    <script>
+        (function () {
 
-    <script src="~/Content/lib/jquery/jquery-3.3.1.min.js"></script>
+            var login = {
+                loginBtn: $('#login-btn'),
+                event: function () {
+                    var _self = this;
+                    _self.loginBtn.click(function () {
+                        window.location.href = "/Admin/Activity/Activities";
+                    });
+                },
+                init: function () {
+                    var _self = this;
+                    _self.event();
+                }
 
-    <script src="~/Content/lib/amazeui/assets/js/amazeui.min.js"></script>
-    <script src="~/Content/lib/amazeui/assets/js/app.js"></script>
+            };
+            login.init();
+        })()
+    </script>
 </body>
-
 </html>

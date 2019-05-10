@@ -1,4 +1,5 @@
-﻿using Interact.Core.IRespository;
+﻿using Interact.Application.Enum;
+using Interact.Core.IRespository;
 using Interact.Infrastructure.Helper;
 using System;
 using System.Collections.Generic;
@@ -14,43 +15,52 @@ namespace Interact.Application.Utils
     public class AppUtil
     {
         /// <summary>
-        /// token名称
+        /// token名称(后台登录)
         /// </summary>
-        private const string tokenName = "interact.auth";
+        private const string adminTokenName = "interact.admin.auth";
         /// <summary>
-        /// 登入
+        /// token名称(大屏幕授权展示)
         /// </summary>
-        /// <param name="payload"></param>
-        public static void SignIn(Dictionary<string, object> payload)
+        private const string homeScreenTokenName = "interact.home.auth";
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="tokenType"></param>
+        public static  void ToSigin<T>(TokenTypeEnum tokenType,T payload)
         {
-            string token = JWTHelper.Set(payload);
-            CookieHelper.Set(token, tokenName, TimeSpan.FromHours(1.0));
+            switch (tokenType)
+            {
+                case TokenTypeEnum.Admin_Login:
+                    AppHelper.SignIn(payload,adminTokenName);
+                    break;
+                case TokenTypeEnum.Screen_Auth:
+                    AppHelper.SignIn(payload, homeScreenTokenName);
+                    break;
+                default:
+                    throw new ApplicationException("不存在此类型的token");
+                  
+            }
+
         }
         /// <summary>
         /// 登出
         /// </summary>
-        public static void SignOut()
+        /// <param name="tokenType"></param>
+        public static void ToSignOut<T>(TokenTypeEnum tokenType)
         {
-            CookieHelper.Remove(tokenName);
-        }
-        /// <summary>
-        /// 当前用户信息
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public static T CurrentUser<T>()
-        {
-            string token = CookieHelper.Get(tokenName);
-            return JWTHelper.Get<T>(tokenName);
-        }
-        /// <summary>
-        /// 刷新登录
-        /// </summary>
-        /// <param name="payload"></param>
-        public static void RefreshSignIn(Dictionary<string, object> payload)
-        {
-            CookieHelper.Remove(tokenName);
-            SignIn(payload);
+            switch (tokenType)
+            {
+                case TokenTypeEnum.Admin_Login:
+                    AppHelper.SignOut(adminTokenName);
+                    break;
+                case TokenTypeEnum.Screen_Auth:
+                    AppHelper.SignOut(homeScreenTokenName);
+                    break;
+                default:
+                    throw new ApplicationException("不存在此类型的token");
+
+            }
+
         }
     }
 }

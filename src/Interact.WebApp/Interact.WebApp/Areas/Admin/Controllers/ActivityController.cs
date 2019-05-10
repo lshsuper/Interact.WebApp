@@ -1,5 +1,6 @@
 ﻿using Interact.Core.Entity;
 using Interact.Core.IRespository;
+using Interact.Core.Option;
 using Interact.Infrastructure.Config;
 using Interact.Infrastructure.Config.Model;
 using Interact.Infrastructure.Util;
@@ -34,15 +35,25 @@ namespace Interact.WebApp.Areas.Admin.Controllers
 
         #region Operator
         /// <summary>
+        /// 搜索活动
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult SearchActivities(ActivityPageOption option)
+        {
+            var data = _activityRespository.QueryActivityByPage(option);
+            return Json(new DataResult() {
+                   Data=data,
+                   Status=true,
+                   Notify="获取成功"
+            });
+        }
+        /// <summary>
         /// 添加活动
         /// </summary>
         /// <returns></returns>
-        public ActionResult AddActivity(Activity activity)
+        public ActionResult AddActivity(Activity activity, List<ActivityAward> activityAwards)
         {
-            activity.AuthCode = Tool.UUID(5);
-            activity.CreateTime = DateTime.Now;
-            var model = _activityRespository.Insert(DbConfig.DbConnStr,activity);
-
+            bool result = _activityRespository.AddActivity(activity,activityAwards);
             return Json(new DataResult() {
                    Status= activity!=null,
                    Notify=activity!=null?"操作成功":"操作失败"
@@ -52,7 +63,7 @@ namespace Interact.WebApp.Areas.Admin.Controllers
         /// 编辑活动
         /// </summary>
         /// <returns></returns>
-        public ActionResult ActivityEdit(Activity activity)
+        public ActionResult ActivityEdit(Activity activity,List<ActivityAward>activityAwards)
         {
             //1.判断签到数量和签到限制数量
             var currentActivity = _activityRespository.Get(DbConfig.DbConnStr,activity.Id);
@@ -62,7 +73,7 @@ namespace Interact.WebApp.Areas.Admin.Controllers
                       Notify="签到数量不能大于签到限制数量"
                 });
             //2.修改
-            bool result=_activityRespository.EditActivity(activity);
+            bool result=_activityRespository.EditActivity(activity,activityAwards);
             return Json(new DataResult()
             {
                 Status = activity != null,

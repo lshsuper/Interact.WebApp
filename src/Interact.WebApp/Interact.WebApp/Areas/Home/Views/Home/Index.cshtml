@@ -1,0 +1,112 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>互动授权</title>
+    <script src="~/Content/lib/jquery/jquery-3.3.1.min.js"></script>
+    <link href="~/Content/lib/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" />
+    <script src="~/Content/lib/bootstrap-table/bootstrap-table.min.js"></script>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        .login-form {
+            position: absolute;
+            width: 300px;
+            height: 140px;
+            border-radius: 10px;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0);
+            left: 50%;
+            margin-left: -150px;
+            top: 50%;
+            margin-top: -75px;
+            padding: 20px;
+            font-size: 24px;
+            color: #fff;
+            text-align: center;
+            text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.39);
+        }
+
+        .login-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-image: url('/Areas/Home/Content/img/bg/bg-luckydraw.jpg');
+            background-size:cover;
+           
+        }
+        .login-authcode > input {
+            color: #fff;
+            position: relative;
+            width: 100%;
+            height: 32px;
+            margin: 20px auto;
+            line-height: 32px;
+            font-size: 20px;
+            text-indent: 15px;
+            border-radius: 15px;
+            padding: 5px 0;
+            border: 2px solid rgba(0, 0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.51);
+            box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.46) inset, 1px 2px 2px rgba(255, 255, 255, 0.61);
+        }
+        .auth>button{
+            cursor: pointer;
+            width: 100%;
+            height: 40px;
+            border-radius: 12px;
+            -moz-border-radius: 6px;
+            font-size: 26px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.37);
+            color: #fff;
+            padding: 0;
+            border: 0;
+            background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(255, 255, 255, 0.85)), color-stop(100%, rgba(218, 218, 218, 0)));
+            box-shadow: 0 3px 3px rgba(0, 0, 0, 0.36);
+        }
+            .auth:hover {
+                background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(255, 255, 255, 0.85)), color-stop(100%, rgba(218, 218, 218, 0.3)));
+            }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-form">
+            <div>互 动 授 权</div>
+            <div class="login-authcode">
+                <input type="password"   name="AuthCode"  placeholder="请输入活动授权码" />
+            </div>
+            <div class="auth">
+                <button id="auth-btn"> 确定</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        (function () {
+            var auth = {
+                authBtn: $('#auth-btn'),
+                event: function () {
+                    var _self = this;
+                    _self.authBtn.click(function () {
+                        window.location.href = "/Home/Screen/SignInScreen";
+                    });
+                },
+                init: function () {
+                    var _self = this;
+                    _self.event();
+                }
+            };
+            auth.init();
+        })()
+    </script>
+</body>
+</html>

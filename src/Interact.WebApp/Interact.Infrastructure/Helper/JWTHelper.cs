@@ -21,7 +21,7 @@ namespace Interact.Infrastructure.Helper
         /// </summary>
         /// <param name="payload">不敏感的用户数据</param>
         /// <returns></returns>
-        public static string Set(Dictionary<string, object> payload)
+        public static string Set<T>(T payload)
         {
 
             //格式如下
@@ -38,7 +38,7 @@ namespace Interact.Infrastructure.Helper
             var token = encoder.Encode(payload, WebConfig.JWT_Secret);
             return token;
         }
-
+        
         /// <summary>
         /// 根据jwtToken  获取实体
         /// </summary>

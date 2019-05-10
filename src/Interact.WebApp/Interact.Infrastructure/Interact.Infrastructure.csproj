@@ -70,6 +70,7 @@
     <Compile Include="Dapper\Model\PageModel.cs" />
     <Compile Include="Dapper\Respository\IRespository.cs" />
     <Compile Include="Dapper\Respository\Respository.cs" />
+    <Compile Include="Helper\AppHelper.cs" />
     <Compile Include="Helper\CookieHelper.cs" />
     <Compile Include="Helper\DapperHelper.cs" />
     <Compile Include="Helper\HttpHelper.cs" />

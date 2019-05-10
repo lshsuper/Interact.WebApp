@@ -46,6 +46,7 @@
     <Compile Include="Service\SignInService.cs" />
     <Compile Include="Utils\AppUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Enum\TokenTypeEnum.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Interact.Core\Interact.Core.csproj">
