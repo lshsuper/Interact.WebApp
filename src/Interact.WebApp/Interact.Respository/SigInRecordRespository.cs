@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using Interact.Core.Enum;
+using Interact.Core.Option;
+using Interact.Infrastructure.Helper.Model;
 
 namespace Interact.Respository
 {
@@ -88,6 +90,28 @@ namespace Interact.Respository
                            inner join WinnerMenu wm on sr.Id=wm.SiginInRecoredId
                            where sr.ActivityId=@activityId and wm.WinnerLevel=@winnerLevel";
             return DapperHelper.Instance.Query<SignInRecord>(DbConfig.DbConnStr, sql, new { activityId, winnerLevel });
+        }
+
+        public PageInfo<List<SignInRecord>> QuerySignInRecordByPage(SignInRecordPageOption option)
+        {
+            string sqlFilter = option.GetFilterStr;
+            sqlFilter = string.IsNullOrEmpty(sqlFilter) ? "" : " where " + sqlFilter;
+            string dataSql = $@"select *
+                                from(
+                                     select *,
+                                            row_number() over({option.BuildOrderByStr()}) num 
+                                     from SignInRecord {sqlFilter}
+                                ) as tb {option.BuildRangeStr("num")}";
+
+            string countSql = $"select count(*) from Activity {sqlFilter}";
+            var data = DapperHelper.Instance.Page<SignInRecord>(DbConfig.DbConnStr, $"{dataSql};{countSql}");
+            return new PageInfo<List<SignInRecord>>()
+            {
+                DataCount = data.Total,
+                DataSource = data.Data.ToList(),
+                PageIndex = option.PageIndex,
+                PageSize = option.PageSize
+            };
         }
     }
 }

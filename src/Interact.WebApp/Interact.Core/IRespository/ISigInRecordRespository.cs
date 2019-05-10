@@ -1,6 +1,8 @@
 ﻿using Interact.Core.Entity;
 using Interact.Core.Enum;
+using Interact.Core.Option;
 using Interact.Infrastructure.Dapper.Respository;
+using Interact.Infrastructure.Helper.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,5 +47,11 @@ namespace Interact.Core.IRespository
         /// <param name="winnerLevel"></param>
         /// <returns></returns>
         List<SignInRecord> ByActivityIdAndWinnerLevel(int activityId, WinnerLevelEnum winnerLevel);
+        /// <summary>
+        /// 获取分页签到数据
+        /// </summary>
+        /// <param name="option"></param>
+        /// <returns></returns>
+        PageInfo<List<SignInRecord>> QuerySignInRecordByPage(SignInRecordPageOption option);
     }
 }
