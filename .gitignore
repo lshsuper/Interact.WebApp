@@ -327,5 +327,3 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
-/src/Interact.WebApp/Interact.WebApp/Web.config
-Web.config
