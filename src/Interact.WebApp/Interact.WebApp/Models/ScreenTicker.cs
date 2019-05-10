@@ -55,5 +55,13 @@ namespace Interact.WebApp.Models
             string str = JsonHelper.Set(record);
             Clients.All.sendSignInRecordToClient(str);
         }
+        /// <summary>
+        ///向客户端发送签到人数
+        /// </summary>
+        /// <param name="count"></param>
+        public void SendSignInCount(int count)
+        {
+            Clients.All.sendSignInRecordToClient(count);
+        }
     }
 }
