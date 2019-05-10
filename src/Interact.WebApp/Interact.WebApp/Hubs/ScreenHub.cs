@@ -6,7 +6,7 @@ using Microsoft.AspNet.SignalR;
 
 namespace Interact.WebApp.Hubs
 {
-    public class SignInHub : Hub
+    public class ScreenHub : Hub
     {
         public void Hello()
         {

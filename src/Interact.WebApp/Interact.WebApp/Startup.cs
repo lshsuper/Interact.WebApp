@@ -7,6 +7,9 @@ using Owin;
 
 namespace Interact.WebApp
 {
+    /// <summary>
+    /// 启动类
+    /// </summary>
     public class Startup
     {
         public void Configuration(IAppBuilder app)
