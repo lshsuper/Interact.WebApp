@@ -82,8 +82,8 @@
     <Compile Include="Helper\Tool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Wexin\Enum\AuditScopeTypeEnum.cs" />
-    <Compile Include="Wexin\Model\WeixinAuthAccessTokenResult.cs" />
-    <Compile Include="Wexin\Model\WeixinAuthUserInfoResult.cs" />
+    <Compile Include="Wexin\Model\WeixinAccessTokenResult.cs" />
+    <Compile Include="Wexin\Model\WeixinUserInfoResult.cs" />
     <Compile Include="Wexin\WexinApiAddrBuilder.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Interact.Infrastructure.Wexin.Model
 {
-    public class WeixinAuthUserInfoResult
+
+    /// <summary>
+    /// 微信用户信息结果
+    /// </summary>
+    public class WeixinUserInfoResult
     {
         /*
          "openid":" OPENID",

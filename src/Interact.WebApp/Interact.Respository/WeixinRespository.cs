@@ -18,7 +18,7 @@ namespace Interact.Respository
     {
         public WeixinAuthAccessTokenResult GetAuthAccessTokenResult(string code)
         {
-            var url = WexinApiAddrBuilder.AuthAccessTokenAddr(WeixinConfig.AppKey, WeixinConfig.AppSecuret, code);
+            var url = WexinApiAddrBuilder.Oauth2Addr(WeixinConfig.AppKey, WeixinConfig.AppSecuret, code);
             string notify, result;
             bool succ = HttpClientHelper.Get(url, out result, out notify);
             if (!succ)
@@ -32,18 +32,18 @@ namespace Interact.Respository
 
         public string GetAuthCodeUrl(string redirectUrl)
         {
-            return WexinApiAddrBuilder.AuthCodeAddr(WeixinConfig.AppKey, redirectUrl, AuditScopeTypeEnum.snsapi_userinfo);
+            return WexinApiAddrBuilder.AuthorizeAddr(WeixinConfig.AppKey, redirectUrl, AuditScopeTypeEnum.snsapi_userinfo);
         }
 
-        public WeixinAuthUserInfoResult GetUserInfoByOpennIdAndAccessToken(string access_token, string openId)
+        public WeixinUserInfoResult GetUserInfoByOpennIdAndAccessToken(string access_token, string openId)
         {
 
-            var url = WexinApiAddrBuilder.AuthUserInfoAddr(access_token, openId);
+            var url = WexinApiAddrBuilder.UserinfoAddr(access_token, openId);
             string notify, result;
             bool succ = HttpClientHelper.Get(url, out result, out notify);
             if (!succ)
                 return null;
-            return new WeixinAuthUserInfoResult()
+            return new WeixinUserInfoResult()
             {
                 openid = Tool.GetJosnValue(result, "openid"),
                 unionid = Tool.GetJosnValue(result, "unionid"),

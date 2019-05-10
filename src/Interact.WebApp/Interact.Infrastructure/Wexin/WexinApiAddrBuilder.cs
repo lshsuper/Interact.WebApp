@@ -12,37 +12,37 @@ namespace Interact.Infrastructure.Wexin
     /// </summary>
     public class WexinApiAddrBuilder
     {
-        #region basic support
+        #region 公众平台
         /// <summary>
         /// 用户基本信息接口
         /// </summary>
         /// <param name="access_token"></param>
         /// <param name="openid"></param>
         /// <returns></returns>
-        public static string UserInfoAddr(string access_token, string openid)
+        public static string InfoAddr(string access_token, string openid)
         {
             //https://api.weixin.qq.com/cgi-bin/user/info?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN
             return $"https://api.weixin.qq.com/cgi-bin/user/info?access_token={access_token}&openid={openid}&lang=zh_CN";
         }
         /// <summary>
-        /// 构建AccessToken接口地址
+        /// 构建Token接口地址
         /// </summary>
         /// <param name="appkey"></param>
         /// <param name="appsecret"></param>
         /// <returns></returns>
-        public static string AccessTokenAddr(string appkey, string appsecret)
+        public static string TokenAddr(string appkey, string appsecret)
         {
             //https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET
             return $"https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={appkey}&secret={appsecret}";
         } 
         #endregion
 
-        #region about authorization
+        #region 开发平台
         /// <summary>
         /// 获取Code码接口地址
         /// </summary>
         /// <returns></returns>
-        public static string AuthCodeAddr(string appkey, string redirect_uri, AuditScopeTypeEnum scope)
+        public static string AuthorizeAddr(string appkey, string redirect_uri, AuditScopeTypeEnum scope)
         {
             //https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=SCOPE&state=STATE#wechat_redirect
             return $"https://open.weixin.qq.com/connect/oauth2/authorize?appid={appkey}&redirect_uri={redirect_uri}&response_type=code&scope={scope.ToString()}&state=STATE#wechat_redirect";
@@ -54,7 +54,7 @@ namespace Interact.Infrastructure.Wexin
         /// <param name="appsecret"></param>
         /// <param name="code"></param>
         /// <returns></returns>
-        public static string AuthAccessTokenAddr(string appkey, string appsecret, string code)
+        public static string Oauth2Addr(string appkey, string appsecret, string code)
         {
             //https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code
             return $"https://api.weixin.qq.com/sns/oauth2/access_token?appid={appkey}&secret={appsecret}&code={code}&grant_type=authorization_code";
@@ -65,7 +65,7 @@ namespace Interact.Infrastructure.Wexin
         /// <param name="access_token"></param>
         /// <param name="openid"></param>
         /// <returns></returns>
-        public static string AuthUserInfoAddr(string access_token, string openid)
+        public static string UserinfoAddr(string access_token, string openid)
         {
             //https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN
             return $"https://api.weixin.qq.com/sns/userinfo?access_token={access_token}&openid={openid}&lang=zh_CN";
