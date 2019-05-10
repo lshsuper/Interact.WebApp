@@ -18,7 +18,7 @@ namespace Interact.Respository
     {
         public WeixinAuthAccessTokenResult GetAuthAccessTokenResult(string code)
         {
-            var url = WexinApiAddrBuilder.Oauth2Addr(WeixinConfig.AppKey, WeixinConfig.AppSecuret, code);
+            var url = WexinApiUrlBuilder.Oauth2Url(WeixinConfig.AppKey, WeixinConfig.AppSecuret, code);
             string notify, result;
             bool succ = HttpClientHelper.Get(url, out result, out notify);
             if (!succ)
@@ -32,13 +32,13 @@ namespace Interact.Respository
 
         public string GetAuthCodeUrl(string redirectUrl)
         {
-            return WexinApiAddrBuilder.AuthorizeAddr(WeixinConfig.AppKey, redirectUrl, AuditScopeTypeEnum.snsapi_userinfo);
+            return WexinApiUrlBuilder.AuthorizeUrl(WeixinConfig.AppKey, redirectUrl, ScopeTypeEnum.snsapi_userinfo);
         }
 
         public WeixinUserInfoResult GetUserInfoByOpennIdAndAccessToken(string access_token, string openId)
         {
 
-            var url = WexinApiAddrBuilder.UserinfoAddr(access_token, openId);
+            var url = WexinApiUrlBuilder.UserinfoUrl(access_token, openId);
             string notify, result;
             bool succ = HttpClientHelper.Get(url, out result, out notify);
             if (!succ)

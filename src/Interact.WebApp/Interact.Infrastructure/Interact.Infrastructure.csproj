@@ -81,10 +81,10 @@
     <Compile Include="Helper\QrCodeHelper.cs" />
     <Compile Include="Helper\Tool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Wexin\Enum\AuditScopeTypeEnum.cs" />
+    <Compile Include="Wexin\Enum\ScopeTypeEnum.cs" />
     <Compile Include="Wexin\Model\WeixinAccessTokenResult.cs" />
     <Compile Include="Wexin\Model\WeixinUserInfoResult.cs" />
-    <Compile Include="Wexin\WexinApiAddrBuilder.cs" />
+    <Compile Include="Wexin\WexinApiUrlBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

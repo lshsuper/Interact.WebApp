@@ -9,7 +9,7 @@ namespace Interact.Infrastructure.Wexin.Enum
     /// <summary>
     /// 授权Scope类别
     /// </summary>
-    public enum AuditScopeTypeEnum
+    public enum ScopeTypeEnum
     {
         //不弹出授权页面，直接跳转，只能获取用户openid
         snsapi_base,
