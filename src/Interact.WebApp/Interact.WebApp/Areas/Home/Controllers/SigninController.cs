@@ -11,6 +11,7 @@ using Interact.Infrastructure.Util;
 using Interact.Application.Service;
 using Interact.Core.Entity;
 using Interact.WebApp.Models;
+using Interact.Infrastructure.Config;
 
 namespace Interact.WebApp.Areas.Home.Controllers
 {
@@ -68,6 +69,7 @@ namespace Interact.WebApp.Areas.Home.Controllers
         #endregion
 
         #region Weixin-Operator
+
         /// <summary>
         /// token测试
         /// </summary>
@@ -86,10 +88,15 @@ namespace Interact.WebApp.Areas.Home.Controllers
         /// <returns></returns>
         public ActionResult ToSigin(SignInRecord record)
         {
-
             //签到
             string notify;
             bool result = _signInService.SignIn(record, out notify);
+            if (result)
+            {
+                //签到上墙
+                var model=_sigInRecordRespository.Get(DbConfig.DbConnStr,record.Id);
+                ScreenTicker.Instance.SendSignInRecordToClient(model); 
+            }
             return Json(new DataResult() {
                 Status=result,
                 Notify=notify
