@@ -13,7 +13,7 @@ namespace Interact.Infrastructure.Config.Model
     public class WeixinConfig
     {
         public  static string AppKey=>ConfigurationManager.AppSettings["weixin_appkey"];
-        public static string AppSecuret=>ConfigurationManager.AppSettings["weixin_appkey"];
+        public static string AppSecuret=>ConfigurationManager.AppSettings["weixin_appsecret"];
 
     }
 }

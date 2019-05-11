@@ -1,6 +1,7 @@
 ﻿using Interact.Core.Entity;
 using Interact.Core.IRespository;
 using Interact.Infrastructure.Config;
+using Interact.Infrastructure.Wexin.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,7 @@ namespace Interact.Application.Service
         /// <returns></returns>
         public bool SignIn(SignInRecord record, out string notify)
         {
+
             //1.判断是否超出报名限制
             var currentActivity = _activityRespository.Get(DbConfig.DbConnStr, record.ActivityId);
             if (currentActivity == null || currentActivity.Id <= 0)
@@ -66,6 +68,20 @@ namespace Interact.Application.Service
             notify = "签到成功";
             return true;
         }
-
+        /// <summary>
+        /// 获取用户签到数据
+        /// </summary>
+        /// <param name="activityId"></param>
+        /// <param name="weixinAuthUserInfoResult"></param>
+        /// <returns></returns>
+        public SignInRecord SignInRecord(int activityId, WeixinUserInfoResult weixinAuthUserInfoResult)
+        {
+            //1.获取当前签到数据
+            var record = _sigInRecordRespository.GetSignInRecordsByActivityIdAndOpenId(activityId, weixinAuthUserInfoResult.openid);
+            if (record == null) return null;
+            //2.对比签到数据微信用户信息是否与当前过去的信息一致，若不一致便更新记录里的微信用户信息(暂时不核对)
+            //3.返回数据
+            return record;
+        }
     }
 }

@@ -53,5 +53,12 @@ namespace Interact.Core.IRespository
         /// <param name="option"></param>
         /// <returns></returns>
         PageInfo<List<SignInRecord>> QuerySignInRecordByPage(SignInRecordPageOption option);
+        /// <summary>
+        /// 根据活动id和openid获取签到记录
+        /// </summary>
+        /// <param name="activityId"></param>
+        /// <param name="openId"></param>
+        /// <returns></returns>
+        SignInRecord GetSignInRecordsByActivityIdAndOpenId(int activityId,string openId);
     }
 }

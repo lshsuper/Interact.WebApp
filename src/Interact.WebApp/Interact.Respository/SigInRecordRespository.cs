@@ -113,5 +113,11 @@ namespace Interact.Respository
                 PageSize = option.PageSize
             };
         }
+
+        public SignInRecord GetSignInRecordsByActivityIdAndOpenId(int activityId, string openId)
+        {
+            string sql = $@"select * from SignInRecord where ActivityId=@activityId and OpendId=@openId";
+            return DapperHelper.Instance.QueryFirst<SignInRecord>(DbConfig.DbConnStr,sql,new { activityId, openId });
+        }
     }
 }
