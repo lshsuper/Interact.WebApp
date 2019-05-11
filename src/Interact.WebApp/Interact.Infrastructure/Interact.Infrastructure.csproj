@@ -65,7 +65,7 @@
   <ItemGroup>
     <Compile Include="Config\DbConfig.cs" />
     <Compile Include="Config\WebConfig.cs" />
-    <Compile Include="Config\WeixinConfig.cs" />
+    <Compile Include="Config\WechatConfig.cs" />
     <Compile Include="Dapper\DapperContext.cs" />
     <Compile Include="Dapper\Model\PageModel.cs" />
     <Compile Include="Dapper\Respository\IRespository.cs" />
@@ -73,18 +73,22 @@
     <Compile Include="Helper\AppHelper.cs" />
     <Compile Include="Helper\CookieHelper.cs" />
     <Compile Include="Helper\DapperHelper.cs" />
+    <Compile Include="Helper\EncryptHelper.cs" />
     <Compile Include="Helper\HttpHelper.cs" />
     <Compile Include="Helper\JsonHelper.cs" />
     <Compile Include="Helper\JWTHelper.cs" />
-    <Compile Include="Helper\Model\PageInfo.cs" />
-    <Compile Include="Helper\Model\PageOption.cs" />
+    <Compile Include="Helper\Page\PageInfo.cs" />
+    <Compile Include="Helper\Page\PageOption.cs" />
     <Compile Include="Helper\QrCodeHelper.cs" />
     <Compile Include="Helper\Tool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Wexin\Enum\ScopeTypeEnum.cs" />
-    <Compile Include="Wexin\Model\WeixinOAuth2AccessTokenResult.cs" />
-    <Compile Include="Wexin\Model\WeixinOAuth2UserInfoResult.cs" />
-    <Compile Include="Wexin\WexinApiUrlBuilder.cs" />
+    <Compile Include="WeChat\Enum\ScopeTypeEnum.cs" />
+    <Compile Include="WeChat\Enum\XmlMessageTypeEnum.cs" />
+    <Compile Include="WeChat\WeChatMessageAgent.cs" />
+    <Compile Include="WeChat\Model\WeChatOAuth2AccessTokenResult.cs" />
+    <Compile Include="WeChat\Model\WeChatOAuth2UserInfoResult.cs" />
+    <Compile Include="WeChat\Model\WeChatXmlModel.cs" />
+    <Compile Include="WeChat\WeChatApiUrlBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

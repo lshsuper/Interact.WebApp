@@ -18,7 +18,7 @@ namespace Interact.Respository
     {
         public WeixinAuthAccessTokenResult GetAuthAccessTokenResult(string code)
         {
-            var url = WexinApiUrlBuilder.OAuth2_AccessTokenUrl(WeixinConfig.AppKey, WeixinConfig.AppSecuret, code);
+            var url = WexinApiUrlBuilder.OAuth2_AccessTokenUrl(WeChatConfig.AppKey, WeChatConfig.AppSecuret, code);
             string notify, result;
             bool succ = HttpClientHelper.Get(url, out result, out notify);
             if (!succ)
@@ -32,7 +32,7 @@ namespace Interact.Respository
 
         public string GetAuthCodeUrl(string redirectUrl)
         {
-            return WexinApiUrlBuilder.OAuth2_AuthorizeUrl(WeixinConfig.AppKey, redirectUrl, ScopeTypeEnum.snsapi_userinfo);
+            return WexinApiUrlBuilder.OAuth2_AuthorizeUrl(WeChatConfig.AppKey, redirectUrl, ScopeTypeEnum.snsapi_userinfo);
         }
 
         public WeixinOAuth2UserInfoResult GetUserInfoByOpennIdAndAccessToken(string access_token, string openId)

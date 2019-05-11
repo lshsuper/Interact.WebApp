@@ -225,6 +225,7 @@
     <Compile Include="Areas\Home\Controllers\NoticeController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\TestSignalRController.cs" />
+    <Compile Include="Controllers\WechatController.cs" />
     <Compile Include="Filters\CustomExceptionFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -285,6 +286,7 @@
     <Folder Include="Areas\Home\Models\" />
     <Folder Include="Content\app\" />
     <Folder Include="Views\Shared\" />
+    <Folder Include="Views\Weixin\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Interact.Core\Interact.Core.csproj">
