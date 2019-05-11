@@ -213,14 +213,17 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Common\AdminAuthrizeFilter.cs" />
     <Compile Include="Areas\Admin\Controllers\ActivityController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SignInRecordController.cs" />
     <Compile Include="Areas\Home\Controllers\HomeController.cs" />
     <Compile Include="Areas\Home\HomeAreaRegistration.cs" />
     <Compile Include="Areas\Home\Controllers\ActivityController.cs" />
     <Compile Include="Areas\Home\Controllers\ScreenController.cs" />
     <Compile Include="Areas\Home\Controllers\SigninController.cs" />
     <Compile Include="Areas\Home\Controllers\NoticeController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\TestSignalRController.cs" />
     <Compile Include="Filters\CustomExceptionFilter.cs" />
     <Compile Include="Global.asax.cs">
@@ -254,6 +257,7 @@
     <Content Include="Areas\Admin\Content\ui-layout-0.0.0\.travis.yml" />
     <Content Include="Areas\Admin\Content\ui-layout-0.0.0\bower.json" />
     <Content Include="Areas\Home\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SignInRecord\SignInRecords.cshtml" />
     <None Include="bundleconfig.json" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

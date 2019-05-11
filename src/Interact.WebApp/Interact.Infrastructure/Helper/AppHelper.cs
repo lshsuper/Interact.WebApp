@@ -32,6 +32,7 @@ namespace Interact.Infrastructure.Helper
         public static T CurrentUser<T>(string tokenName)
         {
             string token = CookieHelper.Get(tokenName);
+            if (string.IsNullOrEmpty(token)) return default(T);
             return JWTHelper.Get<T>(tokenName);
         }
     }

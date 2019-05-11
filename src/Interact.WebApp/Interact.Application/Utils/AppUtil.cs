@@ -26,7 +26,7 @@ namespace Interact.Application.Utils
         /// 登录
         /// </summary>
         /// <param name="tokenType"></param>
-        public static  void ToSigin<T>(TokenTypeEnum tokenType,T payload)
+        public   void ToSigin<T>(TokenTypeEnum tokenType,T payload)
         {
             switch (tokenType)
             {
@@ -46,7 +46,7 @@ namespace Interact.Application.Utils
         /// 登出
         /// </summary>
         /// <param name="tokenType"></param>
-        public static void ToSignOut<T>(TokenTypeEnum tokenType)
+        public  void ToSignOut<T>(TokenTypeEnum tokenType)
         {
             switch (tokenType)
             {
@@ -61,6 +61,19 @@ namespace Interact.Application.Utils
 
             }
 
+        }
+        public  T GetCurrentUser<T>(TokenTypeEnum tokenType)
+        {
+            switch (tokenType)
+            {
+                case TokenTypeEnum.Admin_Login:
+                   return  AppHelper.CurrentUser<T>(adminTokenName);
+                case TokenTypeEnum.Screen_Auth:
+                   return AppHelper.CurrentUser<T>(homeScreenTokenName);
+                default:
+                    throw new ApplicationException("不存在此类型的token");
+
+            }
         }
     }
 }
