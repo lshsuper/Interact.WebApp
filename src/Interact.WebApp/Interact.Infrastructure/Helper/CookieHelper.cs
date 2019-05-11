@@ -14,6 +14,7 @@ namespace Interact.Infrastructure.Helper
     {
         public static void Set(string value,string name,TimeSpan expires)
         {
+            //expires = TimeSpan.FromDays(1);
             HttpCookie cookie = new HttpCookie(name, value) {
                  Expires=DateTime.Now.Add(expires)
             };
@@ -22,7 +23,7 @@ namespace Interact.Infrastructure.Helper
         }
         public static string Get(string name)
         {
-           HttpCookie cookie= HttpContext.Current.Response.Cookies.Get(name);
+           HttpCookie cookie= HttpContext.Current.Request.Cookies.Get(name);
             if (cookie == null) return string.Empty;
             return cookie.Value;
         }
@@ -32,7 +33,9 @@ namespace Interact.Infrastructure.Helper
         /// <param name="name"></param>
         public static void Remove(string name)
         {
-            HttpContext.Current.Response.Cookies.Remove(name);
+            HttpCookie cookie = HttpContext.Current.Request.Cookies.Get(name);
+            if(cookie!=null)
+                HttpContext.Current.Response.Cookies.Get(name).Expires = DateTime.Now.AddDays(-1);
         }
     }
 }

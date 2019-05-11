@@ -52,6 +52,9 @@
     <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.Mvc5.4.0.2\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="AutoMapper, Version=8.1.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.8.1.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
     </Reference>
@@ -188,6 +191,17 @@
     <Content Include="Content\lib\bootstrap-table\locale\bootstrap-table-zh-CN.min.js" />
     <Content Include="Content\lib\jquery\jquery-3.3.1.js" />
     <Content Include="Content\lib\jquery\jquery-3.3.1.min.js" />
+    <Content Include="Content\lib\layer-v3.1.1\layer-v3.1.1\layer\layer.js" />
+    <Content Include="Content\lib\layer-v3.1.1\layer-v3.1.1\layer\mobile\layer.js" />
+    <Content Include="Content\lib\layer-v3.1.1\layer-v3.1.1\layer\mobile\need\layer.css" />
+    <Content Include="Content\lib\layer-v3.1.1\layer-v3.1.1\layer\theme\default\icon-ext.png" />
+    <Content Include="Content\lib\layer-v3.1.1\layer-v3.1.1\layer\theme\default\icon.png" />
+    <Content Include="Content\lib\layer-v3.1.1\layer-v3.1.1\layer\theme\default\layer.css" />
+    <Content Include="Content\lib\layer-v3.1.1\layer-v3.1.1\layer\theme\default\loading-0.gif" />
+    <Content Include="Content\lib\layer-v3.1.1\layer-v3.1.1\layer\theme\default\loading-1.gif" />
+    <Content Include="Content\lib\layer-v3.1.1\layer-v3.1.1\layer\theme\default\loading-2.gif" />
+    <Content Include="Content\lib\layer-v3.1.1\layer-v3.1.1\test.html" />
+    <Content Include="Content\lib\layer-v3.1.1\layer-v3.1.1\更新日志.txt" />
     <Content Include="Content\lib\mui-master\css\mui.css" />
     <Content Include="Content\lib\mui-master\css\mui.min.css" />
     <Content Include="Content\lib\mui-master\js\mui.js" />
@@ -210,10 +224,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AutofacConfig.cs" />
+    <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Common\AdminAuthrizeFilter.cs" />
+    <Compile Include="Areas\Admin\Common\AdminAuthorizeFilter.cs" />
     <Compile Include="Areas\Admin\Controllers\ActivityController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\SignInRecordController.cs" />
@@ -264,6 +279,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\lib\layer-v3.1.1\layer-v3.1.1\文档\jquery下载.url" />
+    <Content Include="Content\lib\layer-v3.1.1\layer-v3.1.1\文档\layer官网.url" />
+    <Content Include="Content\lib\layer-v3.1.1\layer-v3.1.1\文档\layer文档.url" />
+    <Content Include="Content\lib\layer-v3.1.1\layer-v3.1.1\文档\layui社区.url" />
+    <Content Include="Content\lib\layer-v3.1.1\layer-v3.1.1\文档\获得layim.url" />
     <None Include="packages.config" />
     <Content Include="Areas\Home\Views\Notice\Error.cshtml" />
     <Content Include="Areas\Home\Views\Signin\Signin.cshtml" />

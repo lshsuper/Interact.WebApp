@@ -4,6 +4,7 @@ using Interact.Core.Option;
 using Interact.Infrastructure.Config;
 using Interact.Infrastructure.Config.Model;
 using Interact.Infrastructure.Util;
+using Interact.WebApp.Areas.Admin.Common;
 using Interact.WebApp.Models;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ using System.Web;
 using System.Web.Mvc;
 namespace Interact.WebApp.Areas.Admin.Controllers
 {
+    [AdminAuthorizeFilter]
     /// <summary>
     /// 活动管理
     /// </summary>

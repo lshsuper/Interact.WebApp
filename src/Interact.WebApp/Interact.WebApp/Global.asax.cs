@@ -18,6 +18,7 @@ namespace Interact.WebApp
            
             //×¢²áiocÈÝÆ÷
             AutofacConfig.RegisterIoc();
+            AutoMapperConfig.RegisterProfile();
         }
     }
 }

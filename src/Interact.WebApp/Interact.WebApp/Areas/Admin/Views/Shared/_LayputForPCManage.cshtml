@@ -1,8 +1,19 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿@using Interact.WebApp.App_Start
+@using Interact.Application.Utils
+@using Autofac
+@using Interact.Application.Dto
+@using Interact.Application.Enum;
+@{
+
+    AppUtil _appUtil = AutofacConfig._container.Resolve<AppUtil>();
+    AdminDto admin = _appUtil.GetCurrentUser<AdminDto>(TokenTypeEnum.Admin_Login);
+}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no" />
     <title>@ViewBag.Title</title>
     <link href="~/Content/lib/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Areas/Admin/Content/css/style.css" rel="stylesheet" />
@@ -31,28 +42,14 @@
             </ul>
 
             <ul class="nav navbar-nav pull-right">
-                <li class="li-border">
-                    <a href="#" class="mystyle-color">
-                        <span class="glyphicon glyphicon-bell"></span>
-                        <span class="topbar-num">0</span>
-                    </a>
-                </li>
+                
                 <li class="dropdown li-border">
-                    <a href="#" class="dropdown-toggle mystyle-color" data-toggle="dropdown">00000000@qq.com<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle mystyle-color" data-toggle="dropdown">@admin.Name<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">退出</a></li>
+                        <li><a href="/admin/home/tologout">退出</a></li>
                     </ul>
                 </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle mystyle-color" data-toggle="dropdown">换肤<span class="caret"></span></a>
-                    <ul class="dropdown-menu changecolor">
-                        <li id="blue"><a href="#">蓝色</a></li>
-                        <li class="divider"></li>
-                        <li id="green"><a href="#">绿色</a></li>
-                        <li class="divider"></li>
-                        <li id="orange"><a href="#">橙色</a></li>
-                    </ul>
-                </li>
+   
             </ul>
         </div>
     </nav>

@@ -15,6 +15,7 @@
     <link href="~/Areas/Admin/Content/css/layout.css" rel="stylesheet" />
     <link href="~/Areas/Admin/Content/css/login.css" rel="stylesheet" />
     <script src="~/Content/lib/jquery/jquery-3.3.1.min.js"></script>
+    <script src="~/Content/lib/layer-v3.1.1/layer-v3.1.1/layer/layer.js"></script>
 </head>
 
 <body class="login-bg">
@@ -30,32 +31,47 @@
                 <p class="text-big text-center logo-color">
                     互 动 后 台
                 </p>
-                <form class="login-form" action="index.html" method="post" autocomplete="off">
+                <form class="login-form">
                     <div class="login-box border text-small" id="box">
                         <div class="name border-bottom">
-                            <input type="text" placeholder="请输入账号" id="username" name="username" />
+                            <input type="text" placeholder="请输入账号" name="login" />
                         </div>
                         <div class="pwd">
-                            <input type="password" placeholder="请输入密码" datatype="*" id="password" name="password" />
+                            <input type="password" placeholder="请输入密码" name="pwd" />
                         </div>
                     </div>
-                    <input type="hidden" name="formhash" value="5abb5d21" />
-                    <input type="button"  id="login-btn" class="btn text-center login-btn" value="立即登录">
+                    <input type="button" id="login-btn" class="btn text-center login-btn" value="立即登录">
                 </form>
-               
+
             </div>
         </div>
-      
+
     </div>
     <script>
         (function () {
 
             var login = {
                 loginBtn: $('#login-btn'),
+                loginTxt: $('input[name=login]'),
+                pwdTxt: $('input[name=pwd]'),
                 event: function () {
                     var _self = this;
                     _self.loginBtn.click(function () {
-                        window.location.href = "/Admin/Activity/Activities";
+
+                        var login = _self.loginTxt.val();
+                        var pwd = _self.pwdTxt.val();
+                        var index = layer.load(0, {
+                            shade: [0.5, '#fff'] //0.1透明度的白色背景
+                        });
+                        $.post('/admin/home/tologin', { login, pwd }, function (data) {
+                            if (data.Status) {
+                                window.location.href = "/Admin/Activity/Activities";
+                            } else {
+                                layer.close(index);
+                               layer.msg(data.Notify, {icon: 5});
+                            }
+                        });
+
                     });
                 },
                 init: function () {

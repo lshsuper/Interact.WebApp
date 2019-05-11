@@ -43,7 +43,7 @@ namespace Interact.Infrastructure.Dapper
         {
             using (var conn = GetConnection(connStr))
             {
-                return conn.QueryFirst<T>(sql);
+                return conn.QueryFirstOrDefault<T>(sql,param);
             }
         }
         /// <summary>

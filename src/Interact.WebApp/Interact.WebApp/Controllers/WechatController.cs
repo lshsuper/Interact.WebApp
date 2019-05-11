@@ -26,7 +26,7 @@ namespace Interact.WebApp.Controllers
             //1.验签
             if (!WeChatMessageAgent.CheckSignature())
                 return Content("error");
-            //2.截获消息+对应发送
+            //2.截获消息+对应发送(填充自己逻辑即可)
             var model = WeChatMessageAgent.ReceiveXml();
             switch (model.MsgType)
             {
@@ -37,9 +37,9 @@ namespace Interact.WebApp.Controllers
                     return Content("xxx");
                 case Infrastructure.WeChat.Enum.XmlMessageTypeEnum.@event:
                     return Content("xxx");
-
+                default:
+                    return Content(WeChatMessageAgent.ResponseText(model.FromUserName, model.ToUserName, "指令有误"));
             }
-            return Content("error");
         }
     }
 }

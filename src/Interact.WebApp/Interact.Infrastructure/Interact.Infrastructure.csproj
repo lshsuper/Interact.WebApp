@@ -77,6 +77,7 @@
     <Compile Include="Helper\HttpHelper.cs" />
     <Compile Include="Helper\JsonHelper.cs" />
     <Compile Include="Helper\JWTHelper.cs" />
+    <Compile Include="Helper\Model\JwtPaylod.cs" />
     <Compile Include="Helper\Page\PageInfo.cs" />
     <Compile Include="Helper\Page\PageOption.cs" />
     <Compile Include="Helper\QrCodeHelper.cs" />

@@ -85,7 +85,7 @@ namespace Interact.Infrastructure.Wexin.Helper
                 }
                 return WxXmlModel;
             }
-            return new WeChatXmlModel();
+            return new WeChatXmlModel() { MsgType=XmlMessageTypeEnum.text,Content="未知指令"};
         }
         /// <summary>
         /// 回复文本

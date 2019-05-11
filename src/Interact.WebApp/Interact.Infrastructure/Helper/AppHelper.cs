@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Interact.Infrastructure.Helper.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,10 +13,10 @@ namespace Interact.Infrastructure.Helper
         /// 登入
         /// </summary>
         /// <param name="payload"></param>
-        public static void SignIn<T>(T payload, string tokenName)
+        public static void SignIn(JwtPaylod payload, string tokenName, TimeSpan timeSpan)
         {
-            string token = JWTHelper.Set(payload);
-            CookieHelper.Set(token, tokenName, TimeSpan.FromHours(1.0));
+            string token = JWTHelper.Set(payload,timeSpan);
+            CookieHelper.Set(token, tokenName, timeSpan);
         }
         /// <summary>
         /// 登出
@@ -33,7 +34,7 @@ namespace Interact.Infrastructure.Helper
         {
             string token = CookieHelper.Get(tokenName);
             if (string.IsNullOrEmpty(token)) return default(T);
-            return JWTHelper.Get<T>(tokenName);
+            return JWTHelper.Get<T>(token);
         }
     }
 }

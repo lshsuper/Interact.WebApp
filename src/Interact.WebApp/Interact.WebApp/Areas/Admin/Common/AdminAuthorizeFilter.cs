@@ -11,20 +11,28 @@ using Interact.Application.Dto;
 
 namespace Interact.WebApp.Areas.Admin.Common
 {
-    public class AdminAuthrizeFilter : IAuthorizationFilter
+    public class AdminAuthorizeFilter : AuthorizeAttribute
     {
         private AppUtil _appUtil;
-        public AdminAuthrizeFilter()
+        public AdminAuthorizeFilter()
         {
             _appUtil = AutofacConfig._container.Resolve<AppUtil>();
         }
-        public void OnAuthorization(AuthorizationContext filterContext)
+        public override void OnAuthorization(AuthorizationContext filterContext)
         {
-            var _context = filterContext.RequestContext;
+
+            if (filterContext.ActionDescriptor.IsDefined(typeof(AllowAnonymousAttribute),true) || 
+                filterContext.ActionDescriptor.ControllerDescriptor.IsDefined(typeof(AllowAnonymousAttribute),true))
+            {
+                base.OnAuthorization(filterContext);
+                return;
+            }
             var currentUser = _appUtil.GetCurrentUser<AdminDto>(Application.Enum.TokenTypeEnum.Admin_Login);
             if (currentUser == null)
             {
                 //跳转
+                filterContext.Result = new RedirectResult("/admin/home/login");
+               
             }
 
         }

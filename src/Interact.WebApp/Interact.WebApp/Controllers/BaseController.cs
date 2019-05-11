@@ -9,10 +9,11 @@ namespace Interact.WebApp.Controllers
 {
     public class BaseController : Controller
     {
-        private readonly AppUtil _appUtil;
+        protected readonly AppUtil _appUtil;
         public BaseController(AppUtil appUtil)
         {
             _appUtil = appUtil;
         }
+      
     }
 }

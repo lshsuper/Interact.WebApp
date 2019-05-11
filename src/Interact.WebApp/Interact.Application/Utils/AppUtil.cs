@@ -1,6 +1,8 @@
 ﻿using Interact.Application.Enum;
+using Interact.Application.Service;
 using Interact.Core.IRespository;
 using Interact.Infrastructure.Helper;
+using Interact.Infrastructure.Helper.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,19 +24,20 @@ namespace Interact.Application.Utils
         /// token名称(大屏幕授权展示)
         /// </summary>
         private const string homeScreenTokenName = "interact.home.auth";
+        private readonly TimeSpan tokenTimeSpan = TimeSpan.FromDays(1);
         /// <summary>
         /// 登录
         /// </summary>
         /// <param name="tokenType"></param>
-        public   void ToSigin<T>(TokenTypeEnum tokenType,T payload)
+        public   void ToSigin(TokenTypeEnum tokenType,JwtPaylod payload)
         {
             switch (tokenType)
             {
                 case TokenTypeEnum.Admin_Login:
-                    AppHelper.SignIn(payload,adminTokenName);
+                    AppHelper.SignIn(payload,adminTokenName, tokenTimeSpan);
                     break;
                 case TokenTypeEnum.Screen_Auth:
-                    AppHelper.SignIn(payload, homeScreenTokenName);
+                    AppHelper.SignIn(payload, homeScreenTokenName, tokenTimeSpan);
                     break;
                 default:
                     throw new ApplicationException("不存在此类型的token");
@@ -46,7 +49,7 @@ namespace Interact.Application.Utils
         /// 登出
         /// </summary>
         /// <param name="tokenType"></param>
-        public  void ToSignOut<T>(TokenTypeEnum tokenType)
+        public  void ToSignOut(TokenTypeEnum tokenType)
         {
             switch (tokenType)
             {
@@ -62,6 +65,12 @@ namespace Interact.Application.Utils
             }
 
         }
+        /// <summary>
+        /// 获取当前用户信息
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="tokenType"></param>
+        /// <returns></returns>
         public  T GetCurrentUser<T>(TokenTypeEnum tokenType)
         {
             switch (tokenType)
