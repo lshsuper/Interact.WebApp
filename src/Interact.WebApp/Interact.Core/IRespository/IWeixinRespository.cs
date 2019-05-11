@@ -26,6 +26,6 @@ namespace Interact.Core.IRespository
         /// </summary>
         /// <param name="openId"></param>
         /// <returns></returns>
-        WeixinUserInfoResult GetUserInfoByOpennIdAndAccessToken(string access_token,string openId);
+        WeixinOAuth2UserInfoResult GetUserInfoByOpennIdAndAccessToken(string access_token,string openId);
     }
 }

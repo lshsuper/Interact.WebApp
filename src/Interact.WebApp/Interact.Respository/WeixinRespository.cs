@@ -35,7 +35,7 @@ namespace Interact.Respository
             return WexinApiUrlBuilder.OAuth2_AuthorizeUrl(WeixinConfig.AppKey, redirectUrl, ScopeTypeEnum.snsapi_userinfo);
         }
 
-        public WeixinUserInfoResult GetUserInfoByOpennIdAndAccessToken(string access_token, string openId)
+        public WeixinOAuth2UserInfoResult GetUserInfoByOpennIdAndAccessToken(string access_token, string openId)
         {
 
             var url = WexinApiUrlBuilder.OAuth2_UserinfoUrl(access_token, openId);
@@ -43,7 +43,7 @@ namespace Interact.Respository
             bool succ = HttpClientHelper.Get(url, out result, out notify);
             if (!succ)
                 return null;
-            return new WeixinUserInfoResult()
+            return new WeixinOAuth2UserInfoResult()
             {
                 openid = Tool.GetJosnValue(result, "openid"),
                 unionid = Tool.GetJosnValue(result, "unionid"),

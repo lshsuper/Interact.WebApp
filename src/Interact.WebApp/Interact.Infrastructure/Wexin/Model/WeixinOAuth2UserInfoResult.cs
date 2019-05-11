@@ -10,19 +10,9 @@ namespace Interact.Infrastructure.Wexin.Model
     /// <summary>
     /// 微信用户信息结果
     /// </summary>
-    public class WeixinUserInfoResult
+    public class WeixinOAuth2UserInfoResult
     {
-        /*
-         "openid":" OPENID",
-    " nickname": NICKNAME,
-    "sex":"1",
-    "province":"PROVINCE"
-    "city":"CITY",
-    "country":"COUNTRY",
-    "headimgurl":       "http://thirdwx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/46",
-    "privilege":[ "PRIVILEGE1" "PRIVILEGE2"     ],
-    "unionid": "o6_bmasdasdsad6_2sgVt7hMZOPfL"
-         */
+       
         public string openid { get; set; }
         public string nickname { get; set; }
         public string sex { get; set; }
@@ -30,6 +20,7 @@ namespace Interact.Infrastructure.Wexin.Model
         public string city { get; set; }
         public string country { get; set; }
         public string headimgurl { get; set; }
-        public string unionid { get; set; }
+        public string unionid { get; set; }   //需要在开放平台绑定公众号才可以获取(绑定需花三百大洋)
+        
     }
 }

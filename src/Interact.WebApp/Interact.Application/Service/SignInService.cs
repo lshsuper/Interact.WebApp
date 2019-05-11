@@ -74,7 +74,7 @@ namespace Interact.Application.Service
         /// <param name="activityId"></param>
         /// <param name="weixinAuthUserInfoResult"></param>
         /// <returns></returns>
-        public SignInRecord SignInRecord(int activityId, WeixinUserInfoResult weixinAuthUserInfoResult)
+        public SignInRecord SignInRecord(int activityId, WeixinOAuth2UserInfoResult weixinAuthUserInfoResult)
         {
             //1.获取当前签到数据
             var record = _sigInRecordRespository.GetSignInRecordsByActivityIdAndOpenId(activityId, weixinAuthUserInfoResult.openid);
