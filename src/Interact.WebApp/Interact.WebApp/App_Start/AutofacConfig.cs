@@ -17,6 +17,7 @@ namespace Interact.WebApp.App_Start
             //2.注入controller+过滤器
             var webapp = Assembly.Load("Interact.WebApp");
             builder.RegisterControllers(webapp);
+            builder.RegisterFilterProvider();
             //3.注入respository
             var respository = Assembly.Load("Interact.Respository");
             builder.RegisterTypes(respository.GetTypes().Where(o=>o.Name.EndsWith("Respository")).ToArray()).AsImplementedInterfaces().InstancePerDependency();
