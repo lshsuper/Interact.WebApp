@@ -42,7 +42,7 @@ namespace Interact.Infrastructure.Wexin
         /// 获取Code码接口地址
         /// </summary>
         /// <returns></returns>
-        public static string AuthorizeUrl(string appkey, string redirect_uri, ScopeTypeEnum scope,string state ="STATE")
+        public static string OAuth2_AuthorizeUrl(string appkey, string redirect_uri, ScopeTypeEnum scope,string state ="STATE")
         {
             //https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=SCOPE&state=STATE#wechat_redirect
             return $"https://open.weixin.qq.com/connect/oauth2/authorize?appid={appkey}&redirect_uri={redirect_uri}&response_type=code&scope={scope.ToString()}&state={state}#wechat_redirect";
@@ -54,7 +54,7 @@ namespace Interact.Infrastructure.Wexin
         /// <param name="appsecret"></param>
         /// <param name="code"></param>
         /// <returns></returns>
-        public static string Oauth2Url(string appkey, string appsecret, string code)
+        public static string OAuth2_AccessTokenUrl(string appkey, string appsecret, string code)
         {
             //https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code
             return $"https://api.weixin.qq.com/sns/oauth2/access_token?appid={appkey}&secret={appsecret}&code={code}&grant_type=authorization_code";
@@ -65,12 +65,11 @@ namespace Interact.Infrastructure.Wexin
         /// <param name="access_token"></param>
         /// <param name="openid"></param>
         /// <returns></returns>
-        public static string UserinfoUrl(string access_token, string openid)
+        public static string OAuth2_UserinfoUrl(string access_token, string openid)
         {
             //https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN
             return $"https://api.weixin.qq.com/sns/userinfo?access_token={access_token}&openid={openid}&lang=zh_CN";
         } 
         #endregion
-
     }
 }
