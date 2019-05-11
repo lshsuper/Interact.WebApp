@@ -4,7 +4,7 @@
 @using Interact.Application.Dto
 @using Interact.Application.Enum;
 @{
-
+    //获取管理员信息
     AppUtil _appUtil = AutofacConfig._container.Resolve<AppUtil>();
     AdminDto admin = _appUtil.GetCurrentUser<AdminDto>(TokenTypeEnum.Admin_Login);
 }
