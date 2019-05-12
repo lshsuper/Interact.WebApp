@@ -91,6 +91,15 @@
                                 title: '授权码',
                                 align: 'center',
                             },
+                             {
+                                field: 'toscreen',
+                                title: '前往互动大屏幕',
+                                 align: 'center',
+                                 formatter: function (value, row, index) {
+                                     var url = '/home/home/index?activityId=' + row["Id"];
+                                 return "<a class='text-primary' href="+url+">跳转</a>";
+                             }
+                            },
                         ],
 
                     });
