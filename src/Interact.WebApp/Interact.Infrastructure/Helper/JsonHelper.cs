@@ -17,7 +17,7 @@ namespace Interact.Infrastructure.Helper
         {
             JsonSerializerSettings setting = new JsonSerializerSettings();
             // 设置日期序列化的格式
-            setting.DateFormatString = "yyyy-MM-dd HH:mm:ss";
+            setting.DateFormatString = dateFormat;
             return JsonConvert.SerializeObject(obj,setting);
         }
         public static T Get<T>(string str)
