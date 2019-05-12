@@ -37,7 +37,7 @@ namespace Interact.WebApp.Areas.Admin.Controllers
             var data = _sigInRecordRespository.QuerySignInRecordByPage(option);
             return Json(new DataResult()
             {
-                Data = data.Rows,
+                Data = data,
                 Status = true,
                 Notify = ""
             });

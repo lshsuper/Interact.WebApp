@@ -86,9 +86,11 @@ namespace Interact.Infrastructure.Dapper
             var result = new PageModel<T>();
             using (var conn = GetConnection(connStr))
             {
+                
                 using (var muilt=conn.QueryMultiple(sql))
                 {
                   
+
                     result.Data = muilt.Read<T>();
                     result.Total = muilt.Read<int>().FirstOrDefault();
                     return result;

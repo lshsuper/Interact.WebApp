@@ -20,7 +20,7 @@ namespace Interact.WebApp.Common
         }
         public new JsonResult Json(object data)
         {
-            return new CustomJsonResult { Data = data, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            return new CustomJsonResult { Data = data, JsonRequestBehavior = JsonRequestBehavior.DenyGet };
         }
     }
 }

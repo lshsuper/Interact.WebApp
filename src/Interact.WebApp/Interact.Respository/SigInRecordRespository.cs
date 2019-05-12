@@ -104,7 +104,7 @@ namespace Interact.Respository
                                      from SignInRecord {sqlFilter}
                                 ) as tbc where {option.BuildRangeStr("num")}";
 
-            string countSql = $"select count(*) from Activity {sqlFilter}";
+            string countSql = $"select count(*) from SignInRecord {sqlFilter}";
             var data = DapperHelper.Instance.Page<SignInRecord>(DbConfig.DbConnStr, $"{dataSql};{countSql}");
             return new PageInfo<List<SignInRecord>>()
             {

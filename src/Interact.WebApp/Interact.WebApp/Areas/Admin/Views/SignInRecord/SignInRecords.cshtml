@@ -3,11 +3,10 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayputForPCManage.cshtml";
     ViewBag.Title = "签到数据统计";
 }
-<div class="activity-container">
+<div class="signinrecord-container">
     <ol class="breadcrumb">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Library</a></li>
-        <li class="active">Data</li>
+        <li><a href="#">数据统计</a></li>
+        <li ><a href="#" class="active">签到统计</a></li>
     </ol>
 
     <!--表格面板-->
@@ -16,7 +15,7 @@
             <h3 class="panel-title">签到数据列表</h3>
         </div>
         <div class="panel-body">
-            <table id="activity-table"></table>
+            <table id="signinrecord-table"></table>
         </div>
     </div>
 </div>
@@ -25,17 +24,25 @@
 
     <link href="~/Content/lib/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" />
     <script src="~/Content/lib/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="~/Content/lib/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
     <script>
-        var activity = {
-            activityTable: $('#activity-table'),
+        var signinrecord = {
+            signinrecordTable: $('#signinrecord-table'),
             getParam: function (option) {
                 return option;
+            },
+            responseFormat: function (res) {
+                var data = {
+                    total: res.Data.Total,//总页数
+                    rows: res.Data.Rows   //数据
+                };
+                return data;
             },
             //初始化
             buildTable: function () {
                 var _self = this;
-                _self.activityTable.bootstrapTable({
-                    url: '/auditmanage/SearchIdentityAudit',//请求后台的URL（*）
+                _self.signinrecordTable.bootstrapTable({
+                    url: '/Admin/SignInRecord/SearchSignInRecords',//请求后台的URL（*）
                     method: 'post',                      //请求方式（*）
                     striped: true,                      //是否显示行间隔色
                     cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
@@ -53,18 +60,35 @@
                     showRefresh: true,                  //是否显示刷新按钮
                     minimumCountColumns: 2,             //最少允许的列数
                     clickToSelect: false,                //是否启用点击选中行
-                    uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
+                    uniqueId: "Id",                     //每一行的唯一标识，一般为主键列
+                    responseHandler: _self.responseFormat,
                     showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
                     cardView: false,                    //是否显示详细视图
-                    detailView: false,                   //是否显示父子表
                     pageList: [],  //可供选择的每页的行数（*）
                     columns: [
                         {
                             field: 'Id',
-                            title: '活动Id',
+                            title: 'Id',
                             align: 'center',
                         },
-
+                         {
+                            field: 'NickName',
+                            title: '昵称',
+                            align: 'center',
+                        },
+                         {
+                            field: 'HeadImage',
+                            title: '头像',
+                             align: 'center',
+                            valign:'middle',
+                             formatter: function (value, row, index) {
+                                 return "<a><img src="+value+" style='width:40px;height:40px;'></a>";
+                             }
+                        }, {
+                            field: 'CreateTime',
+                            title: '签到时间',
+                            align: 'center',
+                        },
                     ]
                 });
             },
@@ -73,6 +97,6 @@
                 _self.buildTable();
             }
         };
-        activity.init();
+        signinrecord.init();
     </script>
 }
