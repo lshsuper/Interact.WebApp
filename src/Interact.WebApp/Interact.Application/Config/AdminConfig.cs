@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using Interact.Application.Dto;
+
+using Interact.Core.Dto;
 using Interact.Core.Entity;
 using System;
 using System.Collections.Generic;

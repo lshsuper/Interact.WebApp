@@ -15,7 +15,7 @@ namespace Interact.WebApp
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-           
+            FilterConfig.RegisterFilter(GlobalFilters.Filters);
             //×¢²áiocÈÝÆ÷
             AutofacConfig.RegisterIoc();
             AutoMapperConfig.RegisterProfile();

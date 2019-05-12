@@ -4,7 +4,22 @@
     Layout = "~/Areas/Home/Views/Shared/_LayoutScreenForPC.cshtml";
     ViewBag.Title = "签到";
 }
-
+<style>
+    .signin-count{
+            display: inline-block;
+    position: absolute;
+    top: 25px;
+    right: 120px;
+    font-size: 20px;
+    text-align: center;
+    color: #fff;
+    }
+    .signin-count>div{
+        display: block;
+    height: 30px;
+    }
+</style>
+<div class="signin-count"><span id="signin-count">0</span><span>人</span></div>
 <div class="sigin-screen-body">
     <ul class="list-unstyled user-info-group clearfix"></ul>
 </div>
@@ -13,20 +28,26 @@
         <img src="/Areas/Home/Content/img/bg/bg-flash-light.png" />
     </div>
     <div class="user-card">
-        <img src="/Areas/Home/Content/img/yuantiao.jpg" />
+        <img src="/Areas/Home/Content/img/yuantiao.jpg"  class="user-card-img"/>
         <p class="user-card-sort">111</p>
         <p class="user-card-nick">lsh</p>
     </div>
 </div>
+<button id="get-signin-count-btn" style="display:none"></button>
 <script id="user-info-tmpl" type="text/html">
     <li class="animated heartBeat">
-        <img src="/Areas/Home/Content/img/yuantiao.jpg" />
+        <img src="{{headimage}}" />
         <p class="user-sort">{{sort}}</p>
         <p class="user-nick">{{nickname}}</p>
     </li>
 </script>
 @section scripts{
     <link href="~/Areas/Home/Content/css/signin-screen.css" rel="stylesheet" />
+    <script src="~/Content/lib/signalr/jquery.signalR-2.2.2.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script>
+        var data =@Html.Raw(ViewBag.data);
+    </script>
     <script src="~/Areas/Home/Content/js/signin-screen.js"></script>
 }
 

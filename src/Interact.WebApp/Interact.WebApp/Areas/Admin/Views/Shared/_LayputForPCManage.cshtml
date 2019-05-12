@@ -1,20 +1,17 @@
-﻿@using Interact.WebApp.App_Start
-@using Interact.Application.Utils
-@using Autofac
-@using Interact.Application.Dto
+﻿@using Interact.Application.Utils;
+@using Interact.Core.Dto;
 @using Interact.Application.Enum;
 @{
-    //获取管理员信息
-    AppUtil _appUtil = AutofacConfig._container.Resolve<AppUtil>();
-    AdminDto admin = _appUtil.GetCurrentUser<AdminDto>(TokenTypeEnum.Admin_Login);
-}
 
+    var currentUser = AppUtil.GetCurrentUser<AdminDto>(TokenTypeEnum.Admin_Login);
+}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no" />
     <title>@ViewBag.Title</title>
+
     <link href="~/Content/lib/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Areas/Admin/Content/css/style.css" rel="stylesheet" />
     <link href="~/Areas/Admin/Content/css/dermadefault.css" rel="stylesheet" />
@@ -42,14 +39,14 @@
             </ul>
 
             <ul class="nav navbar-nav pull-right">
-                
+
                 <li class="dropdown li-border">
-                    <a href="#" class="dropdown-toggle mystyle-color" data-toggle="dropdown">@admin.Name<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle mystyle-color" data-toggle="dropdown">@currentUser.Name<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="/admin/home/tologout">退出</a></li>
                     </ul>
                 </li>
-   
+
             </ul>
         </div>
     </nav>

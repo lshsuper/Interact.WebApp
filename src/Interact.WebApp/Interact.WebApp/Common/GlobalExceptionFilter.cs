@@ -5,17 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
-namespace Interact.WebApp.Filters
+namespace Interact.WebApp.Common
 {
     /// <summary>
     /// 全局异常捕捉器
     /// </summary>
-    public class CustomExceptionFilter : HandleErrorAttribute
+    public class GlobalExceptionFilter : HandleErrorAttribute
     {
         public override void OnException(ExceptionContext filterContext)
         {
             base.OnException(filterContext);
-
             filterContext.ExceptionHandled = true;
             //接口异常处理
             if (filterContext.HttpContext.Request.IsAjaxRequest())
@@ -28,7 +27,7 @@ namespace Interact.WebApp.Filters
                     ContentType= "application/json"
                 };
             //页面异常处理
-            filterContext.Result = new ViewResult() { ViewName = "~/Views/Notice/error.cshtml" };
+            filterContext.Result = new RedirectResult("/Notice/Error");
         }
     }
 }

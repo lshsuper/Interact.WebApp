@@ -13,15 +13,16 @@ using Dapper;
 using Interact.Core.Enum;
 using Interact.Core.Option;
 using Interact.Infrastructure.Helper.Model;
+using Interact.Core.Dto;
 
 namespace Interact.Respository
 {
-    public class SigInRecordRespository : Respository<SignInRecord>, ISigInRecordRespository
+    public class SigInRecordRespository : Respository<SignInRecord>,ISigInRecordRespository
     {
         public bool CheckSignIn(string openId, int activityId)
         {
-            string sql = "select count(1) from SignInRecord where OpendId=@opendId and ActivityId=@activityId";
-            return DapperHelper.Instance.ExcuteScaler<int>(DbConfig.DbConnStr,sql)>0;
+            string sql = "select count(1) from SignInRecord where OpenId=@openId and ActivityId=@activityId";
+            return DapperHelper.Instance.ExcuteScaler<int>(DbConfig.DbConnStr,sql,new {activityId,openId })>0;
         }
 
         public List<string> GetSignInHeadImages(int activityId,int top)
@@ -49,12 +50,12 @@ namespace Interact.Respository
                                          Id,
                                          OpenId,
                                          NickName,
-                                         ActivityId,
+                                         ActivityId,HeadImage,
                                          CreateTime) values(
                                          @Id,
                                          @OpenId,
                                          @NickName,
-                                         @ActivityId,
+                                         @ActivityId,@HeadImage,
                                          @CreateTime)";
                     result = conn.Execute(sql,record,tran)>0;
                     if (!result)
@@ -101,14 +102,14 @@ namespace Interact.Respository
                                      select *,
                                             row_number() over({option.BuildOrderByStr()}) num 
                                      from SignInRecord {sqlFilter}
-                                ) as tb {option.BuildRangeStr("num")}";
+                                ) as tbc where {option.BuildRangeStr("num")}";
 
             string countSql = $"select count(*) from Activity {sqlFilter}";
             var data = DapperHelper.Instance.Page<SignInRecord>(DbConfig.DbConnStr, $"{dataSql};{countSql}");
             return new PageInfo<List<SignInRecord>>()
             {
-                DataCount = data.Total,
-                DataSource = data.Data.ToList(),
+                Total = data.Total,
+                Rows = data.Data.ToList(),
                 PageIndex = option.PageIndex,
                 PageSize = option.PageSize
             };
@@ -116,8 +117,20 @@ namespace Interact.Respository
 
         public SignInRecord GetSignInRecordsByActivityIdAndOpenId(int activityId, string openId)
         {
-            string sql = $@"select * from SignInRecord where ActivityId=@activityId and OpendId=@openId";
+            string sql = $@"select * from SignInRecord where ActivityId=@activityId and OpenId=@openId";
             return DapperHelper.Instance.QueryFirst<SignInRecord>(DbConfig.DbConnStr,sql,new { activityId, openId });
+        }
+
+        public List<SignInRecordDto> GetSignInRecordsByActivityId(int activityId)
+        {
+            string sql = "select *,row_number() over(order by CreateTime) as Sort from SignInRecord where ActivityId=@activityId";
+            return DapperHelper.Instance.Query<SignInRecordDto>(DbConfig.DbConnStr,sql,new { activityId });
+        }
+
+        public int TotalCount(int activityId)
+        {
+            string sql = $"select count(1) from SignInRecord where ActivityId=@activityId";
+            return DapperHelper.Instance.ExcuteScaler<int>(DbConfig.DbConnStr,sql,new { activityId});
         }
     }
 }

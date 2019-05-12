@@ -15,5 +15,7 @@ namespace Interact.Core.IRespository
         /// <param name="activityId"></param>
         /// <returns></returns>
         List<ActivityAward> GetActivityAwardsByActivityId(int activityId);
+
+       
     }
 }

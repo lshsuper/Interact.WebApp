@@ -9,9 +9,12 @@
     <script src="~/Content/lib/jquery/jquery-3.3.1.min.js"></script>
     <link href="~/Content/lib/mui-master/css/mui.min.css" rel="stylesheet" />
     <script src="~/Content/lib/mui-master/js/mui.min.js"></script>
+    <link href="~/Content/lib/mui-master/css/mui-loading.css" rel="stylesheet" />
+    <script src="~/Content/lib/mui-master/js/mui-loading.js"></script>
 </head>
 <body>
     @RenderBody()
+    @RenderSection("scripts", false)
 </body>
 
 </html>

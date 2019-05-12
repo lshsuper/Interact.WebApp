@@ -67,11 +67,11 @@ namespace Interact.Infrastructure.Dapper
         /// <param name="connStr"></param>
         /// <param name="sql"></param>
         /// <returns></returns>
-        public T ExcuteScaler<T>(string connStr,string sql)
+        public T ExcuteScaler<T>(string connStr,string sql,object param=null)
         {
             using (var conn = GetConnection(connStr))
             {
-                return conn.ExecuteScalar<T>(connStr,sql);
+                return conn.ExecuteScalar<T>(sql,param);
             }
         }
         /// <summary>
@@ -88,8 +88,9 @@ namespace Interact.Infrastructure.Dapper
             {
                 using (var muilt=conn.QueryMultiple(sql))
                 {
-                    result.Total = muilt.Read<int>().FirstOrDefault();
+                  
                     result.Data = muilt.Read<T>();
+                    result.Total = muilt.Read<int>().FirstOrDefault();
                     return result;
                 }
             }

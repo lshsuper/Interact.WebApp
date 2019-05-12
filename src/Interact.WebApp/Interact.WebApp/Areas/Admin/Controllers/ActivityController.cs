@@ -36,6 +36,14 @@ namespace Interact.WebApp.Areas.Admin.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// 添加or编辑活动
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult OpeartorActivities()
+        {
+            return View();
+        }
         #endregion
 
         #region Operator
@@ -46,11 +54,13 @@ namespace Interact.WebApp.Areas.Admin.Controllers
         public ActionResult SearchActivities(ActivityPageOption option)
         {
             var data = _activityRespository.QueryActivityByPage(option);
-            return Json(new DataResult() {
-                   Data=data,
-                   Status=true,
-                   Notify="获取成功"
+            return Json(new DataResult()
+            {
+                Data = data,
+                Status = true,
+                Notify = "获取成功"
             });
+           // return Json(new { total=data.DataCount,rows=data.DataSource});
         }
         /// <summary>
         /// 添加活动

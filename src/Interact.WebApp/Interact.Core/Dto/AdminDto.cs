@@ -3,7 +3,7 @@ using Interact.Infrastructure.Helper.Model;
 using System;
 using System.Web;
 
-namespace Interact.Application.Dto
+namespace Interact.Core.Dto
 {
     public class AdminDto: JwtPaylod
     {

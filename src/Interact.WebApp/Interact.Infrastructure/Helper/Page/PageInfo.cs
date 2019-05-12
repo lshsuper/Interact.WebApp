@@ -21,12 +21,12 @@ namespace Interact.Infrastructure.Helper.Model
         {
             get
             {
-                if (DataCount <= 0)
+                if (Total <= 0)
                 {
                     return 0;
                 }
                
-                int pageCount = Convert.ToInt32(Math.Ceiling((double)DataCount / pageSize));
+                int pageCount = Convert.ToInt32(Math.Ceiling((double)Total / pageSize));
                 return pageCount;
             }
         }
@@ -55,7 +55,7 @@ namespace Interact.Infrastructure.Helper.Model
 
         #endregion
        
-        public T DataSource { get; set; }
-        public int DataCount { get; set; } = 0;
+        public T Rows { get; set; }
+        public int Total { get; set; } = 0;
     }
 }

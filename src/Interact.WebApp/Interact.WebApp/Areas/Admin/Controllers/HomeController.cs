@@ -1,8 +1,10 @@
-﻿using Interact.Application.Dto;
+﻿
 using Interact.Application.Service;
 using Interact.Application.Utils;
+using Interact.Core.Dto;
 using Interact.Core.IRespository;
 using Interact.WebApp.Areas.Admin.Common;
+using Interact.WebApp.Common;
 using Interact.WebApp.Controllers;
 using Interact.WebApp.Models;
 using System;
@@ -17,7 +19,7 @@ namespace Interact.WebApp.Areas.Admin.Controllers
     public class HomeController : BaseController
     {
         private readonly AdminService _adminService;
-        public HomeController(AdminService adminService,AppUtil apputil):base(apputil)
+        public HomeController(AdminService adminService)
         {
             _adminService = adminService;
         }
@@ -28,7 +30,7 @@ namespace Interact.WebApp.Areas.Admin.Controllers
         [AllowAnonymous]
         public ActionResult Login()
         {
-            var currentUser = _appUtil.GetCurrentUser<AdminDto>(Application.Enum.TokenTypeEnum.Admin_Login);
+            var currentUser = AppUtil.GetCurrentUser<AdminDto>(Application.Enum.TokenTypeEnum.Admin_Login);
             if (currentUser != null)
                 return RedirectToAction("Index","Home");
             return View();
@@ -40,7 +42,7 @@ namespace Interact.WebApp.Areas.Admin.Controllers
             AdminDto result = _adminService.Login(login,pwd,out notify);
             if (result!=null)
             {
-                _appUtil.ToSigin(Application.Enum.TokenTypeEnum.Admin_Login,result);
+                AppUtil.ToSigin(Application.Enum.TokenTypeEnum.Admin_Login,result);
             }
             return Json(new DataResult() {
                 Status= result!=null,
@@ -50,7 +52,7 @@ namespace Interact.WebApp.Areas.Admin.Controllers
         [AllowAnonymous]
         public ActionResult ToLogOut()
         {
-            _appUtil.ToSignOut(Application.Enum.TokenTypeEnum.Admin_Login);
+            AppUtil.ToSignOut(Application.Enum.TokenTypeEnum.Admin_Login);
             return RedirectToAction("Login", "Home");
         }
     }

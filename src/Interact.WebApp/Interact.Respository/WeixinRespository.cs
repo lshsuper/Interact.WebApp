@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Interact.Infrastructure.Helper;
 
 namespace Interact.Respository
 {
@@ -26,7 +27,8 @@ namespace Interact.Respository
             return new WeixinAuthAccessTokenResult()
             {
                 access_token = Tool.GetJosnValue(result, "access_token"),
-                openid = Tool.GetJosnValue(result, "openid")
+                openid = Tool.GetJosnValue(result, "openid"),
+                refresh_token= Tool.GetJosnValue(result, "refresh_token"),
             };
         }
 
@@ -43,18 +45,23 @@ namespace Interact.Respository
             bool succ = HttpClientHelper.Get(url, out result, out notify);
             if (!succ)
                 return null;
-            return new WeixinOAuth2UserInfoResult()
-            {
-                openid = Tool.GetJosnValue(result, "openid"),
-                unionid = Tool.GetJosnValue(result, "unionid"),
-                nickname = Tool.GetJosnValue(result, "nickname"),
-                sex = Tool.GetJosnValue(result, "sex"),
-                province = Tool.GetJosnValue(result, "province"),
-                city = Tool.GetJosnValue(result, "city"),
-                country = Tool.GetJosnValue(result, "country"),
-                headimgurl = Tool.GetJosnValue(result, "headimgurl"),
+            string errorCode = Tool.GetJosnValue(result,"errcode");
+            if (!string.IsNullOrEmpty(errorCode))
+                return null;
+            return JsonHelper.Get<WeixinOAuth2UserInfoResult>(result);
+        }
 
-            };
+        public WeixinAuthAccessTokenResult RefrashAuthAccessTokenResult(string refrash_token)
+        {
+            var url = WexinApiUrlBuilder.Refresh_TokenUrl(WeChatConfig.AppKey,refrash_token);
+            string notify, result;
+            bool succ = HttpClientHelper.Get(url, out result, out notify);
+            if (!succ)
+                return null;
+            string errorCode = Tool.GetJosnValue(result, "errcode");
+            if (!string.IsNullOrEmpty(errorCode))
+                return null;
+            return JsonHelper.Get<WeixinAuthAccessTokenResult>(result);
         }
     }
 }

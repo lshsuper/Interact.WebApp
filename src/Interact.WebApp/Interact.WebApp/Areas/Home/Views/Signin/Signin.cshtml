@@ -1,90 +1,143 @@
-﻿@{ 
-    Layout = "~/Views/Shared/_LayoutForMobile.cshtml";
+﻿@{
+    Layout = "~/Areas/Home/Views/Shared/_LayoutForMobile.cshtml";
     ViewBag.Title = "微信签到";
 
 }
-    <style>
-        .sigin-header {
-            height: 180px;
-            background-image: url('/Content/webappp/img/yuantiao.jpg');
-            background-size: cover;
-        }
-        .sigin-footer {
-            padding: 30px;
+<style>
+    .sigin-header {
+        height: 180px;
+        background-image: url('/Content/webappp/img/yuantiao.jpg');
+        background-size: cover;
+    }
+
+    .sigin-footer {
+        padding: 30px;
+    }
+
+    .sigin-body {
+        background-color: #ffffff;
+    }
+
+    .sigin-btn {
+        margin: 0 auto 30px auto;
+        width: 90px;
+        height: 90px;
+        border-radius: 45px;
+        text-align: center;
+        line-height: 90px;
+    }
+
+    .user-headimg {
+        background-size: cover;
+        height: 80px;
+        width: 80px;
+        border-radius: 80px;
+        margin: 18px;
+    }
+
+    .user-info {
+        margin-top: 24px;
+    }
+
+        .user-info > div {
+            margin-bottom: 5px;
         }
 
-        .sigin-body {
-            background-color: #ffffff;
-        }
-
-        .sigin-btn {
-            margin: 0 auto 30px auto;
-            width: 90px;
-            height: 90px;
-            border-radius: 45px;
-            text-align: center;
-            line-height: 90px;
-        }
-
-        .user-headimg {
-            background-image: url(/Content/webappp/img/yuantiao.jpg);
-            background-size: cover;
-            height: 80px;
-            width: 80px;
-            border-radius: 80px;
-            margin: 18px;
-        }
-
-        .user-info {
-            margin-top: 24px;
-        }
-
-            .user-info > div {
-                margin-bottom: 5px;
+            .user-info > div > span {
+                display: inline-block;
             }
 
-                .user-info > div > span {
-                    display: inline-block;
+                .user-info > div > span:first-child {
+                    margin-right: 5px;
                 }
+</style>
+<div class="mui-card">
+    <!--页眉，放置标题-->
+    <div class="mui-card-header mui-card-media sigin-header">
 
-                    .user-info > div > span:first-child {
-                        margin-right: 5px;
-                    }
-    </style>
-<body>
-    <div class="mui-card">
-        <!--页眉，放置标题-->
-        <div class="mui-card-header mui-card-media sigin-header">
-
-        </div>
-        <!--内容区-->
-        <div class="mui-content mui-card-content sigin-body">
-            <div class="mui-row">
-                <div class="mui-col-sm-4 mui-col-xs-4">
-                    <div class="user-headimg"></div>
-                </div>
-                <div class="mui-col-sm-8 mui-col-xs-8 user-info">
-                    <div class="user-nickname"><span>昵称:</span><span>lsh</span></div>
-                    <div class="user-age"><span>年龄:</span><span>25</span></div>
-                    <div class="user-area"><span>地址:</span><span>北京-通州</span></div>
-                   
-                </div>
-            </div>
-            <div class="mui-row">
-                <div class="mui-col-sm-12 mui-col-xs-12">
-                    <div class="sigin-btn mui-btn-primary">
-                        点我签到
-                    </div>
-                </div>
-            </div>
-        </div>
-        
     </div>
+    <!--内容区-->
+    <div class="mui-content mui-card-content sigin-body">
+        <div class="mui-row">
+            <div class="mui-col-sm-4 mui-col-xs-4">
+                <div class="user-headimg"></div>
+            </div>
+            <div class="mui-col-sm-8 mui-col-xs-8 user-info">
+                <div class="user-nickname"><span>昵称:</span><span id="nickname">lsh</span></div>
+                <div class="user-age"><span>年龄:</span><span id="age">25</span></div>
+                <div class="user-area"><span>地址:</span><span id="area">北京-通州</span></div>
+
+            </div>
+        </div>
+        <div class="mui-row">
+            <div class="mui-col-sm-12 mui-col-xs-12">
+                <div class="sigin-btn mui-btn-primary" id="signin-btn">
+                    点我签到
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section scripts{
+    <script>
+       var data=@Html.Raw(ViewBag.data);
+    </script>
     <script>
         (function () {
+            var signin = {
+                nickname: $('#nickname'),
+                age: $('#age'),
+                area: $('#area'),
+                signinBtn: $('#signin-btn'),
+                headimg: $('.user-headimg'),
+                initUserInfo: function () {
+                    var _self = this;
+                    _self.nickname.text(data.weixinAuthUserInfoResult.nickname);
+                    _self.age.text(data.weixinAuthUserInfoResult.sex == "1" ? "男" : "女");
+                    _self.area.text(data.weixinAuthUserInfoResult.province + " " + data.weixinAuthUserInfoResult.city);
+                   
+                    _self.headimg.css('background-image', "url(" + data.weixinAuthUserInfoResult.headimgurl + ")");
 
+                },
+                test: function () {
+                    alert(JSON.stringify(data));
+                },
+                event: function () {
+                    var _self = this;
+                    _self.signinBtn.click(function () {
+                        mui.showLoading("正在加载..", "div");
+                    var option = {
+                        ActivityId: data.activityId,
+                        OpenId: data.weixinAuthUserInfoResult.openid,
+                        NickName: data.weixinAuthUserInfoResult.nickname,
+                        HeadImage: data.weixinAuthUserInfoResult.headimgurl,
 
+                    };
+                        $.post('/Home/Signin/ToSignIn', { record: option }, function (data) {
+                            if (data.Status) {
+                                window.location.href = "";
+                            } else {
+                                mui.hideLoading();//隐藏后的回调函数  
+                                mui.alert(data.Notify,"签到提示","确定",null,'div');
+                            }
+                        });
+                    });
+                },
+                init: function () {
+                    var _self = this;
+                    _self.initUserInfo();
+                    if (data.record != null) {
+                        _self.signinBtn.remove();
+                    }
+                    _self.event();
+                    
+                }
+
+            };
+            signin.init();
         })()
     </script>
-</body>
-</html>
+
+}
+

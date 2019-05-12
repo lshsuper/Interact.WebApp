@@ -69,7 +69,18 @@ namespace Interact.Infrastructure.Wexin
         {
             //https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN
             return $"https://api.weixin.qq.com/sns/userinfo?access_token={access_token}&openid={openid}&lang=zh_CN";
-        } 
+        }
+        /// <summary>
+        /// 刷新token
+        /// </summary>
+        /// <param name="appid"></param>
+        /// <param name="refresh_token"></param>
+        /// <returns></returns>
+        public static string Refresh_TokenUrl(string appid,string refresh_token)
+        {
+            //https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=APPID&grant_type=refresh_token&refresh_token=REFRESH_TOKEN
+            return $"https://api.weixin.qq.com/sns/oauth2/refresh_token?appid={appid}&grant_type=refresh_token&refresh_token={refresh_token}";
+        }
         #endregion
     }
 }

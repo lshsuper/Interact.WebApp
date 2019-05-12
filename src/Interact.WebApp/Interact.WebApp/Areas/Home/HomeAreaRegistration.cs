@@ -17,7 +17,8 @@ namespace Interact.WebApp.Areas.Home
             context.MapRoute(
                 "Home_default",
                 "Home/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new { action = "Index", id = UrlParameter.Optional },
+                 namespaces: new string[] { "Interact.WebApp.Areas.Home.Controllers" }
             );
         }
     }

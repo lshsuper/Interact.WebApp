@@ -1,4 +1,4 @@
-﻿using Interact.Application.Dto;
+﻿
 using Interact.Core.IRespository;
 using System;
 using System.Collections.Generic;
@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Interact.Core.Entity;
+using Interact.Core.Dto;
 
 namespace Interact.Application.Service
 {

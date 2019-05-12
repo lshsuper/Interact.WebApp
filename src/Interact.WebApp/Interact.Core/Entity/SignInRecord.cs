@@ -35,6 +35,7 @@ namespace Interact.Core.Entity
         /// 签到时间
         /// </summary>
         public DateTime CreateTime { get; set; }
+     
 
     }
 }

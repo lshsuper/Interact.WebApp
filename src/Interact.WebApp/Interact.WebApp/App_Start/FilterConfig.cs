@@ -1,4 +1,4 @@
-﻿using Interact.WebApp.Filters;
+﻿using Interact.WebApp.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ namespace Interact.WebApp.App_Start
     public class FilterConfig
     {
         public static void RegisterFilter(GlobalFilterCollection filters) { 
-            filters.Add(new CustomExceptionFilter());
+           // filters.Add(new GlobalExceptionFilter());
         }
     }
 }

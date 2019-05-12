@@ -18,7 +18,11 @@ namespace Interact.Application.Enum
         /// <summary>
         /// 大屏幕授权
         /// </summary>
-        Screen_Auth =1
+        Screen_Auth =1,
+        /// <summary>
+        /// 签到授权
+        /// </summary>
+        SignIn_Auth=2
         
     }
 }

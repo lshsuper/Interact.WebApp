@@ -1,5 +1,6 @@
 ﻿using Interact.Core.Entity;
 using Interact.Infrastructure.Helper;
+using Interact.WebApp.App_Start;
 using Interact.WebApp.Hubs;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
@@ -9,6 +10,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Timers;
 using System.Web;
+using Autofac;
+using Interact.Core.IRespository;
 
 namespace Interact.WebApp.Models
 {
@@ -56,12 +59,15 @@ namespace Interact.WebApp.Models
             Clients.All.sendSignInRecordToClient(str);
         }
         /// <summary>
-        ///向客户端发送签到人数
+        /// 向客户端发送签到人数
         /// </summary>
-        /// <param name="count"></param>
-        public void SendSignInCount(int count)
+        /// <param name="activityId"></param>
+        public void SendSignInCount(int activityId)
         {
-            Clients.All.sendSignInRecordToClient(count);
+            var _sigInRecordRespository = AutofacConfig._container.Resolve<ISigInRecordRespository>();
+            Clients.All.SendSignInCount(_sigInRecordRespository.TotalCount(activityId));
+          
         }
+
     }
 }

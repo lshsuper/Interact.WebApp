@@ -32,5 +32,12 @@ namespace Interact.Core.IRespository
         /// <param name="option"></param>
         /// <returns></returns>
         PageInfo<List<Activity>> QueryActivityByPage(ActivityPageOption option);
+        /// <summary>
+        /// 根据活动id+授权码获取活动信息
+        /// </summary>
+        /// <param name="authCode"></param>
+        /// <param name="activityId"></param>
+        /// <returns></returns>
+        Activity GetActivityByAuthCodeAndActivityId(string authCode,int activityId);
     }
 }

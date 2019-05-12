@@ -5,15 +5,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Interact.WebApp.Controllers
+namespace Interact.WebApp.Common
 {
     public class BaseController : Controller
     {
-        protected readonly AppUtil _appUtil;
-        public BaseController(AppUtil appUtil)
-        {
-            _appUtil = appUtil;
-        }
       
     }
 }

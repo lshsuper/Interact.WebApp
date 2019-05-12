@@ -18,14 +18,7 @@ namespace Interact.WebApp.Controllers
         {
             return View();
         }
-        /// <summary>
-        /// 签到成功
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult SigninSucc()
-        {
-            return View();
-        }
+     
         #endregion
     }
 }

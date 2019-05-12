@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using Interact.Core.IRespository;
+using Interact.WebApp.App_Start;
 using Microsoft.AspNet.SignalR;
+using Autofac;
+using Interact.WebApp.Models;
 
 namespace Interact.WebApp.Hubs
 {
@@ -28,6 +32,14 @@ namespace Interact.WebApp.Hubs
         public override Task OnConnected()
         {
             return base.OnConnected();  
+        }
+        /// <summary>
+        /// 向客户端发送签到人数
+        /// </summary>
+        /// <param name="activityId"></param>
+        public void SendSignInCount(int activityId)
+        {
+            ScreenTicker.Instance.SendSignInCount(activityId);
         }
     }
 }

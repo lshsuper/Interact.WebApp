@@ -1,4 +1,5 @@
-﻿using Interact.Core.Entity;
+﻿using Interact.Core.Dto;
+using Interact.Core.Entity;
 using Interact.Core.Enum;
 using Interact.Core.Option;
 using Interact.Infrastructure.Dapper.Respository;
@@ -60,5 +61,17 @@ namespace Interact.Core.IRespository
         /// <param name="openId"></param>
         /// <returns></returns>
         SignInRecord GetSignInRecordsByActivityIdAndOpenId(int activityId,string openId);
+        /// <summary>
+        /// 根据活动id获取签到数据
+        /// </summary>
+        /// <param name="activityId"></param>
+        /// <returns></returns>
+        List<SignInRecordDto> GetSignInRecordsByActivityId(int activityId);
+        /// <summary>
+        /// 签到总数据
+        /// </summary>
+        /// <param name="activityId"></param>
+        /// <returns></returns>
+        int TotalCount(int activityId);
     }
 }

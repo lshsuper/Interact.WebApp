@@ -17,7 +17,7 @@ namespace Interact.WebApp.App_Start
             //2.注入controller+过滤器
             var webapp = Assembly.Load("Interact.WebApp");
             builder.RegisterControllers(webapp);
-            builder.RegisterFilterProvider();
+            //builder.RegisterFilterProvider();
             //3.注入respository
             var respository = Assembly.Load("Interact.Respository");
             builder.RegisterTypes(respository.GetTypes().Where(o=>o.Name.EndsWith("Respository")).ToArray()).AsImplementedInterfaces().InstancePerDependency();
@@ -25,7 +25,7 @@ namespace Interact.WebApp.App_Start
             var service = Assembly.Load("Interact.Application");
             builder.RegisterTypes(service.GetTypes().Where(o=>o.Name.EndsWith("Service")).ToArray()).AsSelf().InstancePerDependency();
             //5.注入其它
-            builder.RegisterType(typeof(AppUtil)).AsSelf().InstancePerDependency();
+            //builder.RegisterType(typeof(AppUtil)).AsSelf().InstancePerDependency();
             //6.修改mvc默认解析器
              _container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(_container));

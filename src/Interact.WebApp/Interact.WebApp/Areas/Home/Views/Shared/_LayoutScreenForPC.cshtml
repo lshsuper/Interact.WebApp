@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@using Interact.Application.Utils;
+@using Interact.Core.Dto;
+@using Interact.Application.Enum;
+@{
+
+    var currentAuth = AppUtil.GetCurrentUser<ScreenAuthDto>(TokenTypeEnum.Screen_Auth);
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -9,190 +16,190 @@
     <link href="~/Content/lib/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/lib/animate/animate.min.css" rel="stylesheet" />
     <style>
-    .container {
-        position: fixed;
-        background-image: url('/Areas/Home/Content/img/bg/bg-luckydraw.jpg');
-        background-size: 100% 100%;
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        width: 100%;
-        background-repeat: no-repeat;
-        background-size: cover;
-        overflow: hidden;
-        font-family: Microsoft YaHei, Helvitica, Verdana, Tohoma, Arial, san-serif;
-    }
-
-    .screen-footer {
-        position: absolute;
-        bottom: 0px;
-        width: 100%;
-        padding: 0px 230px 10px 230px;
-        z-index: 2000;
-    }
-
-    .screen-func {
-        float: right;
-        position: relative;
-    }
-
-        .screen-func > div[class^=screen-func] {
-            float: left;
-            text-align: center;
-            width: 80px;
+        .container {
+            position: fixed;
+            background-image: url('/Areas/Home/Content/img/bg/bg-luckydraw.jpg');
+            background-size: 100% 100%;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            overflow: hidden;
+            font-family: Microsoft YaHei, Helvitica, Verdana, Tohoma, Arial, san-serif;
         }
 
-        .screen-func > [class^=screen-func]:hover {
-            background-color: rgba(0, 0, 0, 0.75);
+        .screen-footer {
+            position: absolute;
+            bottom: 0px;
+            width: 100%;
+            padding: 0px 230px 10px 230px;
+            z-index: 2000;
+        }
+
+        .screen-func {
+            float: right;
+            position: relative;
+        }
+
+            .screen-func > div[class^=screen-func] {
+                float: left;
+                text-align: center;
+                width: 80px;
+            }
+
+            .screen-func > [class^=screen-func]:hover {
+                background-color: rgba(0, 0, 0, 0.75);
+                box-shadow: 0 3px 10px rgba(0,0,0,.3);
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            .screen-func > div > img {
+                display: block;
+                margin: 0 auto;
+            }
+
+            .screen-func > div > span {
+                display: block;
+                color: #ffffff;
+            }
+
+        .apply-list {
+            display: none;
+            position: absolute;
+            width: 300px;
+            bottom: 80px;
+            left: 55px;
+            background: #fff;
+            border-radius: 10px;
             box-shadow: 0 3px 10px rgba(0,0,0,.3);
-            border-radius: 5px;
-            cursor: pointer;
+            border: 2px solid rgb(255, 255, 255);
+            background-color: rgba(0, 0, 0, 0.75);
+            z-index: 1000;
         }
 
-        .screen-func > div > img {
-            display: block;
-            margin: 0 auto;
-        }
+            .apply-list:after {
+                content: "";
+                /* visibility: hidden; */
+                position: absolute;
+                bottom: -14px;
+                left: 160px;
+                margin-left: -6px;
+                display: inline-block;
+                width: 0;
+                height: 0;
+                font-size: 0;
+                border: 6px dashed transparent;
+                border-top: 6px solid #fff;
+            }
 
-        .screen-func > div > span {
-            display: block;
-            color: #ffffff;
-        }
+            .apply-list > i {
+                cursor: pointer;
+                position: absolute;
+                display: block;
+                border-radius: 50%;
+                width: 26px;
+                height: 26px;
+                top: -8px;
+                right: -8px;
+                background-color: #FFF;
+                /* text-indent: 3px; */
+                padding: 4px 5px;
+            }
 
-    .apply-list {
-        display: none;
-        position: absolute;
-        width: 300px;
-        bottom: 80px;
-        left: 55px;
-        background: #fff;
-        border-radius: 10px;
-        box-shadow: 0 3px 10px rgba(0,0,0,.3);
-        border: 2px solid rgb(255, 255, 255);
-        background-color: rgba(0, 0, 0, 0.75);
-        z-index: 1000;
-    }
+            .apply-list > ul > li {
+                float: left;
+                padding: 5px;
+                color: #ffffff;
+                text-align: center;
+            }
 
-        .apply-list:after {
-            content: "";
-            /* visibility: hidden; */
-            position: absolute;
-            bottom: -14px;
-            left: 160px;
-            margin-left: -6px;
-            display: inline-block;
-            width: 0;
-            height: 0;
-            font-size: 0;
-            border: 6px dashed transparent;
-            border-top: 6px solid #fff;
-        }
+                .apply-list > ul > li > a > img {
+                    display: block;
+                }
 
-        .apply-list > i {
-            cursor: pointer;
-            position: absolute;
-            display: block;
-            border-radius: 50%;
-            width: 26px;
-            height: 26px;
-            top: -8px;
-            right: -8px;
-            background-color: #FFF;
-            /* text-indent: 3px; */
-            padding: 4px 5px;
-        }
+                .apply-list > ul > li > span {
+                    display: block;
+                }
 
-        .apply-list > ul > li {
+        .skin-group > div {
+            position: relative;
+            width: 25%;
             float: left;
             padding: 5px;
-            color: #ffffff;
-            text-align: center;
         }
 
-            .apply-list > ul > li > a > img {
-                display: block;
+            .skin-group > div:hover {
+                cursor: pointer;
             }
 
-            .apply-list > ul > li > span {
-                display: block;
-            }
-
-    .skin-group > div {
-        position: relative;
-        width: 25%;
-        float: left;
-        padding: 5px;
-    }
-
-        .skin-group > div:hover {
-            cursor: pointer;
-        }
-
-        .skin-group > div > img {
-            display: block;
-            width: 100%;
-        }
-
-    .select-it {
-        display: none;
-        background-image: url('/Areas/Home/Content/img/icon/icon-select.png');
-        position: absolute;
-        width: 32px;
-        height: 32px;
-        top: -7px;
-        right: -3px;
-    }
-
-    .qrcode-modal {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 99999;
-        background-color: rgba(0, 0, 0, 0.9);
-        display: none;
-    }
-
-        .qrcode-modal > div:nth-child(1) {
-            cursor: pointer;
-            width: 50px;
-            height: 50px;
-            position: absolute;
-            right: 0;
-            top: 0;
-            /* border: 1px solid red; */
-            background: url(/Areas//Home/Content/img/icon/icon-close.png) 0 no-repeat;
-            background-color: #ffffff;
-            background-size: cover;
-        }
-
-        .qrcode-modal > div:nth-child(2) {
-            color: #fff;
-            line-height: 100px;
-            text-align: center;
-            font-size: 40px;
-        }
-
-        .qrcode-modal > div:nth-child(3) {
-            width: 430px;
-            height: 430px;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            margin-top: -215px;
-            margin-left: -215px;
-            border-radius: 15px;
-            box-shadow: 0 10px 10px #000;
-            background-color: #ffffff;
-            padding: 20px;
-        }
-            .qrcode-modal > div:nth-child(3) > img {
+            .skin-group > div > img {
                 display: block;
                 width: 100%;
-                height: 100%;
             }
 
+        .select-it {
+            display: none;
+            background-image: url('/Areas/Home/Content/img/icon/icon-select.png');
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            top: -7px;
+            right: -3px;
+        }
+
+        .qrcode-modal {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99999;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: none;
+        }
+
+            .qrcode-modal > div:nth-child(1) {
+                cursor: pointer;
+                width: 50px;
+                height: 50px;
+                position: absolute;
+                right: 0;
+                top: 0;
+                /* border: 1px solid red; */
+                background: url(/Areas//Home/Content/img/icon/icon-close.png) 0 no-repeat;
+                background-color: #ffffff;
+                background-size: cover;
+            }
+
+            .qrcode-modal > div:nth-child(2) {
+                color: #fff;
+                line-height: 100px;
+                text-align: center;
+                font-size: 40px;
+            }
+
+            .qrcode-modal > div:nth-child(3) {
+                width: 430px;
+                height: 430px;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                margin-top: -215px;
+                margin-left: -215px;
+                border-radius: 15px;
+                box-shadow: 0 10px 10px #000;
+                background-color: #ffffff;
+                padding: 20px;
+            }
+
+                .qrcode-modal > div:nth-child(3) > img {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                }
     </style>
 </head>
 <body>
@@ -204,7 +211,7 @@
                     <img src="~/Areas/Home/Content/img/icon/icon-ewm.png" />
                     <span>二维码</span>
                 </div>
-                <div class="screen-func-skin" data-toggle="modal" data-target="#skin-modal" id="skin-btn">
+                <div class="screen-func-skin" data-toggle="modal" data-target="#skin-modal" id="skin-btn" style="display:none">
                     <img src="/Areas/Home/Content/img/icon/icon-skin.png" />
                     <span>皮肤</span>
                 </div>
@@ -216,13 +223,13 @@
                     <i id="close-apply-btn"><span class="glyphicon glyphicon-remove"></span></i>
                     <ul class="list-unstyled clearfix">
                         <li>
-                            <a href="#">
+                            <a href="/home/screen/signinscreen?activityId=@currentAuth.ActivityId">
                                 <img src="/Areas/Home/Content/img/bg/bg-lucky-draw.png" />
                             </a>
-                            <span>抽奖</span>
+                            <span>签到</span>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/home/screen/luckydrawscreen?activityId=@currentAuth.ActivityId">
                                 <img src="/Areas/Home/Content/img/bg/bg-lucky-draw.png" />
                             </a>
                             <span>抽奖</span>
@@ -295,21 +302,22 @@
         <div id="close-qrcode-modal"></div>
         <div>扫描二维码参与活动</div>
         <div>
-            <img src="/Home/Signin/QrCodeForSigin?activityId=3" alt="" />
+            <img src="/Home/Signin/QrCodeForSigin?activityId=@currentAuth.ActivityId" alt="" />
         </div>
-        
+
     </div>
     <script>
+        window.Activity=@currentAuth.ActivityId;
         (function () {
             //box
             var pcLayout = {
                 skinModal: $('#skin-modal'),
                 qrcodeModal: $('.qrcode-modal'),
-                closeQrCodeModalBtn:$('#close-qrcode-modal'),
+                closeQrCodeModalBtn: $('#close-qrcode-modal'),
                 skinBtn: $('#skin-btn'),
                 applyBtn: $('#apply-btn'),
                 closeApplyBtn: $('#close-apply-btn'),
-                evmBtn:$('#evm-btn'),
+                evmBtn: $('#evm-btn'),
                 applyModal: $('#apply-modal'),
                 definiteSelectSkin: $('#definite-select-skin'),
                 skinGroup: $('.skin-group'),
@@ -345,7 +353,7 @@
                         }
                     });
                     _self.closeQrCodeModalBtn.click(function () {
-                           _self.qrcodeModal.hide("slow");
+                        _self.qrcodeModal.hide("slow");
                     });
                 },
                 init: function () {

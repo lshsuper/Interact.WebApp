@@ -7,17 +7,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Autofac;
-using Interact.Application.Dto;
+using Interact.Core.Dto;
 
 namespace Interact.WebApp.Areas.Admin.Common
 {
     public class AdminAuthorizeFilter : AuthorizeAttribute
     {
-        private AppUtil _appUtil;
-        public AdminAuthorizeFilter()
-        {
-            _appUtil = AutofacConfig._container.Resolve<AppUtil>();
-        }
+       
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
 
@@ -27,7 +23,7 @@ namespace Interact.WebApp.Areas.Admin.Common
                 base.OnAuthorization(filterContext);
                 return;
             }
-            var currentUser = _appUtil.GetCurrentUser<AdminDto>(Application.Enum.TokenTypeEnum.Admin_Login);
+            var currentUser = AppUtil.GetCurrentUser<AdminDto>(Application.Enum.TokenTypeEnum.Admin_Login);
             if (currentUser == null)
             {
                 //跳转

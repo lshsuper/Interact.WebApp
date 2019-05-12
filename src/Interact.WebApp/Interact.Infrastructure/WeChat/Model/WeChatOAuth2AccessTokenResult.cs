@@ -10,6 +10,7 @@ namespace Interact.Infrastructure.Weixin.Model
     {
         public string access_token { get; set; }
         public string openid { get; set; }
+        public string refresh_token { get; set; }
     //     "access_token":"ACCESS_TOKEN",
     //"expires_in":7200,
     //"refresh_token":"REFRESH_TOKEN",

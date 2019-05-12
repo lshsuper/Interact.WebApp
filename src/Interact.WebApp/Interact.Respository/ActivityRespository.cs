@@ -124,17 +124,23 @@ namespace Interact.Respository
                                      select *,
                                             row_number() over({option.BuildOrderByStr()}) num 
                                      from Activity {sqlFilter}
-                                ) as tb {option.BuildRangeStr("num")}";
+                                ) as tb where {option.BuildRangeStr("num")}";
 
             string countSql = $"select count(*) from Activity {sqlFilter}";
             var data = DapperHelper.Instance.Page<Activity>(DbConfig.DbConnStr, $"{dataSql};{countSql}");
             return new PageInfo<List<Activity>>()
             {
-                DataCount = data.Total,
-                DataSource = data.Data.ToList(),
+                Total = data.Total,
+                Rows = data.Data.ToList(),
                 PageIndex = option.PageIndex,
                 PageSize = option.PageSize
             };
+        }
+
+        public Activity GetActivityByAuthCodeAndActivityId(string authCode, int activityId)
+        {
+            string sql = $"select * from Activity where Id=@activityId and AuthCode=@authCode";
+            return DapperHelper.Instance.QueryFirst<Activity>(DbConfig.DbConnStr,sql,new {authCode,activityId });
         }
     }
 }

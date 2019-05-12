@@ -6,12 +6,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Interact.WebApp.Filters;
 using Interact.Infrastructure.Util;
 using Interact.Application.Service;
 using Interact.Core.Entity;
 using Interact.WebApp.Models;
 using Interact.Infrastructure.Config;
+using Interact.Infrastructure.Helper;
+using Interact.Application.Utils;
+using Interact.Core.Dto;
+using Interact.Application.Enum;
+using Interact.Infrastructure.Weixin.Model;
 
 namespace Interact.WebApp.Areas.Home.Controllers
 {
@@ -34,7 +38,7 @@ namespace Interact.WebApp.Areas.Home.Controllers
         }
         #endregion
 
-        #region Weixin-View
+        #region View
 
         /// <summary>
         /// 签到视图
@@ -42,51 +46,64 @@ namespace Interact.WebApp.Areas.Home.Controllers
         /// <param name="activityId"></param>
         /// <param name="code"></param>
         /// <returns></returns>
-        public ActionResult Signin(int activityId, string code)
+        public ActionResult Signin(int activityId, string code,string refrashToken)
         {
-            //1.从本站地址跳转过来
+            //1.从二维码扫码跳转过来
             if (string.IsNullOrEmpty(code))
             {
                 string redirectUrl = $"{WebConfig.Web_Host}/Home/SignIn/Signin?activityId={activityId}";
                 var authCodeUrl = _weixinRespository.GetAuthCodeUrl(HttpUtility.UrlEncode(redirectUrl));
                 return Content("<script>location.href='" + authCodeUrl + "'</script>");
             }
-            //2.首次访问
-            //2.1.根据code获取access_token+openid
-            var weixinAuthAccessTokenResult = _weixinRespository.GetAuthAccessTokenResult(code);
-            //2.1.1根据openid+activityId查询参与活动的情况
-            var weixinAuthUserInfoResult = _weixinRespository.GetUserInfoByOpennIdAndAccessToken(weixinAuthAccessTokenResult.access_token, weixinAuthAccessTokenResult.openid);
-            //2.1.2根据openid获取当前用户签到信息
-            var record = _signInService.SignInRecord(activityId, weixinAuthUserInfoResult);
-            //2.2.对签到页面做数据展示规划
-            ViewBag.DataResult = new
+            //2.从微信重定向到该页面
+            WeixinAuthAccessTokenResult weixinAuthAccessTokenResult;
+            var currentSignInAuth = AppUtil.GetCurrentUser<SignInAuthDto>(TokenTypeEnum.SignIn_Auth);
+            if (currentSignInAuth!= null)
             {
-                SignInRecord = record
-            };
+                weixinAuthAccessTokenResult = _weixinRespository.RefrashAuthAccessTokenResult(currentSignInAuth.RefrashToken);
+            }
+            else
+            {
+                weixinAuthAccessTokenResult = _weixinRespository.GetAuthAccessTokenResult(code);
+
+            }
+            var weixinAuthUserInfoResult = _weixinRespository.GetUserInfoByOpennIdAndAccessToken(weixinAuthAccessTokenResult.access_token, weixinAuthAccessTokenResult.openid);
+
+            if (weixinAuthUserInfoResult == null)
+            {
+                return Content("页面失效");
+            }
+
+            var record = _signInService.SignInRecord(activityId, weixinAuthUserInfoResult);
+           
+            
+            if (currentSignInAuth == null)
+            {
+                AppUtil.ToSigin(TokenTypeEnum.SignIn_Auth,new  SignInAuthDto(){
+                    RefrashToken = weixinAuthAccessTokenResult.refresh_token
+                });
+            }
+           
+            ViewBag.data =JsonHelper.Set(new
+            {
+                record,
+                weixinAuthUserInfoResult,
+                activityId
+            });
             return View();
         }
 
         #endregion
 
-        #region Weixin-Operator
-
-        /// <summary>
-        /// token测试
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult Token()
-        {
-
-            string echoStr = Request.QueryString["echoStr"].ToString();
-            return Content(echoStr);
-        }
+        #region Operator
+        
 
         /// <summary>
         ///  进行签到
         /// </summary>
         /// <param name="record"></param>
         /// <returns></returns>
-        public ActionResult ToSigin(SignInRecord record)
+        public ActionResult ToSignin(SignInRecord record)
         {
             //签到
             string notify;

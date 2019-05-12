@@ -183,6 +183,63 @@
     <Content Include="Content\lib\bootstrap-3.3.7-dist\js\bootstrap.js" />
     <Content Include="Content\lib\bootstrap-3.3.7-dist\js\bootstrap.min.js" />
     <Content Include="Content\lib\bootstrap-3.3.7-dist\js\npm.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\css\fileinput-rtl.css" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\css\fileinput-rtl.min.css" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\css\fileinput.css" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\css\fileinput.min.css" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\examples\index.html" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\img\loading-sm.gif" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\img\loading.gif" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\fileinput.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\fileinput.min.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\ar.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\az.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\bg.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\ca.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\cr.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\cs.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\da.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\de.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\el.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\es.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\et.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\fa.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\fi.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\fr.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\gl.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\he.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\hu.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\id.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\it.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\ja.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\ka.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\kr.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\kz.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\LANG.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\lt.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\nl.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\no.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\pl.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\pt-BR.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\pt.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\ro.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\ru.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\sk.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\sl.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\sv.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\th.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\tr.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\uk.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\uz.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\vi.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\zh-TW.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\locales\zh.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\plugins\piexif.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\plugins\piexif.min.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\plugins\purify.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\plugins\purify.min.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\plugins\sortable.js" />
+    <Content Include="Content\lib\bootstrap-fileinput-master\js\plugins\sortable.min.js" />
     <Content Include="Content\lib\bootstrap-table\bootstrap-table.css" />
     <Content Include="Content\lib\bootstrap-table\bootstrap-table.js" />
     <Content Include="Content\lib\bootstrap-table\bootstrap-table.min.css" />
@@ -202,8 +259,10 @@
     <Content Include="Content\lib\layer-v3.1.1\layer-v3.1.1\layer\theme\default\loading-2.gif" />
     <Content Include="Content\lib\layer-v3.1.1\layer-v3.1.1\test.html" />
     <Content Include="Content\lib\layer-v3.1.1\layer-v3.1.1\更新日志.txt" />
+    <Content Include="Content\lib\mui-master\css\mui-loading.css" />
     <Content Include="Content\lib\mui-master\css\mui.css" />
     <Content Include="Content\lib\mui-master\css\mui.min.css" />
+    <Content Include="Content\lib\mui-master\js\mui-loading.js" />
     <Content Include="Content\lib\mui-master\js\mui.js" />
     <Content Include="Content\lib\mui-master\js\mui.min.js" />
     <Content Include="Areas\Home\Content\img\bg\bg-flash-light.png" />
@@ -232,16 +291,18 @@
     <Compile Include="Areas\Admin\Controllers\ActivityController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\SignInRecordController.cs" />
+    <Compile Include="Areas\Home\Common\HomeAuthorizeFilter.cs" />
     <Compile Include="Areas\Home\Controllers\HomeController.cs" />
     <Compile Include="Areas\Home\HomeAreaRegistration.cs" />
     <Compile Include="Areas\Home\Controllers\ActivityController.cs" />
     <Compile Include="Areas\Home\Controllers\ScreenController.cs" />
     <Compile Include="Areas\Home\Controllers\SigninController.cs" />
-    <Compile Include="Areas\Home\Controllers\NoticeController.cs" />
-    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Common\BaseController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NoticeController.cs" />
     <Compile Include="Controllers\TestSignalRController.cs" />
     <Compile Include="Controllers\WechatController.cs" />
-    <Compile Include="Filters\CustomExceptionFilter.cs" />
+    <Compile Include="Common\GlobalExceptionFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -274,6 +335,7 @@
     <Content Include="Areas\Admin\Content\ui-layout-0.0.0\bower.json" />
     <Content Include="Areas\Home\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\SignInRecord\SignInRecords.cshtml" />
+    <Content Include="Areas\Admin\Views\Activity\OpeartorActivities.cshtml" />
     <None Include="bundleconfig.json" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -293,6 +355,8 @@
     <Content Include="Areas\Home\Views\Shared\_LayoutScreenForPC.cshtml" />
     <Content Include="Areas\Home\Views\Screen\SignInScreen.cshtml" />
     <Content Include="Views\TestSignalR\Index.cshtml" />
+    <Content Include="Views\Notice\Error.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -305,8 +369,8 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Home\Models\" />
     <Folder Include="Content\app\" />
+    <Folder Include="Filters\" />
     <Folder Include="Views\Shared\" />
-    <Folder Include="Views\Weixin\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Interact.Core\Interact.Core.csproj">
