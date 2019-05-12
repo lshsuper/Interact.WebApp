@@ -4,6 +4,10 @@
 
 }
 <style>
+    .signin-card {
+        position: relative;
+    }
+
     .sigin-header {
         height: 180px;
         background-image: url('/Content/webappp/img/yuantiao.jpg');
@@ -50,14 +54,28 @@
                 .user-info > div > span:first-child {
                     margin-right: 5px;
                 }
+
+    .signin-succ-tag {
+        position: absolute;
+        width: 128px;
+        height: 128px;
+        background-image: url('/Areas/Home/Content/img/icon/icon-signin-succ.png');
+        background-size: cover;
+        top: -30px;
+        right: -30px;
+        z-index: 1000;
+        display: none;
+    }
 </style>
-<div class="mui-card">
+<div class="mui-card signin-card">
+    <div class="signin-succ-tag animated bounceInUp"></div>
     <!--页眉，放置标题-->
     <div class="mui-card-header mui-card-media sigin-header">
 
     </div>
     <!--内容区-->
     <div class="mui-content mui-card-content sigin-body">
+
         <div class="mui-row">
             <div class="mui-col-sm-4 mui-col-xs-4">
                 <div class="user-headimg"></div>
@@ -80,6 +98,7 @@
 
 </div>
 @section scripts{
+    <link href="~/Content/lib/animate/animate.css" rel="stylesheet" />
     <script>
        var data=@Html.Raw(ViewBag.data);
     </script>
@@ -91,12 +110,13 @@
                 area: $('#area'),
                 signinBtn: $('#signin-btn'),
                 headimg: $('.user-headimg'),
+                signinSuccTag: $('.signin-succ-tag'),
                 initUserInfo: function () {
                     var _self = this;
                     _self.nickname.text(data.weixinAuthUserInfoResult.nickname);
                     _self.age.text(data.weixinAuthUserInfoResult.sex == "1" ? "男" : "女");
                     _self.area.text(data.weixinAuthUserInfoResult.province + " " + data.weixinAuthUserInfoResult.city);
-                   
+
                     _self.headimg.css('background-image', "url(" + data.weixinAuthUserInfoResult.headimgurl + ")");
 
                 },
@@ -107,19 +127,21 @@
                     var _self = this;
                     _self.signinBtn.click(function () {
                         mui.showLoading("正在加载..", "div");
-                    var option = {
-                        ActivityId: data.activityId,
-                        OpenId: data.weixinAuthUserInfoResult.openid,
-                        NickName: data.weixinAuthUserInfoResult.nickname,
-                        HeadImage: data.weixinAuthUserInfoResult.headimgurl,
+                        var option = {
+                            ActivityId: data.activityId,
+                            OpenId: data.weixinAuthUserInfoResult.openid,
+                            NickName: data.weixinAuthUserInfoResult.nickname,
+                            HeadImage: data.weixinAuthUserInfoResult.headimgurl,
 
-                    };
+                        };
                         $.post('/Home/Signin/ToSignIn', { record: option }, function (data) {
+                              mui.hideLoading();//隐藏后的回调函数
                             if (data.Status) {
-                                window.location.href = "";
+                                _self.signinSuccTag.show();
+                                 _self.signinBtn.remove();
                             } else {
-                                mui.hideLoading();//隐藏后的回调函数  
-                                mui.alert(data.Notify,"签到提示","确定",null,'div');
+                              
+                                mui.alert(data.Notify, "签到提示", "确定", null, 'div');
                             }
                         });
                     });
@@ -129,9 +151,10 @@
                     _self.initUserInfo();
                     if (data.record != null) {
                         _self.signinBtn.remove();
+                        _self.signinSuccTag.show();
                     }
                     _self.event();
-                    
+
                 }
 
             };

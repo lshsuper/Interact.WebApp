@@ -42,7 +42,7 @@
                     var userInfo = data.record.shift();
                     _self.buildUserInfoBlock({ headimage: userInfo.HeadImage, nickname: userInfo.NickName, sort: userInfo.Sort });
                 }
-            }, 3000);
+            }, 2000);
         },
         initSignalr: function () {
             var _self = this;
@@ -91,7 +91,7 @@
             setInterval(function () {
                 _self.buildUserInfoBlock();
                 _self.showSignCard();
-            }, 3000);
+            }, 2000);
         },
         init: function () {
             var _self = this;
