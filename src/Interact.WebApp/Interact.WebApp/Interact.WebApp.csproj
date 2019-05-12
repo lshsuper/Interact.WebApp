@@ -299,6 +299,7 @@
     <Compile Include="Areas\Home\Controllers\ScreenController.cs" />
     <Compile Include="Areas\Home\Controllers\SigninController.cs" />
     <Compile Include="Common\BaseController.cs" />
+    <Compile Include="Common\CustomJsonResult.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NoticeController.cs" />
     <Compile Include="Controllers\TestSignalRController.cs" />

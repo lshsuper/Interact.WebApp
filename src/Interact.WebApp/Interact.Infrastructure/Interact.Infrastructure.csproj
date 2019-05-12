@@ -65,7 +65,7 @@
   <ItemGroup>
     <Compile Include="Config\DbConfig.cs" />
     <Compile Include="Config\WebConfig.cs" />
-    <Compile Include="Config\WechatConfig.cs" />
+    <Compile Include="Config\WeChatConfig.cs" />
     <Compile Include="Dapper\DapperContext.cs" />
     <Compile Include="Dapper\Model\PageModel.cs" />
     <Compile Include="Dapper\Respository\IRespository.cs" />
