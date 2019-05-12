@@ -291,7 +291,8 @@
     <Compile Include="Areas\Admin\Controllers\ActivityController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\SignInRecordController.cs" />
-    <Compile Include="Areas\Home\Common\HomeAuthorizeFilter.cs" />
+    <Compile Include="Areas\Home\Common\SignInAuthorizeFilter.cs" />
+    <Compile Include="Areas\Home\Common\ScreenAuthorizeFilter.cs" />
     <Compile Include="Areas\Home\Controllers\HomeController.cs" />
     <Compile Include="Areas\Home\HomeAreaRegistration.cs" />
     <Compile Include="Areas\Home\Controllers\ActivityController.cs" />
