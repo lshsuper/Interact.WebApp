@@ -5,6 +5,7 @@ using Interact.Infrastructure.Config;
 using Interact.Infrastructure.Config.Model;
 using Interact.Infrastructure.Util;
 using Interact.WebApp.Areas.Admin.Common;
+using Interact.WebApp.Common;
 using Interact.WebApp.Models;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace Interact.WebApp.Areas.Admin.Controllers
     /// <summary>
     /// 活动管理
     /// </summary>
-    public class ActivityController : Controller
+    public class ActivityController : BaseController
     {
         private readonly IActivityRespository _activityRespository;
         public ActivityController(IActivityRespository activityRespository)

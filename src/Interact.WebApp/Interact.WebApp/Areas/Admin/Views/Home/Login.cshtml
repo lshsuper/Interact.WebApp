@@ -63,6 +63,7 @@
                             shade: [0.5, '#fff'] //0.1透明度的白色背景
                         });
                         $.post('/admin/home/tologin', { login, pwd }, function (data) {
+                           
                             if (data.Status) {
                                 window.location.href = "/Admin/Activity/Activities";
                             } else {

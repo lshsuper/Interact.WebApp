@@ -19,6 +19,7 @@ namespace Interact.WebApp.Common
             HttpResponseBase response = context.HttpContext.Response;
             if (this.Data != null)
             {
+                response.ContentType = "application/json";
                 response.Write(JsonHelper.Set(Data));
             }
         }

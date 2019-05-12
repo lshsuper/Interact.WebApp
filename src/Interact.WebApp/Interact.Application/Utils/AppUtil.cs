@@ -28,6 +28,9 @@ namespace Interact.Application.Utils
         /// 签到授权token
         /// </summary>
         private const string homeSignInTokenName = "interact.home.signin.auth";
+        /// <summary>
+        /// 过期时间
+        /// </summary>
         private readonly  static TimeSpan tokenTimeSpan = TimeSpan.FromDays(1);
         /// <summary>
         /// 登录

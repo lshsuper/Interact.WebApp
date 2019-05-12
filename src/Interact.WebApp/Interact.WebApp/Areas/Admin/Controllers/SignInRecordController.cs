@@ -1,5 +1,6 @@
 ﻿using Interact.Core.IRespository;
 using Interact.Core.Option;
+using Interact.WebApp.Common;
 using Interact.WebApp.Models;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Web.Mvc;
 
 namespace Interact.WebApp.Areas.Admin.Controllers
 {
-    public class SignInRecordController : Controller
+    public class SignInRecordController : BaseController
     {
 
         private readonly ISigInRecordRespository _sigInRecordRespository;

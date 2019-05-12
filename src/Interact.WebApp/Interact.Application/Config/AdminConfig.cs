@@ -12,7 +12,7 @@ namespace Interact.Application.Config
 {
    public class AdminConfig:Profile
     {
-          public AdminConfig()
+         public AdminConfig()
         {
             CreateMap<Admin, AdminDto>();
         }
