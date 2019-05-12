@@ -12,6 +12,11 @@ namespace Interact.WebApp.Common
     /// </summary>
     public class GlobalExceptionFilter : HandleErrorAttribute
     {
+        public string ErrorPage { get; set; }
+        public GlobalExceptionFilter(string errorPage)
+        {
+            ErrorPage = errorPage;
+        }
         public override void OnException(ExceptionContext filterContext)
         {
             base.OnException(filterContext);
@@ -27,7 +32,7 @@ namespace Interact.WebApp.Common
                     ContentType= "application/json"
                 };
             //页面异常处理
-            filterContext.Result = new RedirectResult("/Notice/Error");
+            filterContext.Result = new RedirectResult(ErrorPage);
         }
     }
 }

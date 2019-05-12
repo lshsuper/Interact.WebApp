@@ -10,7 +10,7 @@ namespace Interact.WebApp.App_Start
     public class FilterConfig
     {
         public static void RegisterFilter(GlobalFilterCollection filters) { 
-           // filters.Add(new GlobalExceptionFilter());
+            filters.Add(new GlobalExceptionFilter("/Notice/Error"));
         }
     }
 }
