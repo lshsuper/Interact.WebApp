@@ -1,4 +1,5 @@
-﻿using Interact.WebApp.Common;
+﻿using Interact.Infrastructure.Helper;
+using Interact.WebApp.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,6 +9,9 @@ using System.Web.Mvc;
 
 namespace Interact.WebApp.Controllers
 {
+    /// <summary>
+    ///上传文件控制器
+    /// </summary>
     public class FileController:BaseController
     {
         /// <summary>
