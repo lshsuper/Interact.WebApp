@@ -56,11 +56,18 @@ namespace Interact.Application.Service
         /// <returns></returns>
         public bool LotteryDraw(int activityId,
                                 int number,
-                                WinnerLevelEnum winnerLevel,
+                                int activityAwardId,
                                 out string notify, out List<SignInRecord> signInRecords)
         {
             //1.随机获取
             var lst = _sigInRecordRespository.GetSignInRecordsWithoutAwards(number, activityId);
+            if (lst.Count <= 0)
+            {
+                notify = "待抽奖人数不够";
+                signInRecords = null;
+                return false;
+            }
+               
             List<WinnerMenu> winnerMenus = new List<WinnerMenu>();
             lst.ForEach(ele =>
             {
@@ -69,7 +76,7 @@ namespace Interact.Application.Service
                     ActivityId = ele.ActivityId,
                     SiginInRecoredId = ele.Id,
                     CreateTime = DateTime.Now,
-                    WinnerLevel = winnerLevel,
+                    ActivityAwardId = activityAwardId,
                     Id = Guid.NewGuid().ToString("N")
                 });
             });

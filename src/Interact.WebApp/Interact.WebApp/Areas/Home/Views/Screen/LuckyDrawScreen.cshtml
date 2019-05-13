@@ -4,12 +4,10 @@
     ViewBag.Title = "抽奖";
 }
 <style>
-
-
     .screen-body {
         position: absolute;
         top: 17%;
-        height: 72%;
+        height:72%;
         width: 96%;
         left: 50%;
         margin-left: -45%;
@@ -233,13 +231,14 @@
         color: #E74145;
         box-shadow: 0 2px 0px 3px rgba(0,0,0,0.15), 0 -3px 0px 0px #D0D0D0 inset;
     }
+     
 </style>
 
 <div class="row screen-body">
     <div class="col-md-7 screen-body-left">
         <div class="luckydraw-title clearfix">
             <span class="pull-left">抽奖</span>
-            <span class="pull-right">1000000人</span>
+            <span class="pull-right"><span id="total-count"></span>人</span>
         </div>
         <div class="luckydraw-body">
             <div class="user" id="user-headimg">
@@ -259,9 +258,6 @@
                         <label class="label">请选择奖项:</label>
                         <select class="form-control" id="award-select">
                             <option value="-1">--请选择奖项--</option>
-                            <option value="1">一等奖</option>
-                            <option value="2">二等奖</option>
-                            <option value="3">三等奖</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -291,11 +287,11 @@
         </div>
     </div>
 </div>
-
+<div class="mask-layer"></div>
 <script id="winner-info-tmpl" type="text/html">
     <div class="menu-opt">
         <div class="user-no">{{sort}}</div>
-        <div class="user-pic">{{headimg}}</div>
+        <div class="user-pic" style="background-image:url({{headimg}})"></div>
         <div class="user-nick">{{nickname}}</div>
     </div>
 </script>
@@ -320,12 +316,16 @@
                 userNickName: $('#user-nickname'),
                 reloadBtn: $('#reload-btn'),
                 afrashChoice: $('.afresh-choice-btn'),
-                _timer: null,   //图片滚动定时器
+                totalCount: $('#total-count'),
+                isloop: false,
+                _timer: null,
+                maskLayer:$('.mask-layer'),
                 number: 0,
+                defaultUserHeadImage: "/Areas//Home/Content/img/bg/bg-nouser.jpg",
                 buildWinnerInfo: function (userinfo) {
                     var _self = this;
                     var html = template(_self.winnerInfoTmpl, userinfo);
-                    _self.userInfoGroup.append(html);
+                    _self.winnerMenu.append(html);
                 },
                 //洗牌
                 shuffle: function (array) {
@@ -345,12 +345,13 @@
                 //图片循环滚动
                 scrollImage: function () {
                     var _self = this;
-                    _self._timer = setInterval(function () {
-                        var currentArr = _self.shuffle(data.record);
-                        var currentRecord = currentArr[0];
-                        _self.userHeadimg.css('background-image', "url(" + currentRecord.HeadImage + ")");
-                        _self.userNickName.text(currentRecord.NickName);
-                    }, 1000);
+                    var currentArr = _self.shuffle(data.record);
+                    var currentRecord = currentArr[0];
+                    _self.userHeadimg.css('background-image', "url(" + currentRecord.HeadImage + ")");
+                    _self.userNickName.text(currentRecord.NickName);
+                    _self._timer = setTimeout(function () {
+                        _self.scrollImage();
+                    }, 50);
                 },
                 //抽奖代理
                 luckdrawAgrent: function (callback) {
@@ -358,145 +359,127 @@
                         type: "post",
                         url: "/home/screen/LotteryDraw",
                         async: false,
-                        data: { activityId: callback.activityId, number: callback.number, winnerLevel: callback.level },
-                        dataType: "json",
+                        data: { activityId: callback.activityId, number: callback.number, activityAwardId: callback.level },
+
                         success: function (data) {
                             if (data.Status) {
                                 callback.succ(data);
                             } else {
                                 callback.fail(data);
                             }
+                        },
+                        error: function (error) {
+                            callback.error(error);
                         }
                     });
                 },
-                //多人抽奖策略A
-                luckdrawStrategyA: function (level, activityId, number) {
+                //从待抽奖列表中移除中奖的人信息
+                removeOneSignInRecord: function (recordId) {
+                    var index = -1;
+                    for (var i = 0; i < data.record.length; i++) {
+                        var currentRecord = data.record[i];
+                        if (currentRecord.Id == recordId) {
+                            index = i;
+                            break;
+                        }
+                    }
+                    if (index != -1)
+                        data.record.splice(index, 1);
+                },
+                lotteryDrawStrategy:function () {
                     var _self = this;
-                    while (_self.number > 0) {
-                        _self.scrollImage();
+                     var level = _self.awardSelect.val();//奖品等级
+                        _self.endLuckdrawBtn.hide();
+                        _self.startLuckdrawBtn.show();
+                        _self.maskLayer.show();
                         _self.luckdrawAgrent(
                             {
-                                activityId: activityId,
-                                number: number,
+                                activityId: data.activityId,
+                                number: 1,
                                 level: level,
-                                succ: function (data) {
-
-                                    clearInterval(_self._timer);
+                                succ: function (xdata) {
+                                    clearTimeout(_self._timer);
+                                    var currentRecord = xdata.Data[0];
                                     var index = _self.winnerMenu.children('.menu-opt').length;
-                                    _self.number--;
-
-                                    if (_self.number > 0) {
-                                        _self.endLuckdrawBtn.text("停止抽奖(" + number + ")");
-                                    }
-                                    //展示左侧中奖人信息
-                                    _self.userNickName.text(data.Data.NickName);
-                                    _self.userHeadimg.css('background-image', "url(" + data.Data.HeadImage + ")");
-                                    //展示右侧中奖人信息
-                                    var userInfo = { sort: index + 1, nickname: data.Data.NickName, headimg: data.Data.HeadImage };
-                                    _self.buildWinnerInfo(userInfo);
-                                },
-                                fail: function (data) {
-
-                                },
-                                level
-                            });
-                        _self.startLuckdrawBtn.show();
-                        _self.endLuckdrawBtn.hide();
-                    }
-                },
-                //多人抽奖策略B
-                luckdrawStrategyB: function (level, activityId, number) {
-                    //点击开始立马交互后台抽奖
-                    var _self = this;
-                    var _timeOut = null;
-                    _self.luckdrawAgrent(
-                        {
-                            activityId: activityId,
-                            number: number,
-                            level: level,
-                            succ: function (data) {
-                                //滚动头像
-                                _self.scrollImage();
-                                _timeOut = setInterval(function () {
-                                    //清除图片滚动的定时器
-                                    clearInterval(_self._timer);
-                                    var currentRecord = data.Data.shift();
-                                    if (currentRecord == null) {
-                                        clearInterval(_timeOut);
-                                        return;
-                                    }
-                                    //获取右边中奖人序号
-                                    var index = _self.winnerMenu.children('.menu-opt').length;
+                                    data.totalCount--;
+                                    _self.removeOneSignInRecord(currentRecord.Id);
+                                    var total = parseInt(_self.totalCount.text());
+                                    _self.totalCount.text(total - 1);
                                     //展示左侧中奖人信息
                                     _self.userNickName.text(currentRecord.NickName);
                                     _self.userHeadimg.css('background-image', "url(" + currentRecord.HeadImage + ")");
                                     //展示右侧中奖人信息
                                     var userInfo = { sort: index + 1, nickname: currentRecord.NickName, headimg: currentRecord.HeadImage };
                                     _self.buildWinnerInfo(userInfo);
+                                    _self.number--;
+                                    if (_self.number <= 0) {
+                                        _self.isloop = false;
+                                        _self.startLuckdrawBtn.text("开始抽奖");
+                                        _self.maskLayer.hide();
+                                    } else {
+                                        _self.startLuckdrawBtn.text("开始抽奖(" + _self.number + ")");
+                                        var _timeOut01 = setTimeout(function () {
+                                            _self.scrollImage();
+                                            var _timeOut02 = setTimeout(function () {
+                                                _self.startLuckdrawBtn.hide();
+                                                _self.endLuckdrawBtn.show();
+                                                _self.lotteryDrawStrategy();
+                                                clearTimeout(_timeOut02);
+                                                clearTimeout(_timeOut01);
+                                            }, 2000);
+                                        }, 3000);
+                                    }
 
-                                }, 5000);
+                                },
+                                fail: function (xdata){
 
-                            },
-                            fail: function (data) {
-                                //交互失败的业务逻辑
-                            }
-                        });
-
-
+                                }
+                            });
                 },
                 event: function () {
                     var _self = this;
                     //开始抽奖
                     _self.startLuckdrawBtn.click(function () {
-                        var level = parseInt(_self.winnerLevel.val());
+                         if (_self.isloop) {
+                            layer.msg("正在进行中,不能停止", {icon:5});
+                            return;
+                        }
+                        if (data.totalCount <= 0) {
+                            layer.msg("待抽奖人数不足", { icon: 5 });
+                            return;
+                        }
+                        var level = parseInt(_self.awardSelect.val());
                         if (level <= 0) {
-                            layer.alert("请选择奖品等级", {icon:3});
+                            layer.msg("请选择奖品等级", { icon: 5 });
                             return;
                         }
                         var number = parseInt(_self.numSelect.val());  //抽取人数
                         if (number <= 0) {
-                            layer.alert("请选择抽取人数", { icon: 3 });
+                            layer.msg("请选择抽取人数", { icon: 5 });
                             return;
                         }
                         _self.number = number;  //赋值
-                        if (_self.number > 1) {
-                            //[多人]抽奖执行
-                            var level = awardSelect.val();//奖品等级
-                            _self.luckdrawStrategyA(level, data.activityId, 1);
-                        } else {
-                            //[单人]抽奖执行
-                            _self.scrollImage();
-                        }
+                        $(this).hide();
+                        _self.endLuckdrawBtn.show();
+                        _self.scrollImage();
                     });
                     //停止抽奖
                     _self.endLuckdrawBtn.click(function () {
-                        var _self = this;
-                        if (_self.number > 0) {
+                        if (_self.isloop) {
+                            layer.msg("正在进行中,不能停止", {icon:5});
                             return;
                         }
-                        var level = awardSelect.val();//奖品等级
-                        _self.startLuckdrawBtn();
-                        _self.endLuckdrawBtn.hide();
-                        _self.number = 0;
-                        _self.luckdrawAgrent({
-                            activityId: activityId,
-                            number: 1,
-                            level: level,
-                            succ: function (data) {
-
-                            },
-                            fail: function (data) {
-
-                            }
-                        });
-
+                        _self.isloop = true;
+                        _self.lotteryDrawStrategy();
                     });
                     //重新加载
                     _self.reloadBtn.click(function () {
-                        var _self = this;
-                        if (_self.number <= 0) {
-                            window.location.reload();
+                        if (_self.isloop) {
+                            layer.msg("正在进行中,不能停止", {icon:5});
+                            return;
                         }
+                            window.location.reload();
+                        
                     });
                     //重新抽奖
                     _self.afrashChoice.click(function () {
@@ -508,10 +491,50 @@
                             }
                         });
                     });
+                    _self.awardSelect.change(function () {
+                        _self.winnerMenu.empty();
+                        var awardId = _self.awardSelect.val();
+                        if (awardId == -1) {
+
+                            _self.userHeadimg.css('background-image', "url(" + _self.defaultUserHeadImage + ")");
+                            _self.userNickName.text("");
+                            return;
+                        }
+
+                        var index = layer.load(0, {
+                            shade: [0.5, '#fff'] //0.1透明度的白色背景
+                        });
+                        $.post("/home/screen/GetWinners", { activityId: data.activityId, activityAwardId: awardId }, function (xdata) {
+                            layer.close(index);
+                            if (xdata.Status) {
+                                for (var i = 0; i < data.awards.length; i++) {
+
+                                    if (data.awards[i].Id == awardId) {
+                                        _self.userHeadimg.css('background-image', "url(" + data.awards[i].AwardImage + ")");
+                                        _self.userNickName.text(data.awards[i].Name);
+                                        xdata.Data.forEach(function (ele, index) {
+                                            var userInfo = { sort: index + 1, nickname: ele.NickName, headimg: ele.HeadImage };
+                                            _self.buildWinnerInfo(userInfo);
+                                        });
+                                        break;
+                                    }
+                                }
+
+                            } else {
+
+                            }
+
+                        });
+
+                    });
                 },
                 init: function () {
                     var _self = this;
                     _self.event();
+                    _self.totalCount.text(data.totalCount);
+                    data.awards.forEach(function (ele) {
+                        _self.awardSelect.append("<option value=" + ele.Id + ">" + ele.Name + "</option>");
+                    });
                 }
             }
             //初始化

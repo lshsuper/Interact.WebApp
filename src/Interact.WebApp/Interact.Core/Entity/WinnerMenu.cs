@@ -28,10 +28,8 @@ namespace Interact.Core.Entity
         /// 创建时间
         /// </summary>
         public DateTime CreateTime { get; set; }
-        /// <summary>
-        /// 中奖等级（暂时用枚举写死，可扩展成单独表）
-        /// </summary>
-        public WinnerLevelEnum WinnerLevel { get; set; }
+      
+        public int  ActivityAwardId { get; set; }
 
     }
 }

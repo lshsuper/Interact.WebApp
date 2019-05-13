@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Autofac;
 using Interact.Core.Dto;
+using Interact.WebApp.Models;
 
 namespace Interact.WebApp.Areas.Admin.Common
 {
@@ -25,14 +26,41 @@ namespace Interact.WebApp.Areas.Admin.Common
                 return;
             }
             //校验授权的信息及授权的活动id
-            string activityId = filterContext.RequestContext.HttpContext.Request.QueryString.Get("activityId");
+            string activityId = filterContext.RequestContext.HttpContext.Request["activityId"];
             var currentUser = AppUtil.GetCurrentUser<ScreenAuthDto>(Application.Enum.TokenTypeEnum.Screen_Auth);
-            if (currentUser == null||string.IsNullOrEmpty(activityId)||int.Parse(activityId)!=currentUser.ActivityId)
+            if (filterContext.HttpContext.Request.IsAjaxRequest())
             {
-                //跳转
-                filterContext.Result = new RedirectResult($"/Home/home/Index?activityId={activityId}");
+
+                if (string.IsNullOrEmpty(activityId))
+                {
+                    filterContext.Result = new JsonResult() { Data = new DataResult() { Status = false, Notify = "activityId不能为空" }, ContentType = "application/json" };
+                    return;
+
+                }
+                else
+                {
+                    if (currentUser == null || int.Parse(activityId) != currentUser.ActivityId)
+                    {
+                        
+                        filterContext.Result = new JsonResult() { Data = new DataResult() { Status = false, Notify = "activityI无效" }, ContentType = "application/json" };
+                        return;
+
+                    }
+                }
 
             }
+            else
+            {
+                if (currentUser == null || int.Parse(activityId) != currentUser.ActivityId)
+                {
+                    //跳转
+                    filterContext.Result = new RedirectResult($"/Home/home/Index?activityId={activityId}");
+
+                }
+            }
+
+           
+           
 
         }
     }

@@ -34,7 +34,7 @@ namespace Interact.Test
                    {
                        SiginInRecoredId=Guid.NewGuid().ToString("N"),
                        ActivityId=1,
-                       WinnerLevel=Core.Enum.WinnerLevelEnum.Level_One
+                       ActivityAwardId=1
                    }
             }, out notify);
 
@@ -48,7 +48,7 @@ namespace Interact.Test
             string notify;
             List<SignInRecord> signInRecords;
             bool result = _lotteryDrawService.LotteryDraw(1,
-                                                          5,WinnerLevelEnum.Level_One,
+                                                          5,1,
                                                           out notify,
                                                           out signInRecords);
 

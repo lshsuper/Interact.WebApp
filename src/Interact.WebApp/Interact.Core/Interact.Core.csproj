@@ -49,12 +49,11 @@
     <Compile Include="Dto\SignInAuthDto.cs" />
     <Compile Include="Dto\SignInRecordDto.cs" />
     <Compile Include="Entity\Activity.cs" />
+    <Compile Include="Entity\WinnerMenu.cs" />
     <Compile Include="Enum\ActivityStatusEnum.cs" />
     <Compile Include="Entity\Admin.cs" />
     <Compile Include="Entity\ActivityAward.cs" />
     <Compile Include="Entity\SignInRecord.cs" />
-    <Compile Include="Entity\WinnerMenu.cs" />
-    <Compile Include="Enum\WinnerLevelEnum.cs" />
     <Compile Include="IRespository\IActivityAwardRespository.cs" />
     <Compile Include="IRespository\IActivityRespository.cs" />
     <Compile Include="IRespository\IAdminRespository.cs" />

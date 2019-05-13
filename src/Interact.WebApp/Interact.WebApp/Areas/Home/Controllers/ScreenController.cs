@@ -24,13 +24,16 @@ namespace Interact.WebApp.Areas.Home.Controllers
         private ISigInRecordRespository _sigInRecordRespository;
         private LotteryDrawService _lotteryDrawService;
         private IWinnerMenuRespository _winnerMenuRespository;
+        private IActivityAwardRespository _activityAwardRespository;
         public ScreenController(ISigInRecordRespository sigInRecordRespository,
                                 LotteryDrawService lotteryDrawService,
-                                IWinnerMenuRespository winnerMenuRespository)
+                                IWinnerMenuRespository winnerMenuRespository,
+                                IActivityAwardRespository activityAwardRespository)
         {
             _sigInRecordRespository = sigInRecordRespository;
             _lotteryDrawService = lotteryDrawService;
             _winnerMenuRespository = winnerMenuRespository;
+            _activityAwardRespository = activityAwardRespository;
         }
 
         #region View
@@ -42,9 +45,13 @@ namespace Interact.WebApp.Areas.Home.Controllers
         {
             //这里是随机获取100条签到数据进行抽奖，可根据具体业务场景进行设置
             var record = _sigInRecordRespository.GetSignInRecordsWithoutAwards(100,activityId);
+            var totalCount = _sigInRecordRespository.TotalCountWithoutWinner(activityId);
+            var awards = _activityAwardRespository.GetActivityAwardsByActivityId(activityId);
             ViewBag.data = JsonHelper.Set(new {
                 activityId,
-                record
+                record,
+                totalCount,
+                awards
             });
             return View();
         }
@@ -80,26 +87,40 @@ namespace Interact.WebApp.Areas.Home.Controllers
         /// </summary>
         /// <param name="activityId"></param>
         /// <param name="number"></param>
-        /// <param name="winnerLevel"></param>
+        /// <param name="activityAwardId"></param>
         /// <returns></returns>
-        public ActionResult LotteryDraw(int activityId, int number, WinnerLevelEnum winnerLevel)
+        public ActionResult LotteryDraw(int activityId, int number, int activityAwardId)
         {
             string notofy;
             List<SignInRecord> signInRecords;
-            bool result = _lotteryDrawService.LotteryDraw(activityId, number, winnerLevel, out notofy, out signInRecords);
+            bool result = _lotteryDrawService.LotteryDraw(activityId, number, activityAwardId, out notofy, out signInRecords);
             return Json(new DataResult()
             {
                 Status = result,
-                Data = signInRecords,
+                Data = signInRecords
+                ,
                 Notify = notofy
             });
         }
+        /// <summary>
+        /// 重新开始抽奖
+        /// </summary>
+        /// <param name="activityId"></param>
+        /// <returns></returns>
         public ActionResult RefrashWinnerMenu(int activityId) {
             bool result = _winnerMenuRespository.RemoveAllByActivity(activityId);
 
             return Json(new DataResult() {
                 Status =result,
                 Notify =result?"移除成功":"移除失败"
+            });
+        }
+        public ActionResult GetWinners(int activityId,int activityAwardId)
+        {
+            var data = _sigInRecordRespository.GetSignInRecordsByActivityIdAndActivityAwardId(activityId, activityAwardId);
+            return Json(new DataResult() {
+                   Status=true,
+                   Data=data
             });
         }
         #endregion

@@ -13,7 +13,8 @@ namespace Interact.Core.Entity
         public string Name { get; set; }
         public int ActivityId { get; set; }
         public string AwardImage { get; set; }
-        public WinnerLevelEnum WinnerLevel { get; set; }
+        
+        public int AwardActivityId { get; set; }
 
         public DateTime CreateTime { get; set; }
     }

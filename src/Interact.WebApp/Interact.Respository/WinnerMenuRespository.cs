@@ -20,12 +20,12 @@ namespace Interact.Respository
                                         SiginInRecoredId,
                                         ActivityId,
                                         CreateTime,
-                                        WinnerLevel)values(
+                                        ActivityAwardId)values(
                                         @Id,
                                         @SiginInRecoredId,
                                         @ActivityId,
                                         @CreateTime,
-                                        @WinnerLevel)";
+                                        @ActivityAwardId)";
             return DapperHelper.Instance.Excute(DbConfig.DbConnStr,sql,lst);
         }
        

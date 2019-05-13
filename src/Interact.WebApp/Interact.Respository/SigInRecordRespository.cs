@@ -78,19 +78,17 @@ namespace Interact.Respository
 
         public List<SignInRecord> GetSignInRecordsWithoutAwards(int top,int activityId)
         {
-            string sql = $@"select top({top}) 
-                                   sr.*
+            string sql = $@"select top({top}) * 
                             from SignInRecord sr
-                            left join WinnerMenu wm on wm.SiginInRecoredId=sr.Id
-                            where sr.Id=@activityId and wm.Id=null";
+                            where  not exists (select * from WinnerMenu wm where wm.SiginInRecoredId=sr.Id)";
             return DapperHelper.Instance.Query<SignInRecord>(DbConfig.DbConnStr, sql,new { activityId});
         }
-        public List<SignInRecord> ByActivityIdAndWinnerLevel(int activityId, WinnerLevelEnum winnerLevel)
+        public List<SignInRecord> GetSignInRecordsByActivityIdAndActivityAwardId(int activityId, int activityAwardId)
         {
             string sql =$@"select * from SignInRecord sr
                            inner join WinnerMenu wm on sr.Id=wm.SiginInRecoredId
-                           where sr.ActivityId=@activityId and wm.WinnerLevel=@winnerLevel";
-            return DapperHelper.Instance.Query<SignInRecord>(DbConfig.DbConnStr, sql, new { activityId, winnerLevel });
+                           where sr.ActivityId=@activityId and wm.ActivityAwardId=@activityAwardId";
+            return DapperHelper.Instance.Query<SignInRecord>(DbConfig.DbConnStr, sql, new { activityId, activityAwardId });
         }
 
         public PageInfo<List<SignInRecord>> QuerySignInRecordByPage(SignInRecordPageOption option)
@@ -131,6 +129,14 @@ namespace Interact.Respository
         {
             string sql = $"select count(1) from SignInRecord where ActivityId=@activityId";
             return DapperHelper.Instance.ExcuteScaler<int>(DbConfig.DbConnStr,sql,new { activityId});
+        }
+
+        public int TotalCountWithoutWinner(int activityId)
+        {
+            string sql = $@"select count (1) 
+                            from SignInRecord sr
+                            where  not exists (select * from WinnerMenu wm where wm.SiginInRecoredId=sr.Id)";
+            return DapperHelper.Instance.ExcuteScaler<int>(DbConfig.DbConnStr, sql, new { activityId });
         }
     }
 }

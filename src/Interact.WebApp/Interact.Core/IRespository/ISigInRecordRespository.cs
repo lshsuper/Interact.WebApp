@@ -45,9 +45,9 @@ namespace Interact.Core.IRespository
         /// 根据活动id+奖品等级获取中奖人签到信息
         /// </summary>
         /// <param name="activityId"></param>
-        /// <param name="winnerLevel"></param>
+        /// <param name="activityAwardId"></param>
         /// <returns></returns>
-        List<SignInRecord> ByActivityIdAndWinnerLevel(int activityId, WinnerLevelEnum winnerLevel);
+        List<SignInRecord> GetSignInRecordsByActivityIdAndActivityAwardId(int activityId, int  activityAwardId);
         /// <summary>
         /// 获取分页签到数据
         /// </summary>
@@ -73,5 +73,11 @@ namespace Interact.Core.IRespository
         /// <param name="activityId"></param>
         /// <returns></returns>
         int TotalCount(int activityId);
+        /// <summary>
+        /// 未中奖人数
+        /// </summary>
+        /// <param name="activityId"></param>
+        /// <returns></returns>
+        int TotalCountWithoutWinner(int activityId);
     }
 }
