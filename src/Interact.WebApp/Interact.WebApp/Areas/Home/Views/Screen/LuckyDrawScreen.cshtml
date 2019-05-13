@@ -301,6 +301,7 @@
 </script>
 @section scripts{
     <script src="~/Content/lib/art-template-master/template-web.js"></script>
+    <script src="~/Content/lib/layer-v3.1.1/layer-v3.1.1/layer/layer.js"></script>
     <script>
         var data=@Html.Raw(ViewBag.data);
     </script>
@@ -333,7 +334,7 @@
                     // 如果还剩有元素…
                     while (m) {
                         // 随机选取一个元素…
-                        i = Math.floor(Math.random()*m--);
+                        i = Math.floor(Math.random() * m--);
                         // 与当前元素进行交换
                         t = array[m];
                         array[m] = array[i];
@@ -357,7 +358,7 @@
                         type: "post",
                         url: "/home/screen/LotteryDraw",
                         async: false,
-                        data: { activityId: callback.activityId, number: callback.number,winnerLevel:callback.level },
+                        data: { activityId: callback.activityId, number: callback.number, winnerLevel: callback.level },
                         dataType: "json",
                         success: function (data) {
                             if (data.Status) {
@@ -404,7 +405,7 @@
                     }
                 },
                 //多人抽奖策略B
-                luckdrawStrategyB: function (level, activityId,number) {
+                luckdrawStrategyB: function (level, activityId, number) {
                     //点击开始立马交互后台抽奖
                     var _self = this;
                     var _timeOut = null;
@@ -412,7 +413,7 @@
                         {
                             activityId: activityId,
                             number: number,
-                            level:level,
+                            level: level,
                             succ: function (data) {
                                 //滚动头像
                                 _self.scrollImage();
@@ -447,19 +448,28 @@
                     var _self = this;
                     //开始抽奖
                     _self.startLuckdrawBtn.click(function () {
-                        var number = _self.numSelect.val();  //抽取人数
+                        var level = parseInt(_self.winnerLevel.val());
+                        if (level <= 0) {
+                            layer.alert("请选择奖品等级", {icon:3});
+                            return;
+                        }
+                        var number = parseInt(_self.numSelect.val());  //抽取人数
+                        if (number <= 0) {
+                            layer.alert("请选择抽取人数", { icon: 3 });
+                            return;
+                        }
                         _self.number = number;  //赋值
                         if (_self.number > 1) {
                             //[多人]抽奖执行
                             var level = awardSelect.val();//奖品等级
-                            _self.luckdrawStrategyA(level, data.activityId,1);
+                            _self.luckdrawStrategyA(level, data.activityId, 1);
                         } else {
                             //[单人]抽奖执行
                             _self.scrollImage();
                         }
                     });
                     //停止抽奖
-                    _self.endLuckdrawBtn.click(function (){
+                    _self.endLuckdrawBtn.click(function () {
                         var _self = this;
                         if (_self.number > 0) {
                             return;
@@ -470,7 +480,7 @@
                         _self.number = 0;
                         _self.luckdrawAgrent({
                             activityId: activityId,
-                            number:1,
+                            number: 1,
                             level: level,
                             succ: function (data) {
 
@@ -500,7 +510,8 @@
                     });
                 },
                 init: function () {
-
+                    var _self = this;
+                    _self.event();
                 }
             }
             //初始化
