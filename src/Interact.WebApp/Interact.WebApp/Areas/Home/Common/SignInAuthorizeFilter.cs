@@ -25,6 +25,7 @@ namespace Interact.WebApp.Areas.Admin.Common
                 return;
             }
             var currentUser = AppUtil.GetCurrentUser<SignInAuthDto>(Application.Enum.TokenTypeEnum.SignIn_Auth);
+            //这里其实该校验一下activityId的，暂时没啥必要
             if (currentUser == null)
             {
                 //跳转
