@@ -15,7 +15,10 @@ using System.Web.Mvc;
 
 namespace Interact.WebApp.Areas.Home.Controllers
 {
-    [HomeAuthorizeFilter]
+    /// <summary>
+    /// 大屏幕主控制器
+    /// </summary>
+    [ScreenAuthorizeFilter]
     public class ScreenController : Controller
     {
         private ISigInRecordRespository _sigInRecordRespository;
@@ -26,6 +29,7 @@ namespace Interact.WebApp.Areas.Home.Controllers
             _sigInRecordRespository = sigInRecordRespository;
             _lotteryDrawService = lotteryDrawService;
         }
+
         #region View
         /// <summary>
         /// 抽奖大屏幕

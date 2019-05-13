@@ -23,23 +23,34 @@ namespace Interact.WebApp.Areas.Home.Controllers
         // GET: Home/Home
         public ActionResult Index(int activityId)
         {
+            var model = AppUtil.GetCurrentUser<ScreenAuthDto>(Application.Enum.TokenTypeEnum.Screen_Auth);
+            if (model != null&&model.ActivityId==activityId)
+            {
+               return RedirectToAction($"/Screen/SigninScreen?activityId={activityId}");
+            }
             ViewBag.activityId = activityId;
-
+            
             return View();
         }
-
-        public ActionResult ToAuth(string authCode,int activityId)
+        /// <summary>
+        /// 授权大屏幕
+        /// </summary>
+        /// <param name="authCode"></param>
+        /// <param name="activityId"></param>
+        /// <returns></returns>
+        public ActionResult ToAuth(string authCode, int activityId)
         {
-            var model = _activityRespository.GetActivityByAuthCodeAndActivityId(authCode,activityId);
+            var model = _activityRespository.GetActivityByAuthCodeAndActivityId(authCode, activityId);
             if (model != null)
             {
-                AppUtil.ToSigin(Application.Enum.TokenTypeEnum.Screen_Auth,new ScreenAuthDto() { ActivityId=activityId });
+                AppUtil.ToSigin(Application.Enum.TokenTypeEnum.Screen_Auth, new ScreenAuthDto() { ActivityId = activityId });
             }
-                return Json(new DataResult() {
-                    Status = model!=null,
-                    Notify=model!=null?"操作成功":"活动与授权码不匹配"
-                });
+            return Json(new DataResult()
+            {
+                Status = model != null,
+                Notify = model != null ? "操作成功" : "活动与授权码不匹配"
+            });
         }
-        
+
     }
 }

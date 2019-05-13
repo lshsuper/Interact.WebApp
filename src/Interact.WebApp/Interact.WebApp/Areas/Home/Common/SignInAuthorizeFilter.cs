@@ -24,7 +24,7 @@ namespace Interact.WebApp.Areas.Admin.Common
                 base.OnAuthorization(filterContext);
                 return;
             }
-            var currentUser = AppUtil.GetCurrentUser<ScreenAuthDto>(Application.Enum.TokenTypeEnum.Screen_Auth);
+            var currentUser = AppUtil.GetCurrentUser<SignInAuthDto>(Application.Enum.TokenTypeEnum.SignIn_Auth);
             if (currentUser == null)
             {
                 //跳转

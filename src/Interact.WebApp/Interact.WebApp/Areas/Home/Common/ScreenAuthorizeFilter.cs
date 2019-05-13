@@ -11,7 +11,10 @@ using Interact.Core.Dto;
 
 namespace Interact.WebApp.Areas.Admin.Common
 {
-    public class HomeAuthorizeFilter : AuthorizeAttribute
+    /// <summary>
+    /// 大屏幕授权
+    /// </summary>
+    public class ScreenAuthorizeFilter : AuthorizeAttribute
     {
 
         public override void OnAuthorization(AuthorizationContext filterContext)
@@ -23,10 +26,10 @@ namespace Interact.WebApp.Areas.Admin.Common
                 base.OnAuthorization(filterContext);
                 return;
             }
+            string activityId = filterContext.RequestContext.HttpContext.Request.QueryString.Get("activityId");
             var currentUser = AppUtil.GetCurrentUser<ScreenAuthDto>(Application.Enum.TokenTypeEnum.Screen_Auth);
-            if (currentUser == null)
+            if (currentUser == null||string.IsNullOrEmpty(activityId)||int.Parse(activityId)!=currentUser.ActivityId)
             {
-                string activityId = filterContext.RequestContext.HttpContext.Request.QueryString.Get("activityId");
                 //跳转
                 filterContext.Result = new RedirectResult($"/Home/home/Index?activityId={activityId}");
 
