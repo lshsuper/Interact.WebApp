@@ -82,6 +82,7 @@
     <Compile Include="Helper\Page\PageOption.cs" />
     <Compile Include="Helper\QrCodeHelper.cs" />
     <Compile Include="Helper\Tool.cs" />
+    <Compile Include="Helper\UploadHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WeChat\Enum\ScopeTypeEnum.cs" />
     <Compile Include="WeChat\Enum\XmlMessageTypeEnum.cs" />
