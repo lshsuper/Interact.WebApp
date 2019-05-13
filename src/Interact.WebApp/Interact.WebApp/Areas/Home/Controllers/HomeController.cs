@@ -12,7 +12,9 @@ using System.Web.Mvc;
 
 namespace Interact.WebApp.Areas.Home.Controllers
 {
-
+    /// <summary>
+    /// 大屏幕主页控制器（控制每个浏览器只能管理一个活动）
+    /// </summary>
     public class HomeController : Controller
     {
         private readonly IActivityRespository _activityRespository;
