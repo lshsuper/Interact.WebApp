@@ -1,10 +1,10 @@
 ﻿
 @{
-    Layout ="~/Areas/Home/Views/Shared/_LayoutScreenForPC.cshtml";
+    Layout = "~/Areas/Home/Views/Shared/_LayoutScreenForPC.cshtml";
     ViewBag.Title = "抽奖";
 }
- <style>
-   
+<style>
+
 
     .screen-body {
         position: absolute;
@@ -83,7 +83,7 @@
                 text-shadow: 0 1px 3px rgba(0,0,0,0.45);
             }
 
-        .luckydraw-body > .start-btn {
+        .luckydraw-body > .luckdraw-btn {
             position: absolute;
             left: 52%;
             margin-left: -60px;
@@ -233,87 +233,278 @@
         color: #E74145;
         box-shadow: 0 2px 0px 3px rgba(0,0,0,0.15), 0 -3px 0px 0px #D0D0D0 inset;
     }
-
-   
 </style>
 
-    <div class="row screen-body">
-        <div class="col-md-7 screen-body-left">
-            <div class="luckydraw-title clearfix">
-                <span class="pull-left">抽奖</span>
-                <span class="pull-right">1000000人</span>
+<div class="row screen-body">
+    <div class="col-md-7 screen-body-left">
+        <div class="luckydraw-title clearfix">
+            <span class="pull-left">抽奖</span>
+            <span class="pull-right">1000000人</span>
+        </div>
+        <div class="luckydraw-body">
+            <div class="user" id="user-headimg">
+                <span class="nick-name" id="user-nickname"></span>
             </div>
-            <div class="luckydraw-body">
-                <div class="user">
-                    <span class="nick-name"></span>
-                </div>
-                <div class="start-btn">
-                    开始抽奖
-                </div>
+            <div class="luckdraw-btn" id="start-luckdraw-btn">
+                开始抽奖
             </div>
-            <div class="luckydraw-footer clearfix">
-                <div class="pull-left">
-                    <div class="form-inline choice-group">
-                        <div class="form-group">
-                            <label class="label">请选择奖项:</label>
-                            <select class="form-control">
-                                <option value="-1">--请选择奖项--</option>
-                                <option value="0">一等奖</option>
-                                <option value="1">二等奖</option>
-                                <option value="2">三等奖</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="label">选择人数:</label>
-                            <select class="form-control">
-                                <option value="-1">--请选择中奖人数--</option>
-                                <option value="0">1</option>
-                                <option value="1">2</option>
-                                <option value="2">3</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="pull-right">
-                    重新加载
-                </div>
+            <div class="luckdraw-btn" id="end-luckdraw-btn" style="display:none">
+                停止抽奖
             </div>
         </div>
-        <div class="col-md-4  screen-body-right">
-            <div class="menu-list">
-                <div class="menu-opt">
-                    <div class="user-no">5</div>
-                    <div class="user-pic"></div>
-                    <div class="user-nick">lsh</div>
-                </div>
-                <div class="menu-opt">
-                    <div class="user-no">5</div>
-                    <div class="user-pic"></div>
-                    <div class="user-nick">lsh</div>
-                </div>
-                <div class="menu-opt">
-                    <div class="user-no">5</div>
-                    <div class="user-pic"></div>
-                    <div class="user-nick">lsh</div>
-                </div>
-                <div class="menu-opt">
-                    <div class="user-no">5</div>
-                    <div class="user-pic"></div>
-                    <div class="user-nick">lsh</div>
-                </div>
-                <div class="menu-opt">
-                    <div class="user-no">5</div>
-                    <div class="user-pic"></div>
-                    <div class="user-nick">lsh</div>
+        <div class="luckydraw-footer clearfix">
+            <div class="pull-left">
+                <div class="form-inline choice-group">
+                    <div class="form-group">
+                        <label class="label">请选择奖项:</label>
+                        <select class="form-control" id="award-select">
+                            <option value="-1">--请选择奖项--</option>
+                            <option value="1">一等奖</option>
+                            <option value="2">二等奖</option>
+                            <option value="3">三等奖</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="label">选择人数:</label>
+                        <select class="form-control" id="num-select">
+                            <option value="-1">--请选择中奖人数--</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
                 </div>
             </div>
-            <div class="afresh-choice">
-                <div class="afresh-choice-btn">
-                    重新抽奖
-                </div>
+            <div class="pull-right" id="reload-btn">
+                重新加载
             </div>
         </div>
     </div>
+    <div class="col-md-4  screen-body-right">
+        <div class="menu-list" id="winner-menu">
+
+        </div>
+        <div class="afresh-choice">
+            <div class="afresh-choice-btn">
+                重新抽奖
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="winner-info-tmpl" type="text/html">
+    <div class="menu-opt">
+        <div class="user-no">{{sort}}</div>
+        <div class="user-pic">{{headimg}}</div>
+        <div class="user-nick">{{nickname}}</div>
+    </div>
+</script>
 @section scripts{
-  
+    <script src="~/Content/lib/art-template-master/template-web.js"></script>
+    <script>
+        var data=@Html.Raw(ViewBag.data);
+    </script>
+    <script>
+        (function () {
+            //抽奖区块
+            var luckdraw = {
+                winnerMenu: $('#winner-menu'),
+                winnerInfoTmpl: "winner-info-tmpl",
+                startLuckdrawBtn: $('#start-luckdraw-btn'),
+                endLuckdrawBtn: $('#end-luckdraw-btn'),
+                nextroundLuckdrawBtn: $('#nextround-luckdraw-btn'),
+                awardSelect: $('#award-select'),
+                numSelect: $('#num-select'),
+                userHeadimg: $('#user-headimg'),
+                userNickName: $('#user-nickname'),
+                reloadBtn: $('#reload-btn'),
+                afrashChoice: $('.afresh-choice-btn'),
+                _timer: null,   //图片滚动定时器
+                number: 0,
+                buildWinnerInfo: function (userinfo) {
+                    var _self = this;
+                    var html = template(_self.winnerInfoTmpl, userinfo);
+                    _self.userInfoGroup.append(html);
+                },
+                //洗牌
+                shuffle: function (array) {
+                    var m = array.length,
+                        t, i;
+                    // 如果还剩有元素…
+                    while (m) {
+                        // 随机选取一个元素…
+                        i = Math.floor(Math.random()*m--);
+                        // 与当前元素进行交换
+                        t = array[m];
+                        array[m] = array[i];
+                        array[i] = t;
+                    }
+                    return array;
+                },
+                //图片循环滚动
+                scrollImage: function () {
+                    var _self = this;
+                    _self._timer = setInterval(function () {
+                        var currentArr = _self.shuffle(data.record);
+                        var currentRecord = currentArr[0];
+                        _self.userHeadimg.css('background-image', "url(" + currentRecord.HeadImage + ")");
+                        _self.userNickName.text(currentRecord.NickName);
+                    }, 1000);
+                },
+                //抽奖代理
+                luckdrawAgrent: function (callback) {
+                    $.ajax({
+                        type: "post",
+                        url: "/home/screen/LotteryDraw",
+                        async: false,
+                        data: { activityId: callback.activityId, number: callback.number,winnerLevel:callback.level },
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.Status) {
+                                callback.succ(data);
+                            } else {
+                                callback.fail(data);
+                            }
+                        }
+                    });
+                },
+                //多人抽奖策略A
+                luckdrawStrategyA: function (level, activityId, number) {
+                    var _self = this;
+                    while (_self.number > 0) {
+                        _self.scrollImage();
+                        _self.luckdrawAgrent(
+                            {
+                                activityId: activityId,
+                                number: number,
+                                level: level,
+                                succ: function (data) {
+
+                                    clearInterval(_self._timer);
+                                    var index = _self.winnerMenu.children('.menu-opt').length;
+                                    _self.number--;
+
+                                    if (_self.number > 0) {
+                                        _self.endLuckdrawBtn.text("停止抽奖(" + number + ")");
+                                    }
+                                    //展示左侧中奖人信息
+                                    _self.userNickName.text(data.Data.NickName);
+                                    _self.userHeadimg.css('background-image', "url(" + data.Data.HeadImage + ")");
+                                    //展示右侧中奖人信息
+                                    var userInfo = { sort: index + 1, nickname: data.Data.NickName, headimg: data.Data.HeadImage };
+                                    _self.buildWinnerInfo(userInfo);
+                                },
+                                fail: function (data) {
+
+                                },
+                                level
+                            });
+                        _self.startLuckdrawBtn.show();
+                        _self.endLuckdrawBtn.hide();
+                    }
+                },
+                //多人抽奖策略B
+                luckdrawStrategyB: function (level, activityId,number) {
+                    //点击开始立马交互后台抽奖
+                    var _self = this;
+                    var _timeOut = null;
+                    _self.luckdrawAgrent(
+                        {
+                            activityId: activityId,
+                            number: number,
+                            level:level,
+                            succ: function (data) {
+                                //滚动头像
+                                _self.scrollImage();
+                                _timeOut = setInterval(function () {
+                                    //清除图片滚动的定时器
+                                    clearInterval(_self._timer);
+                                    var currentRecord = data.Data.shift();
+                                    if (currentRecord == null) {
+                                        clearInterval(_timeOut);
+                                        return;
+                                    }
+                                    //获取右边中奖人序号
+                                    var index = _self.winnerMenu.children('.menu-opt').length;
+                                    //展示左侧中奖人信息
+                                    _self.userNickName.text(currentRecord.NickName);
+                                    _self.userHeadimg.css('background-image', "url(" + currentRecord.HeadImage + ")");
+                                    //展示右侧中奖人信息
+                                    var userInfo = { sort: index + 1, nickname: currentRecord.NickName, headimg: currentRecord.HeadImage };
+                                    _self.buildWinnerInfo(userInfo);
+
+                                }, 5000);
+
+                            },
+                            fail: function (data) {
+                                //交互失败的业务逻辑
+                            }
+                        });
+
+
+                },
+                event: function () {
+                    var _self = this;
+                    //开始抽奖
+                    _self.startLuckdrawBtn.click(function () {
+                        var number = _self.numSelect.val();  //抽取人数
+                        _self.number = number;  //赋值
+                        if (_self.number > 1) {
+                            //[多人]抽奖执行
+                            var level = awardSelect.val();//奖品等级
+                            _self.luckdrawStrategyA(level, data.activityId,1);
+                        } else {
+                            //[单人]抽奖执行
+                            _self.scrollImage();
+                        }
+                    });
+                    //停止抽奖
+                    _self.endLuckdrawBtn.click(function (){
+                        var _self = this;
+                        if (_self.number > 0) {
+                            return;
+                        }
+                        var level = awardSelect.val();//奖品等级
+                        _self.startLuckdrawBtn();
+                        _self.endLuckdrawBtn.hide();
+                        _self.number = 0;
+                        _self.luckdrawAgrent({
+                            activityId: activityId,
+                            number:1,
+                            level: level,
+                            succ: function (data) {
+
+                            },
+                            fail: function (data) {
+
+                            }
+                        });
+
+                    });
+                    //重新加载
+                    _self.reloadBtn.click(function () {
+                        var _self = this;
+                        if (_self.number <= 0) {
+                            window.location.reload();
+                        }
+                    });
+                    //重新抽奖
+                    _self.afrashChoice.click(function () {
+                        $.post('/home/screen/RefrashWinnerMenu', { activityId: data.activityId }, function (data) {
+                            if (data.Status) {
+                                window.location.reload();
+                            } else {
+                                //重新加载失败
+                            }
+                        });
+                    });
+                },
+                init: function () {
+
+                }
+            }
+            //初始化
+            luckdraw.init();
+        })()
+    </script>
 }

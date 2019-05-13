@@ -12,6 +12,9 @@ using System.Text;
 
 namespace Interact.WebApp.Areas.Admin.Common
 {
+    /// <summary>
+    /// 签到授权拦截器
+    /// </summary>
     public class SignInAuthorizeFilter : AuthorizeAttribute
     {
 

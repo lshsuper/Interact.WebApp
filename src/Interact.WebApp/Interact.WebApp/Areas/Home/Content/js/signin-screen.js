@@ -1,6 +1,4 @@
-﻿
-
-(function () {
+﻿(function () {
     var signinscreen = {
         userInfoGroup: $('.user-info-group'),
         userInfoTmpl: 'user-info-tmpl',
@@ -9,8 +7,8 @@
         userCardNick: $('.user-card-nick'),
         userCardImg: $('.user-card-img'),
         signinCount: $('#signin-count'),
-        timeOut: null,
-        timeIntervel: null,
+        _timeOut: null,
+        _timeIntervel: null,
         getSigninCountBtn: $('#get-signin-count-btn'),
         buildUserInfoBlock: function (userinfo) {
             var _self = this;
@@ -25,19 +23,19 @@
             _self.userCardSort.text(userInfo.sort);
             _self.signinCard.find('.brilliancy').addClass('img-rotate');
             //定时开始
-            _self.timeOut = setTimeout(function () {
+            _self._timeOut = set_timeOut(function () {
                 _self.signinCard.hide();
                 _self.signinCard.find('.brilliancy').removeClass('img-rotate');
                 //结束定时
-                clearTimeout(_self.timeOut);
+                clear_timeOut(_self._timeOut);
             }, 2000);
         },
         //向签到屏追加签到数据
         appendSignInCard: function () {
             var _self = this;
-            _self.timeIntervel = setInterval(function () {
+            _self._timeIntervel = setInterval(function () {
                 if (data.record.length <=0) {
-                    clearInterval(_self.timeIntervel);
+                    clearInterval(_self.__timeIntervel);
                 } else {
                     var userInfo = data.record.shift();
                     _self.buildUserInfoBlock({ headimage: userInfo.HeadImage, nickname: userInfo.NickName, sort: userInfo.Sort });
@@ -63,7 +61,7 @@
                 else
                 {
                     userInfo.sort = totalSignInRecord.length + 1;
-                    if (_self.timeIntervel ==null) {
+                    if (_self.__timeIntervel ==null) {
                         _self.buildUserInfoBlock(userInfo);
                     } else {
                         data.record.push(record);

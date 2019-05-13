@@ -29,7 +29,11 @@ namespace Interact.Respository
                                         @WinnerLevel)";
             return DapperHelper.Instance.Excute(DbConfig.DbConnStr,sql,lst);
         }
-
-        
+       
+        public bool RemoveAllByActivity(int activityId)
+        {
+            string sql = $"delete from WinnerMenu where ActivityId=@activityId";
+            return DapperHelper.Instance.Excute(DbConfig.DbConnStr,sql,new {activityId});
+        }
     }
 }

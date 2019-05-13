@@ -23,11 +23,14 @@ namespace Interact.WebApp.Areas.Home.Controllers
     {
         private ISigInRecordRespository _sigInRecordRespository;
         private LotteryDrawService _lotteryDrawService;
+        private IWinnerMenuRespository _winnerMenuRespository;
         public ScreenController(ISigInRecordRespository sigInRecordRespository,
-                                LotteryDrawService lotteryDrawService)
+                                LotteryDrawService lotteryDrawService,
+                                IWinnerMenuRespository winnerMenuRespository)
         {
             _sigInRecordRespository = sigInRecordRespository;
             _lotteryDrawService = lotteryDrawService;
+            _winnerMenuRespository = winnerMenuRespository;
         }
 
         #region View
@@ -37,7 +40,12 @@ namespace Interact.WebApp.Areas.Home.Controllers
         /// <returns></returns>
         public ActionResult LuckyDrawScreen(int activityId)
         {
-            ViewBag.activityId = activityId;
+            //这里是随机获取100条签到数据进行抽奖，可根据具体业务场景进行设置
+            var record = _sigInRecordRespository.GetSignInRecordsWithoutAwards(100,activityId);
+            ViewBag.data = JsonHelper.Set(new {
+                activityId,
+                record
+            });
             return View();
         }
         /// <summary>
@@ -84,6 +92,14 @@ namespace Interact.WebApp.Areas.Home.Controllers
                 Status = result,
                 Data = signInRecords,
                 Notify = notofy
+            });
+        }
+        public ActionResult RefrashWinnerMenu(int activityId) {
+            bool result = _winnerMenuRespository.RemoveAllByActivity(activityId);
+
+            return Json(new DataResult() {
+                Status =result,
+                Notify =result?"移除成功":"移除失败"
             });
         }
         #endregion

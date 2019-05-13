@@ -130,19 +130,7 @@ namespace Interact.WebApp.Areas.Home.Controllers
             //2.生成二维码
             return File(QrCodeHelper.BuildQrCode(siginUrl), "image/jpeg");
         }
-        /// <summary>
-        /// 获取签到数据的头像列表
-        /// </summary>
-        /// <param name="activityId"></param>
-        /// <returns></returns>
-        public ActionResult GetHeadImages(int activityId)
-        {
-            var model = _sigInRecordRespository.GetSignInHeadImages(activityId);
-            return Json(new DataResult() {
-                Status=true,Data=model,
-                Notify="获取成功"
-            });
-        }
+        
         #endregion
 
     }

@@ -3,6 +3,7 @@ using Interact.Application.Service;
 using Interact.Application.Utils;
 using Interact.Core.Dto;
 using Interact.Core.IRespository;
+using Interact.Infrastructure.Helper;
 using Interact.WebApp.Areas.Admin.Common;
 using Interact.WebApp.Common;
 using Interact.WebApp.Controllers;
@@ -39,7 +40,7 @@ namespace Interact.WebApp.Areas.Admin.Controllers
         public ActionResult ToLogin(string login,string pwd)
         {
             string notify;
-            AdminDto result = _adminService.Login(login,pwd,out notify);
+            AdminDto result = _adminService.Login(login,pwd.Md5().ToLower(),out notify);
             if (result!=null)
             {
                 AppUtil.ToSigin(Application.Enum.TokenTypeEnum.Admin_Login,result);

@@ -20,6 +20,11 @@ namespace Interact.Core.IRespository
         /// <param name="lst"></param>
         /// <returns></returns>
         bool Add(List<WinnerMenu>lst);
-      
+        /// <summary>
+        /// 移除某活动下的中奖名单(真删)
+        /// </summary>
+        /// <param name="activityId"></param>
+        /// <returns></returns>
+        bool RemoveAllByActivity(int activityId);
     }
 }
