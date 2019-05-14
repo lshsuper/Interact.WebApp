@@ -34,7 +34,7 @@ namespace Interact.Infrastructure.Helper
 
                 string timestamp = ParseDatetime(DateTime.Now).ToString();
                 string nonce = new Random().Next(000000, 999999).ToString().PadLeft('0').Trim();
-                string sign =(WebConfig.Api_Sign_Secret+timestamp + WebConfig.Api_Sign_Secret).Md5();
+                string sign =(WebConfig.Api_Sign_Secret+nonce+timestamp + WebConfig.Api_Sign_Secret).Md5();
 
                 //获取后缀名
                 string extension = fileName.Substring(fileName.LastIndexOf(".") + 1, (fileName.Length - fileName.LastIndexOf(".") - 1)); //扩展名

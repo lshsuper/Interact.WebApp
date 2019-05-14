@@ -2,6 +2,8 @@
 using Interact.Application.Utils;
 using Interact.Core.Dto;
 using Interact.Core.IRespository;
+using Interact.Infrastructure.Config;
+using Interact.Infrastructure.Helper;
 using Interact.WebApp.Common;
 using Interact.WebApp.Models;
 using System;
@@ -28,10 +30,10 @@ namespace Interact.WebApp.Areas.Home.Controllers
             var model = AppUtil.GetCurrentUser<ScreenAuthDto>(Application.Enum.TokenTypeEnum.Screen_Auth);
             if (model != null&&model.ActivityId==activityId)
             {
-               return RedirectToAction($"/Screen/SigninScreen?activityId={activityId}");
+               return RedirectToAction("SigninScreen", "Screen",new { activityId });
             }
-            ViewBag.activityId = activityId;
-            
+            var currentActivity = _activityRespository.Get(DbConfig.DbConnStr,activityId);
+            ViewBag.data=JsonHelper.Set(currentActivity);
             return View();
         }
         /// <summary>

@@ -10,6 +10,7 @@ namespace Interact.Core.Dto
    public class SignInAuthDto:JwtPaylod
     {
         public string RefrashToken { get; set; }
-
+        public string Access_Token { get; set; }
+        public string OpenId { get; set; }
     }
 }

@@ -16,23 +16,13 @@ namespace Interact.Infrastructure.Helper
         /// <returns>加密后的十六进制的哈希散列（字符串）</returns>
         public static string Md5(this string str)
         {
-            //将输入字符串转换成字节数组
-            var buffer = Encoding.Default.GetBytes(str);
-            //接着，创建Md5对象进行散列计算
-            var data = MD5.Create().ComputeHash(buffer);
-
-            //创建一个新的Stringbuilder收集字节
-            var sb = new StringBuilder();
-
-            //遍历每个字节的散列数据 
-            foreach (var t in data)
-            {
-                //格式每一个十六进制字符串
-                sb.Append(t.ToString("X2"));
-            }
-
-            //返回十六进制字符串
-            return sb.ToString();
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] data = System.Text.Encoding.UTF8.GetBytes(str);
+            byte[] result = md5.ComputeHash(data);
+            String ret = "";
+            for (int i = 0; i < result.Length; i++)
+                ret += result[i].ToString("x").PadLeft(2, '0');
+            return ret;
         }
 
         /// <summary>

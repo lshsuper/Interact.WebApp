@@ -16,7 +16,7 @@ namespace Interact.WebApp.App_Start
             {
                 mappers.ForEach(o =>
                 {
-                    cfg.AddProfile(o);
+                    cfg.AddProfile(o.GetType());
                 });
 
             });

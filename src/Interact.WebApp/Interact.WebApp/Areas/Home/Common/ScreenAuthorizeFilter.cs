@@ -27,41 +27,30 @@ namespace Interact.WebApp.Areas.Admin.Common
             }
             //校验授权的信息及授权的活动id
             string activityId = filterContext.RequestContext.HttpContext.Request["activityId"];
-            var currentUser = AppUtil.GetCurrentUser<ScreenAuthDto>(Application.Enum.TokenTypeEnum.Screen_Auth);
-            if (filterContext.HttpContext.Request.IsAjaxRequest())
+            if (string.IsNullOrEmpty(activityId))
             {
-
-                if (string.IsNullOrEmpty(activityId))
+                if (filterContext.HttpContext.Request.IsAjaxRequest())
                 {
-                    filterContext.Result = new JsonResult() { Data = new DataResult() { Status = false, Notify = "activityId不能为空" }, ContentType = "application/json" };
+                    filterContext.Result = new JsonResult() {Data=new DataResult() {Status=false,Notify="activityId不能为空" } };
                     return;
-
                 }
                 else
                 {
-                    if (currentUser == null || int.Parse(activityId) != currentUser.ActivityId)
-                    {
-                        
-                        filterContext.Result = new JsonResult() { Data = new DataResult() { Status = false, Notify = "activityI无效" }, ContentType = "application/json" };
-                        return;
-
-                    }
-                }
-
-            }
-            else
-            {
-                if (currentUser == null || int.Parse(activityId) != currentUser.ActivityId)
-                {
                     //跳转
                     filterContext.Result = new RedirectResult($"/Home/home/Index?activityId={activityId}");
-
+                    return;
                 }
             }
-
-           
-           
-
+            //activityId不为空时
+            var currentUser = AppUtil.GetCurrentUser<ScreenAuthDto>(Application.Enum.TokenTypeEnum.Screen_Auth);
+            int currentActivityId;
+            int.TryParse(activityId, out currentActivityId);
+            if (currentUser == null || currentActivityId != currentUser.ActivityId)
+            {
+                //跳转
+                filterContext.Result = new RedirectResult($"/Home/home/Index?activityId={activityId}");
+            }
+            
         }
     }
 }

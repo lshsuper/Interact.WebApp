@@ -9,6 +9,11 @@ using System.Web.Mvc;
 using Autofac;
 using Interact.Core.Dto;
 using System.Text;
+using Interact.Core.IRespository;
+using Autofac;
+using Interact.WebApp.Areas.Home;
+using Interact.Infrastructure.Config.Model;
+using Interact.WebApp.Models;
 
 namespace Interact.WebApp.Areas.Admin.Common
 {
@@ -18,6 +23,11 @@ namespace Interact.WebApp.Areas.Admin.Common
     public class SignInAuthorizeFilter : AuthorizeAttribute
     {
 
+        private readonly IWeixinRespository _weixinRespository;
+        public SignInAuthorizeFilter()
+        {
+            _weixinRespository = AutofacConfig._container.Resolve<IWeixinRespository>();
+        }
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
 
@@ -27,12 +37,27 @@ namespace Interact.WebApp.Areas.Admin.Common
                 base.OnAuthorization(filterContext);
                 return;
             }
+            //这里我想限制一下只能手机端微信登录(暂时不想实现)
+
             var currentUser = AppUtil.GetCurrentUser<SignInAuthDto>(Application.Enum.TokenTypeEnum.SignIn_Auth);
-            //这里其实该校验一下activityId的，暂时没啥必要
             if (currentUser == null)
             {
-                //跳转
-                filterContext.Result = new ContentResult() { Content= "当前页面已失效", ContentEncoding=Encoding.UTF8};
+                if (filterContext.HttpContext.Request.IsAjaxRequest())
+                {
+                    filterContext.Result = new JsonResult() { Data=new DataResult() {Status=false,Notify="登录失效,请尝试刷新页面" } };
+                    return;
+                }
+                else
+                {
+                    //当前请求的地址
+                    string requestUrl = filterContext.HttpContext.Request.RawUrl;
+                    //微信登录
+                    string redirectUrl = HttpUtility.UrlEncode($"{WebConfig.Web_Host}/Home/Signin/AuthWeChat?redirectUrl={requestUrl}");
+                    string authCodeUrl = _weixinRespository.GetAuthCodeUrl(redirectUrl);
+                    filterContext.Result = new ContentResult() { Content = "<script>location.href='" + authCodeUrl + "'</script>" };
+                    return;
+                }
+                
 
             }
 

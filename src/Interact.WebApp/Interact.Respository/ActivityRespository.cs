@@ -10,7 +10,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Dapper;
+using Interact.Infrastructure.Dapper;
+using Interact.Infrastructure.Util;
+
 namespace Interact.Respository
 {
     public class ActivityRespository : Respository<Activity>, IActivityRespository
@@ -64,7 +66,8 @@ namespace Interact.Respository
         /// <returns></returns>
         public bool AddActivity(Activity activity,List<ActivityAward>activityAwards)
         {
-
+            activity.AuthCode=Tool.UUID(8);
+            activity.CreateTime = DateTime.Now;
             using (var conn = DapperHelper.Instance.GetConnection(DbConfig.DbConnStr))
             {
                 conn.Open();
@@ -74,15 +77,13 @@ namespace Interact.Respository
                     string sql = $@"insert into Activity (Name,
                                                 LimitNumber,
                                                 PlayBillUrl,
-                                                CreateTime,
                                                 AuthCode)values(
-                                                @Name
+                                                @Name,
                                                 @LimitNumber,
                                                 @PlayBillUrl,
-                                                @CreateTime,
-                                                @AuthCode)";
-                    bool result = conn.Execute(sql, activity) > 0;
-                    if (!result)
+                                                @AuthCode);select SCOPE_IDENTITY()";
+                    int id = conn.ExecuteScalar<int>(sql, activity,tran);
+                    if (id<=0)
                     {
                         tran.Rollback();
                         return false;
@@ -90,15 +91,14 @@ namespace Interact.Respository
                
                     sql = $@"insert into ActivityAward(Name,
                                                       ActivityId,
-                                                      AwardImage,
-                                                      WinnerLevel,
-                                                      CreateTime)values(
-                                                     Name,
-                                                      ActivityId,
-                                                      AwardImage,
-                                                      WinnerLevel,
-                                                      CreateTime)";
-                     result = conn.Execute(sql, activityAwards) > 0;
+                                                      AwardImage)values(
+                                                      @Name,
+                                                      @ActivityId,
+                                                      @AwardImage)";
+                    activityAwards.ForEach(o=> {
+                        o.ActivityId = id;
+                    });
+                    bool result = conn.Execute(sql, activityAwards,tran) > 0;
                     if (!result)
                     {
                         tran.Rollback();

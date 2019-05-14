@@ -16,79 +16,80 @@ using Interact.Application.Utils;
 using Interact.Core.Dto;
 using Interact.Application.Enum;
 using Interact.Infrastructure.Weixin.Model;
+using Interact.WebApp.Areas.Admin.Common;
 
 namespace Interact.WebApp.Areas.Home.Controllers
 {
+    [SignInAuthorizeFilter]
     /// <summary>
     /// 微信签到整体控制栏目
     /// </summary>
     public class SigninController : Controller
     {
-        #region Weixin-Service
+        #region Service
         private IWeixinRespository _weixinRespository;
         private ISigInRecordRespository _sigInRecordRespository;
+        private IActivityRespository _activityRespository;
         private SignInService _signInService;
         public SigninController(IWeixinRespository weixinRespository,
                                 ISigInRecordRespository sigInRecordRespository,
-                                SignInService signInService)
+                                SignInService signInService,
+                                IActivityRespository activityRespository)
         {
             _weixinRespository = weixinRespository;
             _sigInRecordRespository = sigInRecordRespository;
             _signInService = signInService;
+            _activityRespository = activityRespository;
         }
         #endregion
 
         #region View
+        /// <summary>
+        /// 统一微信授权入口
+        /// </summary>
+        /// <param name="code"></param>
+        /// <param name="redirectUrl"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        public ActionResult AuthWeChat(string code,string redirectUrl)
+        {
 
+            //做一下多余的处理(以后有主页可以去掉)
+            if (string.IsNullOrEmpty(code) || string.IsNullOrEmpty(redirectUrl))
+                return Content("页面走丢啦~");
+
+            var currentSignInAuth = AppUtil.GetCurrentUser<SignInAuthDto>(TokenTypeEnum.SignIn_Auth);
+            if (currentSignInAuth != null)
+                return Redirect(redirectUrl);
+
+            //记录登录信息
+            WeixinAuthAccessTokenResult weixinAuthAccessTokenResult = _weixinRespository.GetAuthAccessTokenResult(code);
+            AppUtil.ToSigin(TokenTypeEnum.SignIn_Auth, new SignInAuthDto()
+            {
+                RefrashToken = weixinAuthAccessTokenResult.refresh_token,
+                Access_Token=weixinAuthAccessTokenResult.access_token,
+                OpenId=weixinAuthAccessTokenResult.openid
+            });
+            return Redirect(redirectUrl);
+        }
         /// <summary>
         /// 签到视图
         /// </summary>
         /// <param name="activityId"></param>
         /// <param name="code"></param>
         /// <returns></returns>
-        public ActionResult Signin(int activityId, string code,string refrashToken)
+        public ActionResult Signin(int activityId)
         {
-            //1.从二维码扫码跳转过来
-            if (string.IsNullOrEmpty(code))
-            {
-                string redirectUrl = $"{WebConfig.Web_Host}/Home/SignIn/Signin?activityId={activityId}";
-                var authCodeUrl = _weixinRespository.GetAuthCodeUrl(HttpUtility.UrlEncode(redirectUrl));
-                return Content("<script>location.href='" + authCodeUrl + "'</script>");
-            }
-            //2.从微信重定向到该页面
-            WeixinAuthAccessTokenResult weixinAuthAccessTokenResult;
             var currentSignInAuth = AppUtil.GetCurrentUser<SignInAuthDto>(TokenTypeEnum.SignIn_Auth);
-            if (currentSignInAuth!= null)
-            {
-                weixinAuthAccessTokenResult = _weixinRespository.RefrashAuthAccessTokenResult(currentSignInAuth.RefrashToken);
-            }
-            else
-            {
-                weixinAuthAccessTokenResult = _weixinRespository.GetAuthAccessTokenResult(code);
-
-            }
-            var weixinAuthUserInfoResult = _weixinRespository.GetUserInfoByOpennIdAndAccessToken(weixinAuthAccessTokenResult.access_token, weixinAuthAccessTokenResult.openid);
-
-            if (weixinAuthUserInfoResult == null)
-            {
-                return Content("页面失效");
-            }
-
+            var weixinAuthUserInfoResult = _weixinRespository.GetUserInfoByOpennIdAndAccessToken(currentSignInAuth.Access_Token,currentSignInAuth.OpenId);
             var record = _signInService.SignInRecord(activityId, weixinAuthUserInfoResult);
-           
-            
-            if (currentSignInAuth == null)
-            {
-                AppUtil.ToSigin(TokenTypeEnum.SignIn_Auth,new  SignInAuthDto(){
-                    RefrashToken = weixinAuthAccessTokenResult.refresh_token
-                });
-            }
-           
+            //获取当前活动数据
+            var currentActivity = _activityRespository.Get(DbConfig.DbConnStr,activityId);
             ViewBag.data =JsonHelper.Set(new
             {
                 record,
                 weixinAuthUserInfoResult,
-                activityId
+                activity=currentActivity
             });
             return View();
         }
@@ -123,6 +124,7 @@ namespace Interact.WebApp.Areas.Home.Controllers
         /// 参与二维码
         /// </summary>
         /// <returns></returns>
+        [AllowAnonymous]
         public ActionResult QrCodeForSigin(int activityId)
         {
             ////1.定义签到页面地址

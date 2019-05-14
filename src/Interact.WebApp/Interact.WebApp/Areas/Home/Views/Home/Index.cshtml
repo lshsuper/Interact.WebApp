@@ -83,7 +83,8 @@
 <body>
     <div class="login-container">
         <div class="login-form">
-            <div>互 动 授 权</div>
+            <div id="activity-name"></div>
+            <div>授 权 管 理</div>
             <div class="login-authcode">
                 <input type="password"   name="AuthCode"  placeholder="请输入活动授权码" />
             </div>
@@ -91,29 +92,31 @@
                 <button id="auth-btn"> 确定</button>
             </div>
         </div>
-        <input type="hidden" name="activityId" value="@ViewBag.activityId" />
+        
     </div>
+    <script>
+        var data=@Html.Raw(ViewBag.data);
+    </script>
     <script>
         (function () {
             var auth = {
                 authBtn: $('#auth-btn'),
-                activityId: $('input[name=activityId]'),
-                authCode:$('input[name=AuthCode]'),
+                authCode: $('input[name=AuthCode]'),
+                loginContainer: $('.login-container'),
+                activityName: $('#activity-name'),
                 event: function () {
                     var _self = this;
                     _self.authBtn.click(function () {
-                        
-                        var activityId = _self.activityId.val();
                         var authCode = _self.authCode.val();
                          var index = layer.load(0, {
                             shade: [0.5, '#fff'] //0.1透明度的白色背景
                         });
-                        $.post('/Home/Home/ToAuth', { authCode, activityId }, function (data) {
-                            if (data.Status) {
-                                 window.location.href = "/Home/Screen/SignInScreen?activityId="+activityId;
+                        $.post('/Home/Home/ToAuth', { authCode, activityId: data.Id }, function (xdata){
+                            if (xdata.Status) {
+                                window.location.href = "/Home/Screen/SignInScreen?activityId=" + data.Id;
                             } else {
                                  layer.close(index);
-                               layer.msg(data.Notify, {icon: 5});
+                               layer.msg(xdata.Notify, {icon: 5});
                             }
                         });
                        
@@ -121,6 +124,8 @@
                 },
                 init: function () {
                     var _self = this;
+                    _self.loginContainer.css("background-image", "url(" + data.PlayBillUrl + ")");
+                    _self.activityName.text(data.Name);
                     _self.event();
                 }
             };

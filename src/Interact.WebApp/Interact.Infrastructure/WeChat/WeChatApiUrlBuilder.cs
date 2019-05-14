@@ -35,6 +35,7 @@ namespace Interact.Infrastructure.Wexin
             //https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET
             return $"https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={appkey}&secret={appsecret}";
         } 
+        
         #endregion
 
         #region 开发平台
@@ -80,6 +81,16 @@ namespace Interact.Infrastructure.Wexin
         {
             //https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=APPID&grant_type=refresh_token&refresh_token=REFRESH_TOKEN
             return $"https://api.weixin.qq.com/sns/oauth2/refresh_token?appid={appid}&grant_type=refresh_token&refresh_token={refresh_token}";
+        }
+        /// <summary>
+        /// js-ticket获取地址
+        /// </summary>
+        /// <param name="access_token"></param>
+        /// <returns></returns>
+        public static string Jsapi_TicketUrl(string access_token)
+        {
+            //https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=ACCESS_TOKEN&type=jsapi
+            return $"https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={access_token}&type=jsapi";
         }
         #endregion
     }

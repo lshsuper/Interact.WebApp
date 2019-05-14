@@ -10,7 +10,6 @@
 
     .sigin-header {
         height: 180px;
-        background-image: url('/Content/webappp/img/yuantiao.jpg');
         background-size: cover;
     }
 
@@ -23,7 +22,7 @@
     }
 
     .sigin-btn {
-        margin: 0 auto 30px auto;
+        margin: 0 auto 20px auto;
         width: 90px;
         height: 90px;
         border-radius: 45px;
@@ -36,7 +35,8 @@
         height: 80px;
         width: 80px;
         border-radius: 80px;
-        margin: 18px;
+        margin: 20px;
+        border: 0.5px solid rgba(0, 0, 0, 0.1);
     }
 
     .user-info {
@@ -66,12 +66,20 @@
         z-index: 1000;
         display: none;
     }
+
+    .activity-name {
+        position: absolute;
+        top: 78px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+    }
 </style>
 <div class="mui-card signin-card">
     <div class="signin-succ-tag animated bounceInUp"></div>
     <!--页眉，放置标题-->
     <div class="mui-card-header mui-card-media sigin-header">
-
+        <div class="activity-name">lsh</div>
     </div>
     <!--内容区-->
     <div class="mui-content mui-card-content sigin-body">
@@ -100,7 +108,7 @@
 @section scripts{
     <link href="~/Content/lib/animate/animate.css" rel="stylesheet" />
     <script>
-       var data=@Html.Raw(ViewBag.data);
+     var data=@Html.Raw(ViewBag.data);
     </script>
     <script>
         (function () {
@@ -111,36 +119,34 @@
                 signinBtn: $('#signin-btn'),
                 headimg: $('.user-headimg'),
                 signinSuccTag: $('.signin-succ-tag'),
+                siginHeader: $('.sigin-header'),
+                activityName: $('.activity-name'),
                 initUserInfo: function () {
                     var _self = this;
                     _self.nickname.text(data.weixinAuthUserInfoResult.nickname);
                     _self.age.text(data.weixinAuthUserInfoResult.sex == "1" ? "男" : "女");
                     _self.area.text(data.weixinAuthUserInfoResult.province + " " + data.weixinAuthUserInfoResult.city);
-
                     _self.headimg.css('background-image', "url(" + data.weixinAuthUserInfoResult.headimgurl + ")");
 
-                },
-                test: function () {
-                    alert(JSON.stringify(data));
                 },
                 event: function () {
                     var _self = this;
                     _self.signinBtn.click(function () {
                         mui.showLoading("正在加载..", "div");
                         var option = {
-                            ActivityId: data.activityId,
+                            ActivityId: data.activity.Id,
                             OpenId: data.weixinAuthUserInfoResult.openid,
                             NickName: data.weixinAuthUserInfoResult.nickname,
                             HeadImage: data.weixinAuthUserInfoResult.headimgurl,
 
                         };
                         $.post('/Home/Signin/ToSignIn', { record: option }, function (data) {
-                              mui.hideLoading();//隐藏后的回调函数
+                            mui.hideLoading();//隐藏后的回调函数
                             if (data.Status) {
                                 _self.signinSuccTag.show();
-                                 _self.signinBtn.remove();
+                                _self.signinBtn.remove();
                             } else {
-                              
+
                                 mui.alert(data.Notify, "签到提示", "确定", null, 'div');
                             }
                         });
@@ -149,10 +155,14 @@
                 init: function () {
                     var _self = this;
                     _self.initUserInfo();
+                    //是否签到判定
                     if (data.record != null) {
                         _self.signinBtn.remove();
                         _self.signinSuccTag.show();
                     }
+                    //活动信息填充
+                    _self.siginHeader.css("background-image", "url(" + data.activity.PlayBillUrl + ")");
+                    _self.activityName.text(data.activity.Name);
                     _self.event();
 
                 }

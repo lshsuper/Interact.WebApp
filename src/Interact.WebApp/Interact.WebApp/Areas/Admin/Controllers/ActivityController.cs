@@ -21,13 +21,16 @@ namespace Interact.WebApp.Areas.Admin.Controllers
     public class ActivityController : BaseController
     {
         private readonly IActivityRespository _activityRespository;
-        public ActivityController(IActivityRespository activityRespository)
+        private readonly IActivityAwardRespository _activityAwardRespository;
+        public ActivityController(IActivityRespository activityRespository,
+                                  IActivityAwardRespository activityAwardRespository)
         {
             _activityRespository = activityRespository;
+            _activityAwardRespository = activityAwardRespository;
         }
 
-     
-       
+
+
         #region View
         /// <summary>
         /// 活动列表
@@ -61,39 +64,57 @@ namespace Interact.WebApp.Areas.Admin.Controllers
                 Status = true,
                 Notify = "获取成功"
             });
-           // return Json(new { total=data.DataCount,rows=data.DataSource});
+            // return Json(new { total=data.DataCount,rows=data.DataSource});
         }
         /// <summary>
         /// 添加活动
         /// </summary>
         /// <returns></returns>
-        public ActionResult AddActivity(Activity activity, List<ActivityAward> activityAwards)
+        public ActionResult AddActivityOperator(Activity activity, List<ActivityAward> activityAwards)
         {
-            bool result = _activityRespository.AddActivity(activity,activityAwards);
-            return Json(new DataResult() {
-                   Status= activity!=null,
-                   Notify=activity!=null?"操作成功":"操作失败"
-            });
-        }
-        /// <summary>
-        /// 编辑活动
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult ActivityEdit(Activity activity,List<ActivityAward>activityAwards)
-        {
+            bool result;
+            if (activity.Id <= 0)
+            {
+                result = _activityRespository.AddActivity(activity, activityAwards);
+                return Json(new DataResult()
+                {
+                    Status = result,
+                    Notify = result ? "操作成功" : "操作失败"
+                });
+            }
             //1.判断签到数量和签到限制数量
-            var currentActivity = _activityRespository.Get(DbConfig.DbConnStr,activity.Id);
+            var currentActivity = _activityRespository.Get(DbConfig.DbConnStr, activity.Id);
             if (currentActivity.SignInNumber > activity.LimitNumber)
-                return Json(new DataResult() {
-                      Status=false,
-                      Notify="签到数量不能大于签到限制数量"
+                return Json(new DataResult()
+                {
+                    Status = false,
+                    Notify = "签到数量不能大于签到限制数量"
                 });
             //2.修改
-            bool result=_activityRespository.EditActivity(activity,activityAwards);
+            result = _activityRespository.EditActivity(activity, activityAwards);
             return Json(new DataResult()
             {
                 Status = activity != null,
                 Notify = activity != null ? "操作成功" : "操作失败"
+            });
+        }
+        /// <summary>
+        /// 查询活动基本信息
+        /// </summary>
+        /// <param name="activityId"></param>
+        /// <returns></returns>
+        public ActionResult GetActivityDetail(int activityId)
+        {
+            var activity = _activityRespository.Get(DbConfig.DbConnStr,activityId);
+            var awards = _activityAwardRespository.GetActivityAwardsByActivityId(activityId);
+            return Json(new DataResult() {
+
+                Status=true,
+                Data =new {
+                    activity,
+                    awards
+                },
+
             });
         }
         #endregion
