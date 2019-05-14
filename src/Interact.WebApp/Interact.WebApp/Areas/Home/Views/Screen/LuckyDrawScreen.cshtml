@@ -7,7 +7,7 @@
     .screen-body {
         position: absolute;
         top: 17%;
-        height:72%;
+        height: 72%;
         width: 96%;
         left: 50%;
         margin-left: -45%;
@@ -231,7 +231,6 @@
         color: #E74145;
         box-shadow: 0 2px 0px 3px rgba(0,0,0,0.15), 0 -3px 0px 0px #D0D0D0 inset;
     }
-     
 </style>
 
 <div class="row screen-body">
@@ -289,7 +288,7 @@
 </div>
 <div class="mask-layer"></div>
 <script id="winner-info-tmpl" type="text/html">
-    <div class="menu-opt">
+    <div class="menu-opt animated rubberBand">
         <div class="user-no">{{sort}}</div>
         <div class="user-pic" style="background-image:url({{headimg}})"></div>
         <div class="user-nick">{{nickname}}</div>
@@ -298,6 +297,7 @@
 @section scripts{
     <script src="~/Content/lib/art-template-master/template-web.js"></script>
     <script src="~/Content/lib/layer-v3.1.1/layer-v3.1.1/layer/layer.js"></script>
+    <link href="~/Content/lib/animate/animate.css" rel="stylesheet" />
     <script>
         var data=@Html.Raw(ViewBag.data);
     </script>
@@ -319,7 +319,7 @@
                 totalCount: $('#total-count'),
                 isloop: false,
                 _timer: null,
-                maskLayer:$('.mask-layer'),
+                maskLayer: $('.mask-layer'),
                 number: 0,
                 defaultUserHeadImage: "/Areas//Home/Content/img/bg/bg-nouser.jpg",
                 buildWinnerInfo: function (userinfo) {
@@ -386,62 +386,62 @@
                     if (index != -1)
                         data.record.splice(index, 1);
                 },
-                lotteryDrawStrategy:function () {
+                lotteryDrawStrategy: function () {
                     var _self = this;
-                     var level = _self.awardSelect.val();//奖品等级
-                        _self.endLuckdrawBtn.hide();
-                        _self.startLuckdrawBtn.show();
-                        _self.maskLayer.show();
-                        _self.luckdrawAgrent(
-                            {
-                                activityId: data.activityId,
-                                number: 1,
-                                level: level,
-                                succ: function (xdata) {
-                                    clearTimeout(_self._timer);
-                                    var currentRecord = xdata.Data[0];
-                                    var index = _self.winnerMenu.children('.menu-opt').length;
-                                    data.totalCount--;
-                                    _self.removeOneSignInRecord(currentRecord.Id);
-                                    var total = parseInt(_self.totalCount.text());
-                                    _self.totalCount.text(total - 1);
-                                    //展示左侧中奖人信息
-                                    _self.userNickName.text(currentRecord.NickName);
-                                    _self.userHeadimg.css('background-image', "url(" + currentRecord.HeadImage + ")");
-                                    //展示右侧中奖人信息
-                                    var userInfo = { sort: index + 1, nickname: currentRecord.NickName, headimg: currentRecord.HeadImage };
-                                    _self.buildWinnerInfo(userInfo);
-                                    _self.number--;
-                                    if (_self.number <= 0) {
-                                        _self.isloop = false;
-                                        _self.startLuckdrawBtn.text("开始抽奖");
-                                        _self.maskLayer.hide();
-                                    } else {
-                                        _self.startLuckdrawBtn.text("开始抽奖(" + _self.number + ")");
-                                        var _timeOut01 = setTimeout(function () {
-                                            _self.scrollImage();
-                                            var _timeOut02 = setTimeout(function () {
-                                                _self.startLuckdrawBtn.hide();
-                                                _self.endLuckdrawBtn.show();
-                                                _self.lotteryDrawStrategy();
-                                                clearTimeout(_timeOut02);
-                                                clearTimeout(_timeOut01);
-                                            }, 2000);
-                                        }, 3000);
-                                    }
-
-                                },
-                                fail: function (xdata){
-
+                    var level = _self.awardSelect.val();//奖品等级
+                    _self.endLuckdrawBtn.hide();
+                    _self.startLuckdrawBtn.show();
+                    _self.maskLayer.show();
+                    _self.luckdrawAgrent(
+                        {
+                            activityId: data.activityId,
+                            number: 1,
+                            level: level,
+                            succ: function (xdata) {
+                                clearTimeout(_self._timer);
+                                var currentRecord = xdata.Data[0];
+                                var index = _self.winnerMenu.children('.menu-opt').length;
+                                data.totalCount--;
+                                _self.removeOneSignInRecord(currentRecord.Id);
+                                var total = parseInt(_self.totalCount.text());
+                                _self.totalCount.text(total - 1);
+                                //展示左侧中奖人信息
+                                _self.userNickName.text(currentRecord.NickName);
+                                _self.userHeadimg.css('background-image', "url(" + currentRecord.HeadImage + ")");
+                                //展示右侧中奖人信息
+                                var userInfo = { sort: index + 1, nickname: currentRecord.NickName, headimg: currentRecord.HeadImage };
+                                _self.buildWinnerInfo(userInfo);
+                                _self.number--;
+                                if (_self.number <= 0) {
+                                    _self.isloop = false;
+                                    _self.startLuckdrawBtn.text("开始抽奖");
+                                    _self.maskLayer.hide();
+                                } else {
+                                    _self.startLuckdrawBtn.text("开始抽奖(" + _self.number + ")");
+                                    var _timeOut01 = setTimeout(function () {
+                                        _self.scrollImage();
+                                        var _timeOut02 = setTimeout(function () {
+                                            _self.startLuckdrawBtn.hide();
+                                            _self.endLuckdrawBtn.show();
+                                            _self.lotteryDrawStrategy();
+                                            clearTimeout(_timeOut02);
+                                            clearTimeout(_timeOut01);
+                                        }, 2000);
+                                    }, 500);
                                 }
-                            });
+
+                            },
+                            fail: function (xdata) {
+
+                            }
+                        });
                 },
                 event: function () {
                     var _self = this;
                     //开始抽奖
                     _self.startLuckdrawBtn.click(function () {
-                         if (_self.isloop) {
-                            layer.msg("正在进行中,不能停止", {icon:5});
+                        if (_self.isloop) {
+                            layer.msg("正在进行中,不能停止", { icon: 5 });
                             return;
                         }
                         if (data.totalCount <= 0) {
@@ -466,7 +466,7 @@
                     //停止抽奖
                     _self.endLuckdrawBtn.click(function () {
                         if (_self.isloop) {
-                            layer.msg("正在进行中,不能停止", {icon:5});
+                            layer.msg("正在进行中,不能停止", { icon: 5 });
                             return;
                         }
                         _self.isloop = true;
@@ -475,11 +475,11 @@
                     //重新加载
                     _self.reloadBtn.click(function () {
                         if (_self.isloop) {
-                            layer.msg("正在进行中,不能停止", {icon:5});
+                            layer.msg("正在进行中,不能停止", { icon: 5 });
                             return;
                         }
-                            window.location.reload();
-                        
+                        window.location.reload();
+
                     });
                     //重新抽奖
                     _self.afrashChoice.click(function () {

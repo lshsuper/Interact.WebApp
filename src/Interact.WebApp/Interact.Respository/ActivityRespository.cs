@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 using Interact.Infrastructure.Dapper;
 using Interact.Infrastructure.Util;
 using Dapper;
-
 namespace Interact.Respository
 {
     public class ActivityRespository : Respository<Activity>, IActivityRespository

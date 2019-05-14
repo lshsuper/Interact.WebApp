@@ -23,11 +23,11 @@
             _self.userCardSort.text(userInfo.sort);
             _self.signinCard.find('.brilliancy').addClass('img-rotate');
             //定时开始
-            _self._timeOut = set_timeOut(function () {
+            _self._timeOut = setTimeout(function () {
                 _self.signinCard.hide();
                 _self.signinCard.find('.brilliancy').removeClass('img-rotate');
                 //结束定时
-                clear_timeOut(_self._timeOut);
+                clearTimeout(_self._timeOut);
             }, 2000);
         },
         //向签到屏追加签到数据

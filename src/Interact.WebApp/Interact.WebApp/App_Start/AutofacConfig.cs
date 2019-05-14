@@ -1,6 +1,5 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
-using Interact.Application.Utils;
 
 using System.Linq;
 using System.Reflection;

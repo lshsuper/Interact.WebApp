@@ -31,7 +31,7 @@ namespace Interact.WebApp.Hubs
         /// <returns></returns>
         public override Task OnConnected()
         {
-            return base.OnConnected();  
+            return base.OnConnected();
         }
         /// <summary>
         /// 向客户端发送签到人数
