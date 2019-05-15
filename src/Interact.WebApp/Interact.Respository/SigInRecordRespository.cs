@@ -79,8 +79,8 @@ namespace Interact.Respository
         public List<SignInRecord> GetSignInRecordsWithoutAwards(int top,int activityId)
         {
             string sql = $@"select top({top}) * 
-                            from SignInRecord sr
-                            where  not exists (select * from WinnerMenu wm where wm.SiginInRecoredId=sr.Id)";
+                            from SignInRecord sr 
+                            where activityId=@activityId and  not exists (select * from WinnerMenu wm where wm.SiginInRecoredId=sr.Id)";
             return DapperHelper.Instance.Query<SignInRecord>(DbConfig.DbConnStr, sql,new { activityId});
         }
         public List<SignInRecord> GetSignInRecordsByActivityIdAndActivityAwardId(int activityId, int activityAwardId)

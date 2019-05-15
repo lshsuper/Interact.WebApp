@@ -444,20 +444,23 @@
                             layer.msg("正在进行中,不能停止", { icon: 5 });
                             return;
                         }
-                        if (data.totalCount <= 0) {
-                            layer.msg("待抽奖人数不足", { icon: 5 });
-                            return;
-                        }
+                       
                         var level = parseInt(_self.awardSelect.val());
                         if (level <= 0) {
                             layer.msg("请选择奖品等级", { icon: 5 });
                             return;
                         }
                         var number = parseInt(_self.numSelect.val());  //抽取人数
+                        if (data.totalCount <= 0 || data.totalCount < number) {
+                            layer.msg("待抽奖人数不足", { icon: 5 });
+                            return;
+                        }
+
                         if (number <= 0) {
                             layer.msg("请选择抽取人数", { icon: 5 });
                             return;
                         }
+
                         _self.number = number;  //赋值
                         $(this).hide();
                         _self.endLuckdrawBtn.show();
