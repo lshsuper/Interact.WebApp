@@ -45,6 +45,7 @@ namespace Interact.Infrastructure.Wexin
         /// <returns></returns>
         public static string OAuth2_AuthorizeUrl(string appkey, string redirect_uri, ScopeTypeEnum scope,string state ="STATE")
         {
+            
             //https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=SCOPE&state=STATE#wechat_redirect
             return $"https://open.weixin.qq.com/connect/oauth2/authorize?appid={appkey}&redirect_uri={redirect_uri}&response_type=code&scope={scope.ToString()}&state={state}#wechat_redirect";
         }
@@ -91,6 +92,19 @@ namespace Interact.Infrastructure.Wexin
         {
             //https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=ACCESS_TOKEN&type=jsapi
             return $"https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={access_token}&type=jsapi";
+        }
+        /// <summary>
+        /// 网站微信扫码地址
+        /// </summary>
+        /// <param name="appid"></param>
+        /// <param name="redirect_url"></param>
+        /// <param name="state"></param>
+        /// <param name="scope"></param>
+        /// <returns></returns>
+        public static string Qrconnect_Url(string appid,string redirect_url, string state = "STATE",string scope= "snsapi_login")
+        {
+            //https://open.weixin.qq.com/connect/qrconnect?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=SCOPE&state=STATE#wechat_redirect
+            return $"https://open.weixin.qq.com/connect/qrconnect?appid={appid}&redirect_uri={redirect_url}&response_type=code&scope={scope}&state={state}#wechat_redirect";
         }
         #endregion
     }
