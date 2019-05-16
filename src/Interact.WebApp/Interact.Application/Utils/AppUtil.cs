@@ -16,6 +16,7 @@ namespace Interact.Application.Utils
     /// </summary>
     public class AppUtil
     {
+        #region Token-Name
         /// <summary>
         /// token名称(后台登录)
         /// </summary>
@@ -27,27 +28,42 @@ namespace Interact.Application.Utils
         /// <summary>
         /// 签到授权token
         /// </summary>
-        private const string homeSignInTokenName = "interact.home.signin.auth";
+        private const string homeSignInTokenName = "interact.home.signin.auth"; 
+        #endregion
+
+        #region Token-TimeSpan
         /// <summary>
-        /// 过期时间
+        /// 过期时间-admin
         /// </summary>
-        private readonly  static TimeSpan tokenTimeSpan = TimeSpan.FromDays(1);
+        private readonly static TimeSpan tokenTimeSpanForAdmin = TimeSpan.FromDays(1);
+        /// <summary>
+        /// 过期时间-homescreen
+        /// </summary>
+        private readonly static TimeSpan tokenTimeSpanForHomeScreen = TimeSpan.FromDays(1);
+        // <summary>
+        /// 过期时间-homesignin
+        /// </summary>
+        private readonly static TimeSpan tokenTimeSpanForHomeSignIn = TimeSpan.FromDays(1.5);
+        #endregion
+
+        #region Token-Service
+
         /// <summary>
         /// 登录
         /// </summary>
         /// <param name="tokenType"></param>
-        public  static  void ToSigin(TokenTypeEnum tokenType,JwtPaylod payload)
+        public static void ToSigin(TokenTypeEnum tokenType, JwtPaylod payload)
         {
             switch (tokenType)
             {
                 case TokenTypeEnum.Admin_Login:
-                    AppHelper.SignIn(payload, adminTokenName, tokenTimeSpan);
+                    AppHelper.SignIn(payload, adminTokenName, tokenTimeSpanForAdmin);
                     break;
                 case TokenTypeEnum.Screen_Auth:
-                    AppHelper.SignIn(payload, homeScreenTokenName, tokenTimeSpan);
+                    AppHelper.SignIn(payload, homeScreenTokenName, tokenTimeSpanForHomeScreen);
                     break;
                 case TokenTypeEnum.SignIn_Auth:
-                    AppHelper.SignIn(payload, homeSignInTokenName, tokenTimeSpan);
+                    AppHelper.SignIn(payload, homeSignInTokenName, tokenTimeSpanForHomeSignIn);
                     break;
                 default:
                     throw new ApplicationException("不存在此类型的token");
@@ -59,7 +75,7 @@ namespace Interact.Application.Utils
         /// 登出
         /// </summary>
         /// <param name="tokenType"></param>
-        public static  void ToSignOut(TokenTypeEnum tokenType)
+        public static void ToSignOut(TokenTypeEnum tokenType)
         {
             switch (tokenType)
             {
@@ -84,7 +100,7 @@ namespace Interact.Application.Utils
         /// <typeparam name="T"></typeparam>
         /// <param name="tokenType"></param>
         /// <returns></returns>
-        public static  T GetCurrentUser<T>(TokenTypeEnum tokenType)
+        public static T GetCurrentUser<T>(TokenTypeEnum tokenType)
         {
             switch (tokenType)
             {
@@ -98,6 +114,7 @@ namespace Interact.Application.Utils
                     throw new ApplicationException("不存在此类型的token");
 
             }
-        }
+        } 
+        #endregion
     }
 }
